@@ -1,0 +1,60 @@
+hello_the_world:
+    path:     /hello-world
+    defaults: { _controller: AppBundle:Advert:index }
+
+oc_platform_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: AppBundle:Advert:index }
+# src/OC/PlatformBundle/Resources/config/routing.yml
+
+# src/OC/PlatformBundle/Resources/config/routing.yml
+
+
+oc_platform_test:
+    path: /test
+    defaults: { _controller: AppBundle:Advert:test }
+
+oc_platform_connexion:
+    path: /connexion
+    defaults: { _controller: AppBundle:Advert:connexion }
+
+oc_platform_inscription:
+    path: /inscription
+    defaults: { _controller: AppBundle:Advert:inscription }
+
+oc_platform_inscription2:
+    path: /inscription2
+    defaults: { _controller: AppBundle:Advert:inscription2 }
+
+
+
+
+oc_platform_home:
+    path:      /{page}
+    defaults:
+        _controller: AppBundle:Advert:index
+        page:        1
+    requirements:
+        page: \d*
+
+oc_platform_view:
+    path:      /advert/{id}
+    defaults:  { _controller: AppBundle:Advert:view }
+    requirements:
+        id: \d+
+
+oc_platform_add:
+    path:      /add
+    defaults:  { _controller: AppBundle:Advert:add }
+
+oc_platform_edit:
+    path:      /edit/{id}
+    defaults:  { _controller: AppBundle:Advert:edit }
+    requirements:
+        id: \d+
+
+oc_platform_delete:
+    path:      /delete/{id}
+    defaults:  { _controller: AppBundle:Advert:delete }
+    requirements:
+        id: \d+

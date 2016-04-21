@@ -1,0 +1,17 @@
+{# src/lesheureusesnaissances/PlatformBundle/Resources/views/layout.html.twig #}
+
+{% extends "::layout.html.twig" %}
+
+{% block title %}
+{% endblock %}
+
+{% block body %}
+
+<div class="col-md-12 bandeau">
+	<h1 class="text-center">Annonces</h1>
+</div>
+  {# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
+  {% block lesheureusesnaissancesplatform_body %}
+  {% endblock %}
+
+{% endblock %}

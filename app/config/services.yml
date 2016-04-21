@@ -1,0 +1,20 @@
+services:
+#    oc_user.example:
+#        class: OC\UserBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+
+#
+
+    oc_user.registration.form.type:
+        class: AppUserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: oc_user_registration }
+
+
+    oc_user.profile.form.type:
+        class: AppUserBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: oc_user_profile }

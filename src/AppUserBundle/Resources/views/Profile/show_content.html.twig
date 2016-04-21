@@ -1,0 +1,97 @@
+{%extends 'AppBundle::Layout.html.twig'%}
+
+
+
+{%block body%}
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10">
+             <h1 class="">{{user.nom}}
+             	{%if user.prenom%}
+             	{{user.prenom}}
+             	{%endif%}
+             </h1>
+			
+			{%if app.user.id==user.id%}
+          <a class="btn btn-success" href="{{path('fos_user_profile_edit')}}">Modifier mon Profil</a>  
+			{%endif%}
+			 <button type="button" class="btn btn-info">Envoyez moi un  message</button>
+			
+        </div>
+		
+		{%if (user.image)!=null%}
+      <div class="col-sm-2"><img  class="img-circle img-responsive" src= "{{ asset(user.image.webPath) }}" alt="{{ user.image.alt }}">
+		
+		</div>
+	  {%else%}
+	  <div class="col-sm-2"><img  class="img-circle img-responsive" src= "http://i57.servimg.com/u/f57/16/18/15/10/1866.jpg" ></div>
+		{%endif%}
+		
+    </div>
+	
+  <br>
+    <div class="row">
+        <div class="col-sm-3">
+            <!--left col-->
+            <ul class="list-group">
+                <li class="list-group-item text-muted" contenteditable="false">Profil</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Login</strong></span>{{ user.username }}</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Mail</strong></span>{{ user.email }}</li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Telephone </strong></span>{{ user.telephone }}</li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong class="">Adresse</strong></span>{{ user.adresse }}</li>
+			  {% if user.prenom!=null%}
+				<li class="list-group-item text-right"><span class="pull-left"><strong class=""> Prenom   </strong></span> {{ user.prenom }}</li>
+			  
+			  {% endif %}
+			</ul>
+           <div class="panel panel-default">
+             <div class="panel-heading">Media</div>
+			 <br></div>
+             
+			
+            </div>
+          
+          
+           
+            
+        </div>
+        <!--/col-3-->
+        <div class="col-sm-9" contenteditable="false" style="">
+			<div class="panel panel-default">
+				
+			</div>
+			
+			
+
+
+            <div id="push"></div>
+        </div>
+        <footer id="footer">
+            <div class="row-fluid">
+               
+            </div>
+        </footer>
+        
+        
+        
+</div>
+
+
+
+{% else %}
+    <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+{% endif %}
+
+{% block javascripts %}
+    {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+
+    <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+    <script src="{{asset('js/vendor/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/vendor/modernizr-2.8.3-respond-1.4.2.min.js')}}"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script src="{{asset('js/main.js')}}"></script>
+
+    
+  {% endblock %}
+  {% endblock %}

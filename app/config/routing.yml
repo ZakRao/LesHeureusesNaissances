@@ -1,0 +1,51 @@
+app_user:
+    resource: "@AppUserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+oc_platform:
+    resource: "@AppBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app_user_add_enfant:
+    path: /add_enfant 
+    defaults: {_controller: AppUserBundle:Enfant:add_enfant }
+
+
+show:
+    pattern:  /profil/{username}
+    defaults:   { _controller: AppUserBundle:Profile:show }
+    requirements:
+        _method: GET
+
+profile:
+    pattern: /profil
+    defaults:   { _controller: AppUserBundle:Profile:profil }
+
+oc_userbundle_search:
+    path: /search 
+    defaults: {_controller:AppUserBundle:Search:search}
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile

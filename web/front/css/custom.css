@@ -1,0 +1,12 @@
+.bandeau{
+	background-color: #f8f8f8;
+	height: 170px;
+}
+
+.bandeau h1{
+	margin-top: 50px;
+}
+
+.mt20{
+	margin-top: 20px;
+}

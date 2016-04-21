@@ -1,0 +1,34 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block body %}
+
+<div class="col-md-12 bandeau">
+    <h1 class="text-center">Connexion</h1>
+</div>
+
+{% block lesheureusesnaissancesplatform_body %}
+
+        <div class="container">
+            <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <h4 class="uppercase mt20">J'ai déjà un compte</h4>
+                <input type="text" placeholder="Adresse mail" />
+                <input type="text" placeholder="Mot de passe" />
+                <a href=""><p class="lead pull-right">
+                                Mot de passe oublié ?
+                </p></a>
+                <div class="clearfix"></div>
+                <div>
+                    <div class="radio-option">
+                        <div class="inner"></div>
+                        <input type="radio" name="radio" value="radio1" />
+                    </div>
+                    <span>Se souvenir de moi</span>
+                </div>
+                <input type="submit" value="Connexion" />
+            </div>
+            </div>
+        </div>
+
+{% endblock %}
+{% endblock %}

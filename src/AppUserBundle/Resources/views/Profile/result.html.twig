@@ -1,0 +1,74 @@
+
+
+{%extends 'AppBundle::Layout.html.twig'%}
+{%block body%}
+{%if listUsers!=null%}
+  <em><h5>Résultat de la recherche :</h5></em>
+  {% for user in listUsers %}
+    
+      <div class="container">
+  
+    
+      <div class="well panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-xs-12 col-sm-4 text-center">
+        {%if user.image!=null%}
+              <a href="{{ path('show', {'username': user.username}) }}">
+                <img src="{{asset(user.image.webPath)}}"  class="center-block img-circle img-thumbnail img-responsive">
+              </a>
+        {%else%}
+        <div class="col-sm-2">
+          <a href="{{ path('show', {'username': user.username}) }}">
+            <img  class="img-circle  " src= "http://i57.servimg.com/u/f57/16/18/15/10/1866.jpg" >
+          </a>
+
+          </div>
+        {%endif%}
+              
+            </div>
+            <!--/col--> 
+            <div class="col-xs-12 col-sm-8">
+              <h2>{{user.username}}</h2>
+              <p><strong>Nom: </strong> {{ user.name }} </p>
+              <p><strong>Adresse Mail </strong> {{user.email}} </p>
+              
+            </div>
+            <!--/col-->          
+            
+          
+            <!--/col-->
+            <div class="col-xs-12 col-sm-4">
+             
+              <a href="{{path('show',{'username': user.username})}}"><button class="btn btn-info btn-block"><span class="fa fa-user"></span> Voir mon profil </button></a>
+            </div>
+            <!--/col-->
+            
+            <!--/col-->
+          
+          <!--/row-->
+        </div>
+        <!--/panel-body-->
+      </div>
+      <!--/panel-->
+    </div>
+    <!--/col--> 
+  
+  <!--/row--> 
+</div>
+<!--/container-->
+  
+  {% endfor %}
+  
+{%else%}
+  <em><h4>Recherche non aboutie<h4></em>
+
+  {%endif%}
+
+  {% block javascripts %}
+    {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  {% endblock %}
+
+{%endblock%}

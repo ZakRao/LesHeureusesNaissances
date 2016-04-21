@@ -1,0 +1,8 @@
+app_user_add_enfant:
+    path: /add_enfant 
+    defaults: {_controller: AppUserBundle:Enfant:add_enfant }
+
+
+oc_userbundle_search:
+    path: /search 
+    defaults: {_controller:AppUserBundle:Search:search}
