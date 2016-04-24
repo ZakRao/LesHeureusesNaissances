@@ -1,0 +1,20 @@
+{% extends "MeetUpBundle:MeetUp:layout.html.twig" %}
+
+{% block title %}
+  Rencontre {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+  <h2>Rencontre</h2>
+
+  {{ meet_up.id }}
+  <p> Jour 1 :{{ meet_up.jour1|date('Y-m-d')}} </p>
+  <p> Jour 2 :{{ meet_up.jour2|date('Y-m-d')}} </p>
+  <p> Jour 3 :{{ meet_up.jour3|date('Y-m-d')}} </p>
+
+  <img 
+  src="{{ asset(meet_up.image.webPath) }}"
+  alt="{{ meet_up.image.alt }}"
+  />
+{% endblock %}

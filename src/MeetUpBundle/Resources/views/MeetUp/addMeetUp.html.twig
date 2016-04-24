@@ -1,0 +1,22 @@
+{% extends "MeetUpBundle:MeetUp:layout.html.twig" %}
+
+{% block title %}
+  Créer une rencontre  {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+  <h2>Créer une Rencontre</h2>
+
+  { {{ include("MeetUpBundle:MeetUp:form.html.twig") }} }
+
+  <p>
+    Vous éditez une rencontre déjà existante, merci de ne pas changer
+    l'esprit générale de l'annonce déjà publiée.
+  </p>
+
+  <p>
+   
+  </p>
+
+{% endblock %}
