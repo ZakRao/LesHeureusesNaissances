@@ -1,0 +1,68 @@
+{% extends "MeetUpBundle:MeetUp:layout.html.twig" %}
+
+{% block title %}
+  Rencontre {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="col-md-12 bandeau">
+        <h1 class="text-center">Les rencontres des mamans</h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 text-center col-sm-offset-3 mt20">
+                <div class="select-option">
+                    <i class="ti-angle-down"></i>
+                    <select>
+                        <option selected="" value="Default">Votre département</option>
+                        <option value="Small">Small</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Larger">Large</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!--end of row-->
+        <div class="row">
+            {%if listMeetUp%}
+            {% for meetup in listMeetUp %}
+            <div class="col-md-4 col-sm-6">
+                        {% if meetup.image.webPath != null %}
+                                <img src="/LesHeureusesNaissances/web/uploads/img/1.png" alt="">
+                            {% endif %}
+                        <div class="pricing-table pt-2 boxed mb50">
+
+                            <h5 class="uppercase text-center">Titre du meet - up</h5>
+                            <p class="pb10">{{meetup.description}}</p>
+                            <hr>
+                            <ul>
+                                <li>
+                                    <strong>Département : </strong> {{meetup.departement}}
+                                </li>
+                                <li>
+                                    <strong>Ville : </strong> {{meetup.localisation}}
+                                </li>
+                                <li>
+                                    <strong>Date : </strong> {{meetup.jour1.format('j/m/Y')}}
+                                </li>
+                            </ul>
+                            <div class="text-center">
+                                <a class="btn btn-filled btn-lg" href="#">Voir la rencontre</a>
+                            </div>
+                        </div>
+                <!--end of pricing table-->
+            </div>
+            {% endfor %}
+            {%else%}
+                <span>hell no</span>
+            {%endif%}
+        </div>
+        <!--end of row-->
+    </div>
+        <!--end of container-->
+    <div class="navigation">
+        {{ knp_pagination_render(listMeetUp) }}
+    </div>
+{% endblock %}

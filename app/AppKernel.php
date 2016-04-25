@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new AppUserBundle\AppUserBundle(),
             new AppBundle\AppBundle(),
             new MeetUpBundle\MeetUpBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

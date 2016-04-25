@@ -50,9 +50,9 @@ fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
 
-meet_up_homepage:
-    path:     /homepageMeetUp
-    defaults: { _controller: MeetUpBundle:Default:index }
+lesrencontres:
+    path:     /lesrencontres
+    defaults: { _controller: MeetUpBundle:MeetUp:lesrencontres }
 
 add_meet_up:
   path: /add_meet_up

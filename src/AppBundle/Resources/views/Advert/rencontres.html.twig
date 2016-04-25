@@ -2,16 +2,21 @@
 
 {% block body %}
 
-<div class="col-md-12 bandeau">
-    <h1 class="text-center">Les Rencontres</h1>
-</div>
 
 {% block lesheureusesnaissancesplatform_body %}
-
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 text-center">
                     <div class="select-option">
+                        
+
+                        {%if listMeetUp%}
+                            <span>hello</span>
+                        {%else%}
+                            <span>hell no</span>
+                        {%endif%}
+
+
                         <i class="ti-angle-down"></i>
                         <select>
                             <option selected="" value="Default">Votre département</option>

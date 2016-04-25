@@ -315,5 +315,14 @@ class MeetUp
    {
         return $this->image;
     }
+
+    /**
+     * Get idMeetup
+     *
+     * @return integer
+     */
+    public function getIdMeetup()
+    {
+        return $this->id_meetup;
+    }
 }
-?>

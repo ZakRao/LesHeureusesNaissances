@@ -58,5 +58,23 @@ class MeetUpController extends Controller
 
 	return $this->render('MeetUpBundle:MeetUp:view.html.twig', array('meet_up' => $meet_up));
 	}
+
+	public function lesrencontresAction()
+	{
+	    // Pour récupérer la liste de toutes les annonces : on utilise findAll()
+	    $findlistMeetUp = $this->getDoctrine()
+	      ->getManager()
+	      ->getRepository('MeetUpBundle:MeetUp')
+	      ->findAll()
+	    ;
+
+	    $listMeetUp  = $this->get('knp_paginator')->paginate($findlistMeetUp,
+	        $this->get('request')->query->get('page', 1)/*page number*/,
+	        2/*limit per page*/
+	    );
+			return $this->render('MeetUpBundle:MeetUp:lesrencontres.html.twig', array(
+	      'listMeetUp' => $listMeetUp
+	    ));
+	}
 }
 ?>
