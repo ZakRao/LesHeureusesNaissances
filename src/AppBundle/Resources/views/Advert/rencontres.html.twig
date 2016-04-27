@@ -1,0 +1,108 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block body %}
+
+
+{% block lesheureusesnaissancesplatform_body %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 text-center">
+                    <div class="select-option">
+                        
+
+                        {%if listMeetUp%}
+                            <span>hello</span>
+                        {%else%}
+                            <span>hell no</span>
+                        {%endif%}
+
+
+                        <i class="ti-angle-down"></i>
+                        <select>
+                            <option selected="" value="Default">Votre département</option>
+                            <option value="Small">Small</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Larger">Large</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--end of row-->
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="pricing-table pt-2 text-center">
+                        <h5 class="uppercase">Starter</h5>
+                        <span class="price">$12</span>
+                        <p class="lead">Per Month</p>
+                        <a class="btn btn-filled btn-lg" href="#">Get Started</a>
+                        <ul>
+                            <li>
+                                <strong>Unlimited</strong> access to content
+                            </li>
+                            <li>
+                                <strong>Fully Secure</strong> online backup
+                            </li>
+                            <li>
+                                <strong>One Year</strong> round the clock support
+                            </li>
+                            <li>
+                                <strong>FREE</strong> complimentary lanyard
+                            </li>
+                        </ul>
+                    </div>
+                    <!--end of pricing table-->
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="pricing-table pt-2 boxed text-center">
+                        <h5 class="uppercase">Starter</h5>
+                        <span class="price">$12</span>
+                        <p class="lead">Per Month</p>
+                        <a class="btn btn-filled btn-lg" href="#">Get Started</a>
+                        <ul>
+                            <li>
+                                <strong>Unlimited</strong> access to content
+                            </li>
+                            <li>
+                                <strong>Fully Secure</strong> online backup
+                            </li>
+                            <li>
+                                <strong>One Year</strong> round the clock support
+                            </li>
+                            <li>
+                                <strong>FREE</strong> complimentary lanyard
+                            </li>
+                        </ul>
+                    </div>
+                    <!--end of pricing table-->
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="pricing-table pt-2 emphasis text-center">
+                        <h5 class="uppercase">Starter</h5>
+                        <span class="price">$12</span>
+                        <p class="lead">Per Month</p>
+                        <a class="btn btn-white btn-lg" href="#">Get Started</a>
+                        <ul>
+                            <li>
+                                <strong>Unlimited</strong> access to content
+                            </li>
+                            <li>
+                                <strong>Fully Secure</strong> online backup
+                            </li>
+                            <li>
+                                <strong>One Year</strong> round the clock support
+                            </li>
+                            <li>
+                                <strong>FREE</strong> complimentary lanyard
+                            </li>
+                        </ul>
+                    </div>
+                    <!--end of pricing table-->
+                </div>
+            </div>
+            <!--end of row-->
+        </div>
+        <!--end of container-->
+    
+
+{% endblock %}
+{% endblock %}

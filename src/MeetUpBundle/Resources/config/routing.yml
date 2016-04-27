@@ -1,0 +1,13 @@
+meet_up_homepage:
+    path:     /homepageMeetUp
+    defaults: { _controller: MeetUpBundle:Default:index }
+
+add_meet_up:
+  path: /add_meet_up
+  defaults: { _controller: MeetUpBundle:MeetUp:add}    
+
+meet_up_view:
+  path: /meet_up/{id_meetup}
+  defaults: { _controller: MeetUpBundle:MeetUp:show}
+  requirements:
+    id: \d+
