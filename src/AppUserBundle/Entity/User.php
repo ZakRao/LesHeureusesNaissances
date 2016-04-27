@@ -5,6 +5,7 @@ namespace AppUserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Entity\User as BaseUser;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -36,7 +37,7 @@ class User extends BaseUser
     protected $nom;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", nullable=false)
      */
     protected $parrain;
 
@@ -83,6 +84,8 @@ class User extends BaseUser
      */
     private $datef;
 
+
+
     /**
      * @ORM\Column(type="boolean" , nullable = true )
      */
@@ -99,10 +102,21 @@ class User extends BaseUser
      */
     protected $description;
 
-  /**
-   * @ORM\OneToMany(targetEntity="AppUserBundle\Entity\Enfant", mappedBy="user",cascade={"persist"})
+    /**
+     * @ORM\OneToMany(targetEntity="AppUserBundle\Entity\Enfant", mappedBy="user",cascade={"persist"})
+     */
+    private $enfants;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppUserBundle\Entity\Commentaire", mappedBy="user", cascade={"persist"})
+     */
+    private $commentaires; // Notez le « s », une annonce est liée à plusieurs commentaires
+
+    /**
+   * @ORM\Column(name="nb_commentaire", type="integer")
    */
-  private $enfants;
+  private $nbCommentaires = 0;
 
 
 
@@ -111,6 +125,7 @@ class User extends BaseUser
   {
     parent::__construct();
     $this->enfants   = new ArrayCollection();
+    $this->commentaires = new ArrayCollection();
 }
 
 
@@ -137,10 +152,6 @@ class User extends BaseUser
     return $this->enfants;
   }
 
-
-
-
- 
 
     /**
      * Set image
@@ -463,5 +474,48 @@ class User extends BaseUser
     {
         return $this->personnalite;
     }
+
+    /**
+   * @param Commentaire $commentaire
+   * @return Commentaire
+   */
+  public function addCommentaire(Commentaire $commentaire)
+  {
+    $this->commentaire[] = $commentaire;
+
+    // On lie l'annonce à la candidature
+    $commentaire->setUser($this);
+
+    return $this;
+  }
+
+  /**
+   * @param Commentaire $commentaire
+   */
+  public function removeCommentaire(Commentaire $commentaire)
+  {
+    $this->commentaire->removeElement($commentaire);
+
+    // Et si notre relation était facultative (nullable=true, ce qui n'est pas notre cas ici attention) :
+    // $commentaire->setUser(null);
+  }
+
+  /**
+   * @return ArrayCollection
+   */
+  public function getCommentaires()
+  {
+    return $this->commentaires;
+  }
+
+   public function increaseCommentaire()
+  {
+    $this->nbCommentaires++;
+  }
+
+  public function decreaseCommentaire()
+  {
+    $this->nbCommentaires--;
+  }
 
 }

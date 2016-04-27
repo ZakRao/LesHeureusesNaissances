@@ -5,6 +5,7 @@ use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Intranet\UserBundle\Form\Type\UserLangueType as UserLangueType;
  
 class RegistrationFormType extends BaseType
@@ -14,9 +15,10 @@ class RegistrationFormType extends BaseType
         parent::buildForm($builder, $options);
         
 		$builder
-			->add('nom')
-			->add('adresse')
-      		->add('parrain');
+			->add('nom',TextType::class,array('required' => true))
+
+			->add('adresse',TextType::class, array('required' => true))
+      		->add('parrain',EmailType::class, array('required' => true));
     }
 	
 	public function getName(){

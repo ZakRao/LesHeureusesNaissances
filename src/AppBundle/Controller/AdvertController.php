@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Advert;
+use AppBundle\Entity\Application;
 use AppBundle\Form\AdvertType;
 use AppBundle\Form\AdvertEditType;
 use Symfony\Component\Form\Forms;
@@ -55,10 +56,16 @@ class AdvertController extends Controller
 
     // On récupère la liste des advertSkill pour l'annonce $advert
     $listAdvertSkills = $em->getRepository('AppBundle:AdvertSkill')->findByAdvert($advert);
+    // On récupère la liste des candidatures de cette annonce
+    $listApplications = $em
+      ->getRepository('AppBundle:Application')
+      ->findByAdvert($advert)
+    ;
 
     // Puis modifiez la ligne du render comme ceci, pour prendre en compte les variables :
     return $this->render('AppBundle:Advert:view.html.twig', array(
       'advert'           => $advert,
+      'listApplications' => $listApplications,
       'listAdvertSkills' => $listAdvertSkills,
     ));
   }
@@ -148,6 +155,111 @@ class AdvertController extends Controller
       'form'   => $form->createView()
     ));
   }
+
+
+  public function addApplicationAction($id, Request $request)
+  {
+     $em = $this->getDoctrine()->getManager();
+
+     $application = new Application();
+
+
+    // On récupère l'annonce $id
+    $advert = $em->getRepository('AppBundle:Advert')->find($id);
+
+       if (null === $advert) {
+      throw new NotFoundHttpException("L'annonce d'id ".$id." n'existe pas.");
+    }
+
+    else{
+
+    $request = request::createFromGlobals();
+
+       $req = $request->request->get('commentaire');
+
+       $user = $this->getUser();
+
+      $application->setAuthor($user->getUsername());
+      $application->setAdvert($advert);
+      $application->setContent($req);
+      $advert->addApplication($application);
+
+      $em = $this->getDoctrine()->getManager();
+      $em->persist($application);
+      $em->flush();
+
+
+      // On récupère la liste des advertSkill pour l'annonce $advert
+    $listAdvertSkills = $em->getRepository('AppBundle:AdvertSkill')->findByAdvert($advert);
+    // On récupère la liste des candidatures de cette annonce
+    $listApplications = $em
+      ->getRepository('AppBundle:Application')
+      ->findByAdvert($advert)
+    ;
+
+    // Puis modifiez la ligne du render comme ceci, pour prendre en compte les variables :
+    return $this->render('AppBundle:Advert:view.html.twig', array(
+      'advert'           => $advert,
+      'listApplications' => $listApplications,
+      'listAdvertSkills' => $listAdvertSkills,
+    ));
+
+    
+     
+    }
+
+   // On récupère la liste des advertSkill pour l'annonce $advert
+    $listAdvertSkills = $em->getRepository('AppBundle:AdvertSkill')->findByAdvert($advert);
+    // On récupère la liste des candidatures de cette annonce
+    $listApplications = $em
+      ->getRepository('AppBundle:Application')
+      ->findByAdvert($advert)
+    ;
+
+    // Puis modifiez la ligne du render comme ceci, pour prendre en compte les variables :
+    return $this->render('AppBundle:Advert:view.html.twig', array(
+      'advert'           => $advert,
+      'listApplications' => $listApplications,
+      'listAdvertSkills' => $listAdvertSkills,
+    ));
+  }
+
+  public function deleteApplicationAction($id, Request $request)
+  {
+     $em = $this->getDoctrine()->getManager();
+
+    // On récupère l'annonce $id
+    $application = $em->getRepository('AppBundle:Application')->find($id);
+    $advert = $application->getAdvert();
+
+    if (null === $application) {
+      throw new NotFoundHttpException("Le commentaire  d'id ".$id." n'existe pas.");
+    }
+
+    // On crée un formulaire vide, qui ne contiendra que le champ CSRF
+    // Cela permet de protéger la suppression d'annonce contre cette faille
+    
+      $em->remove($application);
+      $em->flush();
+
+    
+     // On récupère la liste des advertSkill pour l'annonce $advert
+    $listAdvertSkills = $em->getRepository('AppBundle:AdvertSkill')->findByAdvert($advert);
+    // On récupère la liste des candidatures de cette annonce
+    $listApplications = $em
+      ->getRepository('AppBundle:Application')
+      ->findByAdvert($advert)
+    ;
+
+    // Puis modifiez la ligne du render comme ceci, pour prendre en compte les variables :
+    return $this->render('AppBundle:Advert:view.html.twig', array(
+      'advert'           => $advert,
+      'listApplications' => $listApplications,
+      'listAdvertSkills' => $listAdvertSkills,
+    ));
+  }
+
+
 
   public function menuAction($limit = 3)
   {

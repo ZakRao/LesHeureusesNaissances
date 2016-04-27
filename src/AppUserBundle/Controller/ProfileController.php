@@ -39,7 +39,9 @@ class ProfileController extends BaseController
             }
         }
 
-        return $this->container->get('templating')->renderResponse('AppUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user));
+        
+
+return $this->container->get('templating')->renderResponse('AppUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user));
     }
 
 
@@ -71,8 +73,8 @@ class ProfileController extends BaseController
         if ($process) {
             $this->setFlash('fos_user_success', 'profile.flash.updated');
 
-            return new RedirectResponse($this->getRedirectionUrl($user));
-        }
+            return $this->container->get('templating')->renderResponse('AppUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user));
+                    }
 
         return $this->container->get('templating')->renderResponse(
             'FOSUserBundle:Profile:edit.html.'.$this->container->getParameter('fos_user.template.engine'),

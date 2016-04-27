@@ -5,6 +5,8 @@ namespace AppUserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Entity\User as BaseUser;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * User
@@ -32,10 +34,10 @@ class User extends BaseUser
     /**
      * @ORM\Column(type="string")
      */
-    protected $name;
+    protected $nom;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", nullable=false)
      */
     protected $parrain;
 
@@ -50,7 +52,7 @@ class User extends BaseUser
     protected $adresse;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string",nullable = true )
      */
     protected $telephone;
 
@@ -82,6 +84,8 @@ class User extends BaseUser
      */
     private $datef;
 
+
+
     /**
      * @ORM\Column(type="boolean" , nullable = true )
      */
@@ -99,45 +103,50 @@ class User extends BaseUser
     protected $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppUserBundle\Entity\Enfant", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppUserBundle\Entity\Enfant", mappedBy="user",cascade={"persist"})
      */
-  private $enfants;
+    private $enfants;
+
 
     /**
-   * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Category", cascade={"persist"})
-   */
-  private $categories;
+     * @ORM\OneToMany(targetEntity="AppUserBundle\Entity\Commentaire", mappedBy="user")
+     */
+    private $commentaires; // Notez le « s », une annonce est liée à plusieurs commentaires
+
 
 
 
     public function __construct()
   {
+    parent::__construct();
     $this->enfants   = new ArrayCollection();
-     $this->categories   = new ArrayCollection();
+    $this->commentaires = new ArrayCollection();
 }
 
 
-public function addEnfant(Enfant $enfant)
+   // Notez le singulier, on ajoute un seul enfant à la fois
+  public function addEnfant(Enfant $enfant)
   {
+    // Ici, on utilise l'ArrayCollection vraiment comme un tableau
     $this->enfants[] = $enfant;
+    
+    $enfant->setUser($this);
+
     return $this;
   }
 
   public function removeEnfant(Enfant $enfant)
   {
+    // Ici on utilise une méthode de l'ArrayCollection, pour supprimer l'enfant en argument
     $this->enfants->removeElement($enfant);
   }
 
+  // Notez le pluriel, on récupère une liste d'enfants ici !
   public function getEnfants()
   {
     return $this->enfants;
   }
 
-
-
-
-
- 
 
     /**
      * Set image
@@ -164,12 +173,12 @@ public function addEnfant(Enfant $enfant)
     }
 
     
-    public function getName(){
-        return $this->name;
+    public function getNom(){
+        return $this->nom;
     }
     
-    public function setName($name){
-        $this->name = $name;
+    public function setNom($nom){
+        $this->nom = $nom;
         return $this;
     }
     
@@ -461,16 +470,37 @@ public function addEnfant(Enfant $enfant)
         return $this->personnalite;
     }
 
-
-
-  public function addCategory(Category $category)
+    /**
+   * @param Commentaire $commentaire
+   * @return Commentaire
+   */
+  public function addCommentaire(Commentaire $commentaire)
   {
-    $this->categories[] = $category;
+    $this->commentaire[] = $commentaire;
+
+    // On lie l'annonce à la candidature
+    $commentaire->setAdvert($this);
+
     return $this;
   }
 
-  public function removeCategory(Category $category)
+  /**
+   * @param Commentaire $commentaire
+   */
+  public function removeCommentaire(Commentaire $commentaire)
   {
-    $this->categories->removeElement($category);
+    $this->commentaire->removeElement($commentaire);
+
+    // Et si notre relation était facultative (nullable=true, ce qui n'est pas notre cas ici attention) :
+    // $commentaire->setUser(null);
   }
+
+  /**
+   * @return ArrayCollection
+   */
+  public function getCommentaires()
+  {
+    return $this->commentaire;
+  }
+
 }

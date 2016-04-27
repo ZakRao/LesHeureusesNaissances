@@ -30,7 +30,8 @@ class EnfantController extends Controller
             $em->persist($enfant);
             $em->flush();
 
-            return $this->container->get('templating')->renderResponse('FOSUserBundle:Profile:show.html.twig', array('user' => $user)); 
+                return $this->container->get('templating')->renderResponse('AppUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user));
+            
         }
 
         return $this->render('AppUserBundle:Profile:add_enfant.html.twig', array(
@@ -39,6 +40,31 @@ class EnfantController extends Controller
         ));
   
   
+  
+  }
+
+  public function delete_enfantAction($id, Request $request)
+  {
+  $user = $this->container->get('security.context')->getToken()->getUser();
+    $em = $this->getDoctrine()->getManager();
+
+    // On récupère l'annonce $id
+    $enfant = $em->getRepository('AppUserBundle:Enfant')->find($id);
+
+    if (null === $enfant) {
+      throw new NotFoundHttpException("L'enfant  d'id ".$id." n'existe pas.");
+    }
+
+    // On crée un formulaire vide, qui ne contiendra que le champ CSRF
+  
+      $em->remove($enfant);
+      $em->flush();
+
+    return $this->container->get('templating')->renderResponse('AppUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user));
+      
+    
+
+
   
   }
 

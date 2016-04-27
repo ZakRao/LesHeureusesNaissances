@@ -34,42 +34,54 @@ class RegistrationController extends BaseController
         $formHandler = $this->container->get('fos_user.registration.form.handler');
         $confirmationEnabled = $this->container->getParameter('fos_user.registration.confirmation.enabled');
 
+        // If : Check if isset parrain
+        if(isset($_POST['fos_user_registration_form']) AND$parrain = $_POST['fos_user_registration_form']['parrain'] AND isset($parrain) AND !empty($parrain)){
+            
+            $usera = $this->getDoctrine()
+            ->getManager()->getRepository('AppUserBundle:User')->findOneByEmail($parrain);
 
-          $usera = $this->getDoctrine()
-      ->getManager()->getRepository('AppUserBundle:User')->findOneByEmail('zaaaa@gmal.com');
 
-          if (null === $usera) {
-            throw new NotFoundHttpException('Parrain erroné');
-        }     
-        
-        $process = $formHandler->process($confirmationEnabled);
-        if ($process) {
-            $user = $form->getData();
+            if ($usera == NULL) {
+                throw new NotFoundHttpException('Parrain erroné');
+            }   
+            else{            
+                $process = $formHandler->process($confirmationEnabled); // Processus d'inscription
 
-            $authUser = false;
-            if ($confirmationEnabled) {
-                $this->container->get('session')->set('fos_user_send_confirmation_email/email', $user->getEmail());
-                $route = 'fos_user_registration_check_email';
-            } else {
-                $authUser = true;
-                $route = 'fos_user_registration_confirmed';
-            }
+                if ($process) {
+          
+                    $user = $form->getData();
 
-            $this->setFlash('fos_user_success', 'registration.flash.user_created');
-            $url = $this->container->get('router')->generate($route);
-            $response = new RedirectResponse($url);
+                    $authUser = false;
+                    if ($confirmationEnabled) {
+                        $this->container->get('session')->set('fos_user_send_confirmation_email/email', $user->getEmail());
+                        $route = 'fos_user_registration_check_email';
+                    } else {
+                        $authUser = true;
+                        $route = 'fos_user_registration_confirmed';
+                    }
+    
+                    $this->setFlash('fos_user_success', 'registration.flash.user_created');
+                    $url = $this->container->get('router')->generate($route);
+                    $response = new RedirectResponse($url);
 
-            if ($authUser) {
-                $this->authenticateUser($user, $response);
-            }
+                    if ($authUser) {
+                        $this->authenticateUser($user, $response);
+                    }
+                    return $response;
 
-            return $response;
+                }
+            }  
         }
 
-        return $this->container->get('templating')->renderResponse('AppUserBundle:Registration:register.html.'.$this->getEngine(), array(
-            'form' => $form->createView(),
-        ));
-    }
+        
+    
+
+
+    return $this->container->get('templating')
+    ->renderResponse('AppUserBundle:Registration:register.html.'.$this->getEngine(), [
+        'form' => $form->createView(),
+    ]);
+}
 
     /**
      * Tell the user to check his email provider
@@ -86,7 +98,7 @@ class RegistrationController extends BaseController
 
         return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:checkEmail.html.'.$this->getEngine(), array(
             'user' => $user,
-        ));
+            ));
     }
 
     /**
@@ -123,7 +135,7 @@ class RegistrationController extends BaseController
 
         return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:confirmed.html.'.$this->getEngine(), array(
             'user' => $user,
-        ));
+            ));
     }
 
     /**
@@ -160,11 +172,11 @@ class RegistrationController extends BaseController
     }
 
     public function getDoctrine()
- {
-    if (!$this->container->has('doctrine')) {
+    {
+        if (!$this->container->has('doctrine')) {
             throw new \LogicException('The DoctrineBundle is not registered in your application.');
- }
- 
-    return $this->container->get('doctrine');
- }
+        }
+
+        return $this->container->get('doctrine');
+    }
 }

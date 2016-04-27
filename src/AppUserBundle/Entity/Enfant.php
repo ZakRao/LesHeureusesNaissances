@@ -160,4 +160,12 @@ class Enfant
     {
         return $this->user;
     }
+
+
+    public function getAge()
+    {
+        $dateInterval = $this->anniversaire->diff(new \DateTime());
+ 
+        return $dateInterval->y;
+    }
 }

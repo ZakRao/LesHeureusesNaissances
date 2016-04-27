@@ -17,6 +17,26 @@ app_user_add_enfant:
     defaults: {_controller: AppUserBundle:Enfant:add_enfant }
 
 
+app_user_delete_enfant:
+    path: /del/{id}
+    defaults: {_controller: AppUserBundle:Enfant:delete_enfant }
+    requirements:
+        id: \d+
+
+app_user_add_commentaire:
+    path: /comm/{username}
+    defaults:   { _controller: AppUserBundle:Commentaire:add_Commentaire }
+    requirements:
+        _method: POST
+
+app_user_delete_commentaire:
+    path: /delcom/{id}
+    defaults: {_controller: AppUserBundle:Commentaire:delete_Commentaire }
+    requirements:
+        id: \d+
+    
+
+
 show:
     pattern:  /profil/{username}
     defaults:   { _controller: AppUserBundle:Profile:show }

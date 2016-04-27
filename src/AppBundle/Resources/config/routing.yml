@@ -52,6 +52,18 @@ oc_platform_edit:
     defaults:  { _controller: AppBundle:Advert:edit }
     requirements:
         id: \d+
+oc_platform_application:
+    path:      /commentaire/{id}
+    defaults:  {_controller: AppBundle:Advert:addApplication }
+    requirements:
+        id: \d+
+
+oc_platform_delete_application:
+    path:      /deletecom/{id}
+    defaults:  {_controller: AppBundle:Advert:deleteApplication }
+    requirements:
+        id: \d+
+
 
 oc_platform_delete:
     path:      /delete/{id}
