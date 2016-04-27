@@ -114,10 +114,11 @@ class User extends BaseUser
     private $commentaires; // Notez le « s », une annonce est liée à plusieurs commentaires
 
     /**
-   * @ORM\Column(name="nb_commentaire", type="integer")
-   */
-  private $nbCommentaires = 0;
-
+     * @var \DateTime
+     *
+     * @ORM\Column(name="anniversaire", type="datetime", nullable=true)
+     */
+    private $anniversaire;
 
 
 
@@ -517,5 +518,37 @@ class User extends BaseUser
   {
     $this->nbCommentaires--;
   }
+
+
+  /**
+     * Set anniversaire
+     *
+     * @param \DateTime $anniversaire
+     *
+     * @return Enfant
+     */
+    public function setAnniversaire($anniversaire)
+    {
+        $this->anniversaire = $anniversaire;
+
+        return $this;
+    }
+
+    /**
+     * Get anniversaire
+     *
+     * @return \DateTime
+     */
+    public function getAnniversaire()
+    {
+        return $this->anniversaire;
+    }
+
+    public function getAge()
+    {
+        $dateInterval = $this->anniversaire->diff(new \DateTime());
+ 
+        return $dateInterval->y;
+    }
 
 }

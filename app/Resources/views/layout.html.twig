@@ -59,10 +59,14 @@
                                 <span class="title">Search Site</span>
                             </div>
                             <div class="function">
-                                <form class="search-form">
-                                    <input type="text" placeholder="Type Here" />
+                                <form class="search-form"role="form" method="POST" action="{{path('oc_userbundle_search')}}">
+                                    <input type="text" placeholder="Type Here" name="username"/>
+                                    <button type="submit" class="btn btn-default" href="{{path('oc_userbundle_search')}}"> <i class="fa fa-search"></i></button>
                                 </form>
                             </div>
+
+
+
                         </div>
                         <div class="module widget-handle language left">
                             <ul class="menu">

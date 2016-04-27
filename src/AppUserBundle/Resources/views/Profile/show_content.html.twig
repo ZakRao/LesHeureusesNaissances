@@ -4,152 +4,178 @@
 
 {%block body%}
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-10">
-       <h1 class="">{{user.nom}}
-        {%if user.prenom%}
-        {{user.prenom}}
-        {%endif%}
-      </h1>
-      
-      {%if app.user.id==user.id%}
-      <a class="btn btn-success" href="{{path('fos_user_profile_edit')}}">Modifier mon Profil</a>  
+
+  <!-- Bandeau supérieur -->
+<div class="col-md-12 bandeau-profil">
+    <div class="col-md-4 text-center">
+      {%if (user.image)!=null%}
+        <img  class="img-circle img-responsive" src= "{{ asset(user.image.webPath) }}" alt="{{ user.image.alt }}">
+      {%else%}
+        <img  class="img-circle img-responsive" src= "http://i57.servimg.com/u/f57/16/18/15/10/1866.jpg" height="">
       {%endif%}
-      <button type="button" class="btn btn-info">Envoyez moi un  message</button>
-      
     </div>
-    
-    {%if (user.image)!=null%}
-    <div class="col-sm-2"><img  class="img-circle img-responsive" src= "{{ asset(user.image.webPath) }}" alt="{{ user.image.alt }}">
+
+    <div class="col-md-4 text-center">
+      <!-- Pseudo -->
+      <h3 class="profil-username">{{ user.username }}</h4>
       
+      <!-- Age -->
+      <h3 >{{user.getAge()}} ans</h4>
+
+      <!-- Age -->
+      <h3 >Je suis "{{user.personnalite}}"</h4>
+
     </div>
-    {%else%}
-    <div class="col-sm-2"><img  class="img-circle img-responsive" src= "http://i57.servimg.com/u/f57/16/18/15/10/1866.jpg" ></div>
-    {%endif%}
-    
-  </div>
+
+    <div class="col-md-4 text-center">
+      <h3 class="profil-username">{{ user.departement }}</h4>
+      <h3>{{ user.ville }}</h4> 
+      {%if app.user.id==user.id%}
+          <a class="btn btn-filled" href="{{path('fos_user_profile_edit')}}">Modifier mon Profil</a>
+      {%endif%}
+    </div>
 
 
-  
-  <br>
-  <div class="row">
-    <div class="col-sm-3">
-      <!--left col-->
-      <ul class="list-group">
-        <li class="list-group-item text-muted" contenteditable="false">Profil</li>
-        <li class="list-group-item text-right"><span class="pull-left"><strong class="">Login</strong></span>{{ user.username }}</li>
-        <li class="list-group-item text-right"><span class="pull-left"><strong class="">Mail</strong></span>{{ user.email }}</li>
-        <li class="list-group-item text-right"><span class="pull-left"><strong class="">Telephone </strong></span>{{ user.telephone }}</li>
-        <li class="list-group-item text-right"><span class="pull-left"><strong class="">Adresse</strong></span>{{ user.adresse }}</li>
-        {% if user.prenom!=null%}
-        <li class="list-group-item text-right"><span class="pull-left"><strong class=""> Prenom   </strong></span> {{ user.prenom }}</li>
-        
-      {% endif %}
-    </ul>
-    <div class="panel panel-default">
-     <div class="panel-heading">Media</div>
-     <br></div>
-     
-     
-   </div>
-   
-   {%if not user.commentaires.empty %}
-   
-   <p>
-    Commentaire :</br>
-    {% for commentaire in user.commentaires %}
-      <i> Par {{ commentaire.auteur }} à {{commentaire.date | date('d/m/Y')}} 
-        <br>
-        {{ commentaire.contenu }}
-        {%if (commentaire.image)!=null%}
-        <div class="col-sm-2"><img  class="img-circle img-responsive" src= "{{ asset(commentaire.image.webPath) }}" alt="{{ commentaire.image.alt }}">
-          
-        </div>
-        {%endif%}
-        {%if app.user.username==commentaire.auteur%}
-        <a href="{{ path('app_user_delete_commentaire', {'id': commentaire.id}) }}" class="btn btn-danger">
-          <i class="glyphicon glyphicon-trash"></i>
-          Supprimer 
-        </a>
-        {%endif%}
-        <br>
-        {% if not loop.last %}, {% endif %}
-        {% endfor %}
-      </p>
-    {% endif %}
+</div>
 
-    <form class="navbar-form navbar-left" role="form" method="POST"  enctype="multipart/form-data" action="{{path('app_user_add_commentaire', {'username' : user.username})}}"  >
-      <div class="form-group">
-        <input type= "text"   name="commentaire" placeholder="Commentaire" class="form-control">
-        <input type= "file"  name="image" class="form-control" required ="false" >
-      </div>
-      <button type="submit" class="btn btn-default">Envoyer</button>
-    </form>
-    
-    
-    
-  </div>
-  <!--/col-3-->
-  <div class="col-sm-9" contenteditable="false" style="">
-   <div class="panel panel-default">
-    
-   </div>
 
-   {%if not user.enfants.empty %}
-   
-   <div class="panel-heading">Enfants</div>
-   <div class="panel-body">
-    <table class="table table-condensed">
-      
-      <thead>
-        <tr>
-          <th>Prénom</th>
-          <th>Sexe</th>
-          <th>Age</th>
 
-        </tr>
-      </thead>
-      {% for enfant in user.enfants %}
-        <tbody>
-          <tr>
-            <td>{{ enfant.prenom }}</td>
-            <td>{{ enfant.sexe }}</td>
-            <td>{{ enfant.getAge() }}</td>
-            
-
-            <td>
-
-              {%if app.user.id==enfant.user.id%}
-              <a href="{{ path('app_user_delete_enfant', {'id': enfant.id}) }}" class="btn btn-danger">
-                <i class="glyphicon glyphicon-trash"></i>
+<div class="profil-firstsec">
+        <div class="container">
+            <div class="row">
+            <div class="col-md-12">
+                <h3 class="uppercase mt20">Qui suis-je ?</h3>
+                <p class="lead">
+                  <!-- Description -->
+                  {{user.description}}
+                </p>
                 
-              </a>
-              {%endif%}
-              <td>
-              </tr>
-            </tbody>
-            
-            {% if not loop.last %} {% endif %}
-            {% endfor %}
-          </table>
-        </div>
-        {%endif%}
-        
-        
+                
+                <!-- Si l'utilisatrice est enceinte -->
+                {% if user.enceinte == 1%}
+                <h3>Je suis enceinte en ce moment</h3>
+                <p class="lead">
 
+                  <!-- Date de fin de grossesse -->
+                  Ma grossesse arrive à terme en : {{user.datef.format('m/Y')}} <br>
+                
+                  {% if not user.enfants.empty%} <!-- Nombre d'enfants -->
+                    J'ai {{user.enfants.count}} enfants
+                    <div class="profil-enfants">
+                      {% for enfant in user.enfants %}
+                        <div class="col-sm-2 text-center">
+                            {% if enfant.sexe == 'F'%}
+                              <img src="{{asset('front/img/logo_fille.jpg')}}" alt="logo_fille">
+                            {% else %}
+                              <img src="{{asset('front/img/logo_garcon.jpg')}}" alt="logo_garcon">
+                            {% endif %}
+                            <p>{{enfant.getAge()}}</p>
+                            <p>{{enfant.prenom}}</p>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  {% else %}
+                    Je n'ai pas encore d'enfant
+                  {% endif %}
 
-        <div id="push"></div>
-      </div>
-      <footer id="footer">
-        <div class="row-fluid">
-         
+                </p>
+
+                {% else %}
+                  <h3>Je ne suis pas enceinte en ce moment</h3>
+                  
+                  {% if not user.enfants.empty%} <!-- Nombre d'enfants -->
+                    J'ai {{user.enfants.count}} enfants
+                    <div class="profil-enfants">
+                      {% for enfant in user.enfants %}
+                        <div class="col-sm-2 text-center">
+                            {% if enfant.sexe == 'F'%}
+                              <img src="{{asset('front/img/logo_fille.jpg')}}" alt="logo_fille">
+                            {% else %}
+                              <img src="{{asset('front/img/logo_garcon.jpg')}}" alt="logo_garcon">
+                            {% endif %}
+                            <p>{{enfant.getAge()}}</p>
+                            <p>{{enfant.prenom}}</p>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  {% else %}
+                    Je n'ai pas encore d'enfant
+                  {% endif %}
+                {% endif %}
+
+            </div>
+            </div>
         </div>
-      </footer>
-      
-      
-      
     </div>
+    <div class="profil-secondsec">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="uppercase mt20">Mes disponibilités</h3> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="profil-thirdsec">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="uppercase mt20 mb50">Elles ont déjà partagé du temps avec moi</h3> 
+
+                    {% for commentaire in user.commentaires %}
+                      <div class="col-md-10 col-md-offset-1 profil-comments">
+                          <i> Par {{ commentaire.auteur }} à {{commentaire.date | date('d/m/Y')}} </i>
+                          <div class="col-md-6">
+                              <h4>Titre du commentaire</h4>
+                              <p>
+                                  {{ commentaire.contenu }}
+                              </p>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="text-center profil-comment-picture">
+
+                              {% if (commentaire.image)!=null %}
+                                  <div class="col-sm-2"><img  class="img-circle img-responsive" src= "{{ asset(commentaire.image.webPath) }}" alt="{{ commentaire.image.alt }}">
+                              {% endif %}
+                            </div>
+                          </div>
+
+                          {%if app.user.username==commentaire.auteur%}
+                            <a href="{{ path('app_user_delete_commentaire', {'id': commentaire.id}) }}" class="btn btn-danger">
+                              <i class="glyphicon glyphicon-trash"></i>
+                              Supprimer 
+                            </a>
+                            {% endif %}
+                            <br>
+                            
+                      </div>
+                      {% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                    
+                    <hr>
+
+                    <!-- Exemple de commentaire sans photo
+                    <div class="col-md-10 col-md-offset-1 profil-comments">
+                        <h4>Titre du commentaire</h4>
+                        <p>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem.
+                        </p>
+                    </div>-->
+            </div>
+
+            <form class="navbar-form navbar-left" role="form" method="POST"  enctype="multipart/form-data" action="{{path('app_user_add_commentaire', {'username' : user.username})}}"  >
+              <div class="form-group">
+                <input type= "text"   name="commentaire" placeholder="Commentaire" class="form-control">
+                <input type= "file"  name="image" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-default">Envoyer</button>
+            </form>
+          </div>
+        </div>
+    </div>
+
+
 
 
 
