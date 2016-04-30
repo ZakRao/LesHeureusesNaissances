@@ -58,7 +58,7 @@ class CommentaireController extends Controller
       $em->flush();
 
 }
-  return $this->container->get('templating')->renderResponse('AppUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user));
+  return $this->redirectToRoute('show', array('username' => $user));    
 
 
     }
@@ -85,7 +85,7 @@ class CommentaireController extends Controller
       $em->remove($commentaire);
       $em->flush();
 
-    return $this->container->get('templating')->renderResponse('AppUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user));
+    return $this->redirectToRoute('show', array('username' => $user));    
       
   
 

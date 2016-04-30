@@ -30,8 +30,7 @@ class EnfantController extends Controller
             $em->persist($enfant);
             $em->flush();
 
-                return $this->container->get('templating')->renderResponse('AppUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user));
-            
+                 return $this->redirectToRoute('show', array('username' => $user));            
         }
 
         return $this->render('AppUserBundle:Profile:add_enfant.html.twig', array(
@@ -59,9 +58,8 @@ class EnfantController extends Controller
   
       $em->remove($enfant);
       $em->flush();
-
-    return $this->container->get('templating')->renderResponse('AppUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user));
       
+ return $this->redirectToRoute('show', array('username' => $user));    
     
 
 

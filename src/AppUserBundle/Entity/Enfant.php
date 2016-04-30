@@ -168,4 +168,11 @@ class Enfant
  
         return $dateInterval->y;
     }
+
+    public function getMois()
+    {
+        $dateInterval = $this->anniversaire->diff(new \DateTime());
+ 
+        return $dateInterval->m;
+    }
 }

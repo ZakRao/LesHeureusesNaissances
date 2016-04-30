@@ -20,7 +20,6 @@
         "php": ">=5.5.9",
         "twig/extensions": "~1.0",
         "stof/doctrine-extensions-bundle": "~1.1",
-        "friendsofsymfony/message-bundle":"dev-master",
         "symfony/symfony": "^2.8",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",

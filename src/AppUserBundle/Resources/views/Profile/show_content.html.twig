@@ -69,7 +69,11 @@
                             {% else %}
                               <img src="{{asset('front/img/logo_garcon.jpg')}}" alt="logo_garcon">
                             {% endif %}
-                            <p>{{enfant.getAge()}}</p>
+                            {% if enfant.getAge()!= 0 %}
+                            <p>{{enfant.getAge()}} ans </p>
+                            {% else  %}
+                            <p>{{enfant.getMois()}} mois </p>
+                            {% endif %}
                             <p>{{enfant.prenom}}</p>
                         </div>
                       {% endfor %}
@@ -93,7 +97,11 @@
                             {% else %}
                               <img src="{{asset('front/img/logo_garcon.jpg')}}" alt="logo_garcon">
                             {% endif %}
-                            <p>{{enfant.getAge()}}</p>
+                            {% if enfant.getAge()!= 0 %}
+                            <p>{{enfant.getAge()}} ans </p>
+                            {% else  %}
+                            <p>{{enfant.getMois()}} mois</p>
+                            {% endif %}
                             <p>{{enfant.prenom}}</p>
                         </div>
                       {% endfor %}
