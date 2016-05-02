@@ -11,3 +11,15 @@ meet_up_view:
   defaults: { _controller: MeetUpBundle:MeetUp:show}
   requirements:
     id: \d+
+
+delete_meet_up:
+  path: /delete_meet_up/{id_meetup}
+  defaults: { _controller: MeetUpBundle:MeetUp:delete}
+  requirements:
+    id: \d+    
+
+edit_meet_up:
+  path: /edit_meet_up/{id_meetup}
+  defaults: { _controller: MeetUpBundle:MeetUp:edit}
+  requirements:
+    id: \d+        

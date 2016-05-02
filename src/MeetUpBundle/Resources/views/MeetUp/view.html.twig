@@ -18,6 +18,11 @@
   alt="{{ meet_up.image.alt }}"
   />
 
+   <a href="{{ path('delete_meet_up', {'id_meetup': meet_up.id}) }}" class="btn btn-danger">
+          <i class="glyphicon glyphicon-trash"></i>
+          Supprimer 
+        </a>
+
 
   <div class="col-md-12 bandeau">
     <h1 class="text-center">Les Rencontres</h1>
@@ -114,6 +119,8 @@
             <!--end of row-->
         </div>
         <!--end of container-->
+
+       
     
 {% endblock %}
 {% endblock %}

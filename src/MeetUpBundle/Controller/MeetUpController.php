@@ -76,5 +76,56 @@ class MeetUpController extends Controller
 	      'listMeetUp' => $listMeetUp
 	    ));
 	}
+
+
+	 public function deleteAction($id_meetup)
+ 	 {
+
+  	$user = $this->container->get('security.context')->getToken()->getUser();
+    $em = $this->getDoctrine()->getManager();
+
+    // On récupère la meet up $id
+    $meet_up = $em->getRepository('MeetUpBundle:MeetUp')->find($id_meetup);
+
+    if (null === $meet_up) {
+      throw new NotFoundHttpException("La Rencontre d'id ".$id_meetup." n'existe pas.");
+    }
+
+    // On crée un formulaire vide, qui ne contiendra que le champ CSRF
+  
+      $em->remove($meet_up);
+      $em->flush();
+
+    return $this->RedirectToRoute('meet_up_homepage');
+	}
+
+
+
+	public function editAction($id_meetup, Request $request)
+	{
+		$em = $this->getDoctrine()->getManager();
+
+   		 // On récupère la meet up $id
+   		$meet_up = $em->getRepository('MeetUpBundle:MeetUp')->find($id_meetup);
+   		$form = $this->createForm(MeetUpType::class, $meet_up);
+
+   		if (null === $meet_up) {
+      		throw new NotFoundHttpException("La Rencontre d'id ".$id_meetup." n'existe pas.");
+      	}
+
+      	if($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
+      		$em->persist($meet_up);
+      		$em->flush(); 
+
+      		$request->getSession()->getFlashBag()->add('notice', 'La Rencontre bien modifiée');
+
+      		return $this->RedirectToRoute('meet_up_view', array('id_meetup' => $meet_up->getId()));
+      	}
+
+      	return $this->render('MeetUpBundle:MeetUp:edit.html.twig', array(
+      		'form' => $form->createView(),
+      		'meet_up' => $meet_up));
+	}
+
 }
 ?>
