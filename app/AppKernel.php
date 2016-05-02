@@ -21,6 +21,10 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new MeetUpBundle\MeetUpBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+
+            new MessagerieBundle\MessagerieBundle(),
+            new FOS\MessageBundle\FOSMessageBundle(),
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

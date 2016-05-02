@@ -1,0 +1,3 @@
+messagerie_box:
+    path:     /inbox
+    defaults: { _controller: MessagerieBundle:Message:inbox }

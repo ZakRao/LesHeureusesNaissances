@@ -1,0 +1,11 @@
+{# Liste des messages supprimés #}
+
+{% extends 'MessagerieBundle::layout.html.twig' %}
+
+{% block fos_message_content %}
+
+<h2>{% trans from 'FOSMessageBundle' %}deleted{% endtrans %}</h2>
+
+{% include 'MessagerieBundle:Message:threads_list.html.twig' with {'threads': threads} %}
+
+{% endblock %}
