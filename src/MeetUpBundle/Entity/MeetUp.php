@@ -79,11 +79,7 @@ class MeetUp
 
       /**
        *  @ORM\OneToOne(targetEntity="AppBundle\Entity\Image", cascade={"persist", "remove"})
-       *  @Assert\Image(
-       *     minWidth = 200,
-       *     maxWidth = 400,
-       *     minHeight = 200,
-       *     maxHeight = 400)  
+       *  
        */
       private $image;
 
