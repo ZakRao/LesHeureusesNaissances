@@ -70,16 +70,7 @@ fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
 
-lesrencontres:
-    path:     /lesrencontres
-    defaults: { _controller: MeetUpBundle:MeetUp:lesrencontres }
+lesrencontres_all:
+    resource: "@MeetUpBundle/Resources/config/routing.yml"
+    
 
-add_meet_up:
-  path: /add_meet_up
-  defaults: { _controller: MeetUpBundle:MeetUp:add}
-
-meet_up_view:
-  path: /meet_up/{id_meetup}
-  defaults: { _controller: MeetUpBundle:MeetUp:show}
-  requirements:
-    id: \d+
