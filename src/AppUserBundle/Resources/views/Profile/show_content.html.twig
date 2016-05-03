@@ -8,11 +8,13 @@
   <!-- Bandeau supérieur -->
 <div class="col-md-12 bandeau-profil">
     <div class="col-md-4 text-center">
-      {%if (user.image)!=null%}
+      
+
+      {% if (user.image)!=null %}
         <img  class="img-circle img-responsive" src= "{{ asset(user.image.webPath) }}" alt="{{ user.image.alt }}">
-      {%else%}
+      {% else %}
         <img  class="img-circle img-responsive" src= "http://i57.servimg.com/u/f57/16/18/15/10/1866.jpg" height="">
-      {%endif%}
+      {% endif %}
     </div>
 
     <div class="col-md-4 text-center">
@@ -69,11 +71,7 @@
                             {% else %}
                               <img src="{{asset('front/img/logo_garcon.jpg')}}" alt="logo_garcon">
                             {% endif %}
-                            {% if enfant.getAge()!= 0 %}
-                            <p>{{enfant.getAge()}} ans </p>
-                            {% else  %}
-                            <p>{{enfant.getMois()}} mois </p>
-                            {% endif %}
+                            <p>{{enfant.getAge()}}</p>
                             <p>{{enfant.prenom}}</p>
                         </div>
                       {% endfor %}
@@ -97,11 +95,7 @@
                             {% else %}
                               <img src="{{asset('front/img/logo_garcon.jpg')}}" alt="logo_garcon">
                             {% endif %}
-                            {% if enfant.getAge()!= 0 %}
-                            <p>{{enfant.getAge()}} ans </p>
-                            {% else  %}
-                            <p>{{enfant.getMois()}} mois</p>
-                            {% endif %}
+                            <p>{{enfant.getAge()}}</p>
                             <p>{{enfant.prenom}}</p>
                         </div>
                       {% endfor %}
@@ -119,7 +113,185 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="uppercase mt20">Mes disponibilités</h3> 
+                    <h3 class="uppercase mt20">Mes disponibilités</h3>
+                    
+
+                    {% set possibilites = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21'] %}
+
+
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>Lundi</th>
+                          <th>Mardi</th>
+                          <th>Mercredi</th>
+                          <th>Jeudi</th>
+                          <th>Vendredi</th>
+                          <th>Samedi</th>
+                          <th>Dimanche</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">Matin</th>
+                          <td class="lundi-m
+                          {% for dispo in user.disponibilites %}
+                            {% if dispo.disponibilite == 1%}
+                              success
+                            {% endif %} 
+                          {% endfor %}
+                          "></td>
+                          <td class="mardi-m
+                          {% for dispo in user.disponibilites %}
+                            {% if dispo.disponibilite == 4%}
+                              success
+                            {% endif %} 
+                          {% endfor %}
+                          "></td>
+                          <td class="mercredi-m
+                          {% for dispo in user.disponibilites %}
+                            {% if dispo.disponibilite == 7%}
+                              success
+                            {% endif %} 
+                          {% endfor %}
+                          "></td>
+                          <td class="jeudi-m
+                          {% for dispo in user.disponibilites %}
+                            {% if dispo.disponibilite == 10%}
+                              success
+                            {% endif %} 
+                          {% endfor %}
+                          "></td>
+                          <td class="vendredi-m
+                          {% for dispo in user.disponibilites %}
+                            {% if dispo.disponibilite == 13%}
+                              success
+                            {% endif %} 
+                          {% endfor %}
+                          "></td>
+                          <td class="samedi-m
+                          {% for dispo in user.disponibilites %}
+                            {% if dispo.disponibilite == 16%}
+                              success
+                            {% endif %} 
+                          {% endfor %}
+                          "></td>
+                          <td class="dimanche-m
+                          {% for dispo in user.disponibilites %}
+                            {% if dispo.disponibilite == 19%}
+                              success
+                            {% endif %} 
+                          {% endfor %}
+                          "></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Après-midi</th>
+                          <td class="lundi-am
+                          {% for dispo in user.disponibilites %}
+                            {% if dispo.disponibilite == 2%}
+                              success
+                            {% endif %} 
+                          {% endfor %}
+                          "></td>
+                          <td class="mardi-am
+                          {% for dispo in user.disponibilites %}
+                            {% if dispo.disponibilite == 5%}
+                              success
+                            {% endif %} 
+                          {% endfor %}
+                          "></td>
+                          <td class="mercredi-am
+                          {% for dispo in user.disponibilites %}
+                            {% if dispo.disponibilite == 8%}
+                              success
+                            {% endif %} 
+                          {% endfor %}
+                          "></td>
+                          <td class="jeudi-am
+                          {% for dispo in user.disponibilites %}
+                            {% if dispo.disponibilite == 11%}
+                              success
+                            {% endif %} 
+                          {% endfor %}
+                          "></td>
+                          <td class="vendredi-am
+                          {% for dispo in user.disponibilites %}
+                            {% if dispo.disponibilite == 14%}
+                              success
+                            {% endif %} 
+                          {% endfor %}
+                          "></td>
+                          <td class="samedi-am
+                          {% for dispo in user.disponibilites %}
+                            {% if dispo.disponibilite == 17%}
+                              success
+                            {% endif %} 
+                          {% endfor %}
+                          "></td>
+                          <td class="dimanche-am
+                          {% for dispo in user.disponibilites %}
+                            {% if dispo.disponibilite == 20%}
+                              success
+                            {% endif %} 
+                          {% endfor %}
+                          "></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Soirée</th>
+                          <td class="lundi-s
+                          {% for dispo in user.disponibilites %}
+                            {% if dispo.disponibilite == 3%}
+                              success
+                            {% endif %} 
+                          {% endfor %}
+                          "></td>
+                          <td class="mardi-s
+                          {% for dispo in user.disponibilites %}
+                            {% if dispo.disponibilite == 6%}
+                              success
+                            {% endif %} 
+                          {% endfor %}
+                          "></td>
+                          <td class="mercredi-s
+                          {% for dispo in user.disponibilites %}
+                            {% if dispo.disponibilite == 9%}
+                              success
+                            {% endif %} 
+                          {% endfor %}
+                          "></td>
+                          <td class="jeudi-s
+                          {% for dispo in user.disponibilites %}
+                            {% if dispo.disponibilite == 12%}
+                              success
+                            {% endif %} 
+                          {% endfor %}
+                          "></td>
+                          <td class="vendredi-s
+                          {% for dispo in user.disponibilites %}
+                            {% if dispo.disponibilite == 15%}
+                              success
+                            {% endif %} 
+                          {% endfor %}
+                          "></td>
+                          <td class="samedi-s
+                          {% for dispo in user.disponibilites %}
+                            {% if dispo.disponibilite == 18%}
+                              success
+                            {% endif %} 
+                          {% endfor %}
+                          "></td>
+                          <td class="dimanche-s
+                          {% for dispo in user.disponibilites %}
+                            {% if dispo.disponibilite == 21%}
+                              success
+                            {% endif %} 
+                          {% endfor %}
+                          "></td>
+                        </tr>
+                      </tbody>
+                    </table>
+      
                 </div>
             </div>
         </div>
@@ -130,55 +302,88 @@
             <div class="row">
                 <div class="col-md-12">
                     <h3 class="uppercase mt20 mb50">Elles ont déjà partagé du temps avec moi</h3> 
-
-                    {% for commentaire in user.commentaires %}
-                      <div class="col-md-10 col-md-offset-1 profil-comments">
-                          <i> Par {{ commentaire.auteur }} à {{commentaire.date | date('d/m/Y')}} </i>
-                          <div class="col-md-6">
-                              <h4>Titre du commentaire</h4>
-                              <p>
-                                  {{ commentaire.contenu }}
-                              </p>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="text-center profil-comment-picture">
-
-                              {% if (commentaire.image)!=null %}
-                                  <div class="col-sm-2"><img  class="img-circle img-responsive" src= "{{ asset(commentaire.image.webPath) }}" alt="{{ commentaire.image.alt }}">
-                              {% endif %}
-                            </div>
-                          </div>
-
-                          {%if app.user.username==commentaire.auteur%}
-                            <a href="{{ path('app_user_delete_commentaire', {'id': commentaire.id}) }}" class="btn btn-danger">
-                              <i class="glyphicon glyphicon-trash"></i>
-                              Supprimer 
-                            </a>
-                            {% endif %}
-                            <br>
-                            
-                      </div>
-                      {% if not loop.last %}, {% endif %}
-                    {% endfor %}
                     
-                    <hr>
+                    {% if user.commentaires != null %}
+                      {% for commentaire in user.commentaires %}
+                        
+                        <div class="col-md-10 col-md-offset-1 profil-comments">
+                            <div class="col-md-10">
+                              <h4 class="bold">{{commentaire.auteur}}</h4>
+                            </div>
+                            <!-- On test si l'utilisateur connecté est l'auteur du commentaire il peur supprimer le commentaire-->
+                            {% if app.user.username==commentaire.auteur %}
+                              <div class="col-md-2">
+                                <a href="{{ path('app_user_delete_commentaire', {'id': commentaire.id}) }}" class="btn pull-right">
+                                  <i class="glyphicon glyphicon-trash"></i>
+                                  Supprimer 
+                                </a>
+                              </div>
+                            {% endif %}
 
-                    <!-- Exemple de commentaire sans photo
-                    <div class="col-md-10 col-md-offset-1 profil-comments">
-                        <h4>Titre du commentaire</h4>
-                        <p>
-                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem.
-                        </p>
-                    </div>-->
+                            
+                            <div class="clearfix"></div>
+                            <!-- On test s'il le commentaire a une photo, S'il n'en a pas -->
+                            {% if (commentaire.image)==null %}
+
+                              <!-- On affiche le text dans un col-md-12 -->
+                              <div class="col-md-12">
+                                <p>
+                                    {{ commentaire.contenu }}
+                                </p>
+                              </div>
+
+                            <!-- S'il le commentaire a une image-->  
+                            {% else %}
+
+                              <!-- On affiche le contenu dans un col-md-6 -->
+                              <div class="col-md-12">
+                                <p>
+                                    {{ commentaire.contenu }}
+                                </p>
+                              </div>
+
+                              <!-- On affiche l'image dans un col-md-6 -->
+                              <div class="col-md-8 col-md-offset-2 profil-comment-picture">
+                                <img  class="img-responsive" src= "{{ asset(commentaire.image.webPath) }}" alt="{{ commentaire.image.alt }}">
+                              </div>
+                            {% endif %}
+
+                            
+                            <div class="col-md-10">
+                              <i> Par {{ commentaire.auteur }} le {{commentaire.date | date('d/m/Y')}} </i>
+                            </div>
+                        </div>
+                        
+                        {% if not loop.last %} {% endif %}
+                      {% endfor %}
+                    {% else %}
+                      Cette utilisateur n'a pas encore de commentaire
+                    {% endif %}
+                    
+
+                    <div class="col-md-10 col-md-offset-1">
+                      <hr>
+                      <form role="form" method="POST"  enctype="multipart/form-data" action="{{path('app_user_add_commentaire', {'username' : user.username})}}">
+
+                        <div class="col-md-12 text-center">
+                          <textarea placeholder="Laissez un commentaire sur votre rencontre avec cette utilisatrice" name="commentaire" rows="3"></textarea>
+                        </div>
+                        <div class="input-with-label text-left col-md-10">
+                          <span>Vous pouvez ajouter une photo à votre commentaire :</span>
+                        </div>
+                        <div class="col-md-5">
+                          <input type= "file"  name="image" class="form-control">
+                        </div>
+                        <div class="col-md-12">
+                          <button type="submit" class="btn btn-default">Envoyer</button>
+                        </div>
+                      </form>
+                    </div>
+                
+
             </div>
 
-            <form class="navbar-form navbar-left" role="form" method="POST"  enctype="multipart/form-data" action="{{path('app_user_add_commentaire', {'username' : user.username})}}"  >
-              <div class="form-group">
-                <input type= "text"   name="commentaire" placeholder="Commentaire" class="form-control">
-                <input type= "file"  name="image" class="form-control">
-              </div>
-              <button type="submit" class="btn btn-default">Envoyer</button>
-            </form>
+            
           </div>
         </div>
     </div>

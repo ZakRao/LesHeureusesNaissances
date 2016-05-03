@@ -120,6 +120,11 @@ class User extends BaseUser implements ParticipantInterface
      */
     private $anniversaire;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppUserBundle\Entity\Dispos", mappedBy="user", cascade={"persist"})
+     */
+    private $disponibilites; // Notez le « s », une annonce est liée à plusieurs commentaires
+
 
 
     public function __construct()
@@ -127,6 +132,7 @@ class User extends BaseUser implements ParticipantInterface
     parent::__construct();
     $this->enfants   = new ArrayCollection();
     $this->commentaires = new ArrayCollection();
+    $this->disponibilites = new ArrayCollection();
 }
 
 
@@ -551,4 +557,37 @@ class User extends BaseUser implements ParticipantInterface
         return $dateInterval->y;
     }
 
+
+     /**
+       * @param Dispos $dispos
+       * @return Dispos
+       */
+      public function addDispos(Dispos $dispos)
+      {
+        $this->dispos[] = $dispos;
+
+        // On lie l'annonce à la candidature
+        $dispos->setUser($this);
+
+        return $this;
+      }
+
+      /**
+       * @param Dispos $dispos
+       */
+      public function removeDispos(Dispos $dispos)
+      {
+        $this->dispos->removeElement($dispos);
+
+        // Et si notre relation était facultative (nullable=true, ce qui n'est pas notre cas ici attention) :
+        // $dispos->setUser(null);
+      }
+
+      /**
+       * @return ArrayCollection
+       */
+      public function getDisponibilites()
+      {
+        return $this->disponibilites;
+      }
 }
