@@ -14,13 +14,7 @@ oc_platform_test:
     path: /test
     defaults: { _controller: AppBundle:Advert:test }
 
-oc_platform_connexion:
-    path: /connexion
-    defaults: { _controller: AppBundle:Advert:connexion }
 
-oc_platform_inscription:
-    path: /inscription
-    defaults: { _controller: AppBundle:Advert:inscription }
 
 oc_platform_inscription2:
     path: /inscription2

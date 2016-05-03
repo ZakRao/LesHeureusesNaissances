@@ -57,6 +57,24 @@ class CommentaireController extends Controller
       $em->persist($commentaire);
       $em->flush();
 
+      $recipient = $commentaire->getUser()->getEmailCanonical();
+
+      $messagemail = \Swift_Message::newInstance()
+            ->setSubject('Message reçu')
+
+            //Mettre l'adresse mail des Heureuses naissances à la place de la mienne!!
+            ->setFrom($this->getParameter('mailer_user')) 
+            ->setTo($recipient)
+            ->setCharset('utf-8')
+            ->setBody(
+                $this->container->get('templating')->render(
+                    'MessagerieBundle:Emails:notification_commentaire.html.twig'
+                ),
+                'text/html'
+            );
+                            
+            $this->container->get('mailer')->send($messagemail);
+
 }
   return $this->redirectToRoute('show', array('username' => $user));    
 

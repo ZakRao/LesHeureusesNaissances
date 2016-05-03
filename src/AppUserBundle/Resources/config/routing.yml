@@ -1,8 +1,27 @@
+
 app_user_add_enfant:
-    path: /add_enfant 
+    path: /ajout_enfant 
     defaults: {_controller: AppUserBundle:Enfant:add_enfant }
 
 
+app_user_delete_enfant:
+    path: /suppression_enfant/{id}
+    defaults: {_controller: AppUserBundle:Enfant:delete_enfant }
+    requirements:
+        id: \d+
+
+app_user_add_commentaire:
+    path: /commentaire/{username}
+    defaults:   { _controller: AppUserBundle:Commentaire:add_Commentaire }
+    requirements:
+        _method: POST
+
+app_user_delete_commentaire:
+    path: /suppression_commentaire/{id}
+    defaults: {_controller: AppUserBundle:Commentaire:delete_Commentaire }
+    requirements:
+        id: \d+
+
 oc_userbundle_search:
-    path: /search 
+    path: /recherche 
     defaults: {_controller:AppUserBundle:Search:search}
