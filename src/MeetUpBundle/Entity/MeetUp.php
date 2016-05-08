@@ -80,7 +80,7 @@ class MeetUp
 
     /**
     *  @ORM\OneToOne(targetEntity="AppBundle\Entity\Image", cascade={"persist", "remove"})
-    * @ORM\JoinColumn(nullable=false)  
+    * 
     */
     private $image;
 
