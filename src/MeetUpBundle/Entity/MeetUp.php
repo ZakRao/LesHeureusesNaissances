@@ -16,11 +16,11 @@ class MeetUp
     /**
      * @var int
      *
-     * @ORM\Column(name="id_meetup", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id_meetup;
+    private $id;
 
     /**
      * @var string
