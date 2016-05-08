@@ -1,0 +1,19 @@
+{# Onglets pour les messages #}
+
+
+
+{% block onglets %}
+<div class="col-md-3">
+	<a href="{{ url('fos_message_thread_new' )}}">{% trans from 'FOSMessageBundle' %}send_new{% endtrans %}</a>
+</div>
+<div class="col-md-3">
+	<a href="{{ url('fos_message_inbox') }}">{% trans from 'FOSMessageBundle' %}inbox{% endtrans %}</a>
+</div>
+<div class="col-md-3">
+	<a href="{{ url('fos_message_sent') }}">{% trans from 'FOSMessageBundle' %}sent{% endtrans %}</a>
+</div>
+<div class="col-md-3">
+	<a href="{{ url('fos_message_deleted') }}">{% trans from 'FOSMessageBundle' %}deleted{% endtrans %}</a>
+</div>
+<hr/>
+{% endblock %}

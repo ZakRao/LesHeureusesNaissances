@@ -1,12 +1,16 @@
 {# Liste des messages reçus #}
 
-{% extends 'MessagerieBundle::layout.html.twig' %}
 
-{% block fos_message_content %}
+{% extends "::layout.html.twig" %}
 
-<h2>{% trans from 'FOSMessageBundle' %}inbox{% endtrans %}</h2>
+{% block body %}
 
-<a href="{{ url('fos_message_thread_new' )}}">{% trans from 'FOSMessageBundle' %}send_new{% endtrans %}</a>
+{% include "MessagerieBundle:Message:onglets.html.twig" %}
+
+{# A changer par Gilou ! Il faut pas mettre la balise center normalement #}
+<h2><center>{% trans from 'FOSMessageBundle' %}inbox{% endtrans %}</center></h2>
+
+<!--<a href="{{ url('fos_message_thread_new' )}}">{% trans from 'FOSMessageBundle' %}send_new{% endtrans %}</a>-->
 
 {% include 'MessagerieBundle:Message:threads_list.html.twig' with {'threads': threads} %}
 

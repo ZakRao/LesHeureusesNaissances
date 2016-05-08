@@ -1,28 +1,31 @@
 {#  Nouveau message #}
 
 
-{% extends 'MessagerieBundle::layout.html.twig' %}
+{% extends '::layout.html.twig' %}
 
-{% block fos_message_content %}
+{% block body %}
 
-<h2>{% trans from 'FOSMessageBundle' %}send_new{% endtrans %}</h2>
+{% include "MessagerieBundle:Message:onglets.html.twig" %}
+
+<h2><center>{% trans from 'FOSMessageBundle' %}send_new{% endtrans %}</center></h2>
 
 <form action="{{ url('fos_message_thread_new') }}" method="post">
     {{form_label(form.recipient,'Destinataire')}}
     {{form_widget(form.recipient,{'attr':{'class':'form-control'}})}}
     {{form_errors(form.recipient)}}
 
-    {{form_label(form.subject,'Subject')}}
+    {# Enlever peut-être la partie sujet... #}
+    {{form_label(form.subject,'Sujet')}}
     {{form_widget(form.subject,{'attr':{'class':'form-control'}})}}
     {{form_errors(form.subject)}}
 
-    {{form_label(form.body,'Body')}}
+    {{form_label(form.body,'Message')}}
     {{form_widget(form.body,{'attr':{'class':'form-control'}})}}
     {{form_errors(form.body)}}
 
     {{form_rest(form)}}
 
-    <input type="submit" />
+    <input type="submit" value="Envoyer"/>
 </form>
 
 

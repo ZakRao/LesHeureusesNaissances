@@ -1,8 +1,10 @@
-{% extends 'MessagerieBundle::layout.html.twig' %}
+{% extends '::layout.html.twig' %}
 
-{% block fos_message_content %}
+{% block body %}
 
-<h2>{% trans from 'FOSMessageBundle' %}search{% endtrans %}</h2>
+{% include "MessagerieBundle:Message:onglets.html.twig" %}
+
+<h2><center>{% trans from 'FOSMessageBundle' %}search{% endtrans %}</center></h2>
 
 <p>{% transchoice threads|length with {'%num%': threads|length } from 'FOSMessageBundle' %}
     threads_found

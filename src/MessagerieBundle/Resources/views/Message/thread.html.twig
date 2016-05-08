@@ -1,9 +1,11 @@
 {# Réponse à un message #}
 
 
-{% extends 'MessagerieBundle::layout.html.twig' %}
+{% extends '::layout.html.twig' %}
 
-{% block fos_message_content %}
+{% block body %}
+
+{% include "MessagerieBundle:Message:onglets.html.twig" %}
 
 
 {% for flashMessage in app.session.flashbag.get('notice') %}

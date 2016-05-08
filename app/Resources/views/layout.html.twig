@@ -20,6 +20,10 @@
     <link href="{{ asset('front/css/custom.css') }}" rel="stylesheet" type="text/css" media="all" />
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600' rel='stylesheet' type='text/css'>
   {% endblock %}
+
+
+
+
 </head>
 
 {% block header %}  
@@ -46,7 +50,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <a href="{{ url('fos_message_inbox') }}">
                                         Messagerie
                                     </a>
                                 </li>
@@ -111,6 +115,15 @@
         </div>
 {% endblock %}
 {% block body %}
+
+{# Ce passage permet d'afficher un block s'il est rempli #}
+
+  {% set _block = block('onglets') %}
+  {% if _block is not empty %}
+    {% block onglets %}
+    {% endblock %}
+  {% endif %}
+
 {% endblock %}
 {% block footer %}
             <footer class="footer-1 bg-dark">

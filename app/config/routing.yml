@@ -45,8 +45,7 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
-    
-   
+
 lesrencontres_all:
     resource: "@MeetUpBundle/Resources/config/routing.yml"
 
@@ -55,6 +54,6 @@ messagerie:
     prefix:   /
 
 fos_message:
-    resource: "@FOSMessageBundle/Resources/config/routing.xml"
-    prefix: /optional_routing_prefix
+    resource: "@MessagerieBundle/Resources/config/routing.xml"
+    prefix: /
 

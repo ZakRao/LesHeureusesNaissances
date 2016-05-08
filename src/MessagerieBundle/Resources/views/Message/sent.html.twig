@@ -1,8 +1,10 @@
-{% extends 'MessagerieBundle::layout.html.twig' %}
+{% extends '::layout.html.twig' %}
 
-{% block fos_message_content %}
+{% block body %}
 
-<h2>{% trans from 'FOSMessageBundle' %}sent{% endtrans %}</h2>
+{% include "MessagerieBundle:Message:onglets.html.twig" %}
+
+<h2><center>{% trans from 'FOSMessageBundle' %}sent{% endtrans %}</center></h2>
 
 {% include 'MessagerieBundle:Message:threads_list.html.twig' with {'threads': threads} %}
 
