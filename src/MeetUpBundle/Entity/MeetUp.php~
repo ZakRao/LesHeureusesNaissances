@@ -4,7 +4,6 @@ namespace MeetUpBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * MeetUp
@@ -80,12 +79,12 @@ class MeetUp
 
     /**
     *  @ORM\OneToOne(targetEntity="AppBundle\Entity\Image", cascade={"persist", "remove"})
-    * @ORM\JoinColumn(nullable=false)  
+    *  
     */
     private $image;
 
     /**
-    * @ORM\OneToMany(targetEntity="MeetUpBundle\Entity\CommentaireMeetUp", mappedBy="meetup", cascade={"persist","remove"})
+    * @ORM\OneToMany(targetEntity="MeetUpBundle\Entity\CommentaireMeetUp", mappedBy="meet_up", cascade={"persist"})
     *
     */
     private $commentairesMeetUp; //Une MeetUp est liée à plusieurs commentaires
@@ -94,7 +93,6 @@ class MeetUp
     public function __construct()
     {
         $this->commentairesMeetUp = new ArrayCollection();
-        
     }
 
     /**
@@ -363,7 +361,7 @@ class MeetUp
      *
      * @param \MeetUpBundle\Entity\MeetUp $meetup
      *
-     * @return MeetUp
+     * @return CommentaireMeetUp
      */
     public function setMeetUp(\MeetUpBundle\Entity\MeetUp $meetup)
     {
@@ -380,29 +378,5 @@ class MeetUp
     public function getMeetUp()
     {
         return $this->meetup;
-    }
-
-    /**
-     * Add commentairesMeetUp
-     *
-     * @param \MeetUpBundle\Entity\CommentaireMeetUp $commentairesMeetUp
-     *
-     * @return MeetUp
-     */
-    public function addCommentairesMeetUp(\MeetUpBundle\Entity\CommentaireMeetUp $commentairesMeetUp)
-    {
-        $this->commentairesMeetUp[] = $commentairesMeetUp;
-
-        return $this;
-    }
-
-    /**
-     * Remove commentairesMeetUp
-     *
-     * @param \MeetUpBundle\Entity\CommentaireMeetUp $commentairesMeetUp
-     */
-    public function removeCommentairesMeetUp(\MeetUpBundle\Entity\CommentaireMeetUp $commentairesMeetUp)
-    {
-        $this->commentairesMeetUp->removeElement($commentairesMeetUp);
     }
 }

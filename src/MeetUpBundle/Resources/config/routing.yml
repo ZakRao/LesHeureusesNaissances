@@ -4,26 +4,34 @@ meet_up_homepage:
 
 add_meet_up:
   path: /add_meet_up
-  defaults: { _controller: MeetUpBundle:MeetUp:add}
+  defaults: { _controller: MeetUpBundle:MeetUp:add}    
 
 meet_up_view:
-  path: /meet_up/{id_meetup}
+  path: /meet_up/{id}
   defaults: { _controller: MeetUpBundle:MeetUp:show}
   requirements:
     id: \d+
 
 delete_meet_up:
-  path: /delete_meet_up/{id_meetup}
+  path: /delete_meet_up/{id}
   defaults: { _controller: MeetUpBundle:MeetUp:delete}
   requirements:
     id: \d+    
 
 edit_meet_up:
-  path: /edit_meet_up/{id_meetup}
+  path: /edit_meet_up/{id}
   defaults: { _controller: MeetUpBundle:MeetUp:edit}
   requirements:
     id: \d+        
 
-lesrencontres:
-  path: /lesrencontres
-  defaults: { _controller: MeetUpBundle:MeetUp:lesrencontres}
+add_commentaire_meet_up:
+  path: /add_com_meet_up/{id}
+  defaults: { _controller: MeetUpBundle:CommentaireMeetUp:add_CommentaireMeetUp}    
+  requirements:
+    id: \d+  
+
+delete_commentaire_meet_up:
+  path: /delete_com_meet_up/{id}
+  defaults: { _controller: MeetUpBundle:CommentaireMeetUp:delete_CommentaireMeetUp}    
+  requirements:
+    id: \d+  

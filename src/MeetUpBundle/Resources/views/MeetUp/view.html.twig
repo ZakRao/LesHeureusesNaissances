@@ -13,15 +13,49 @@
   <p> Jour 2 :{{ meet_up.jour2|date('Y-m-d')}} </p>
   <p> Jour 3 :{{ meet_up.jour3|date('Y-m-d')}} </p>
 
+  {% if (meet_up.image != null) %}
   <img 
   src="{{ asset(meet_up.image.webPath) }}"
   alt="{{ meet_up.image.alt }}"
   />
+  {%endif%}
 
-   <a href="{{ path('delete_meet_up', {'id_meetup': meet_up.id}) }}" class="btn btn-danger">
-          <i class="glyphicon glyphicon-trash"></i>
-          Supprimer 
-        </a>
+   <a href="{{ path('delete_meet_up', {'id': meet_up.id}) }}" class="btn btn-danger">
+   <i class="glyphicon glyphicon-trash"></i>
+    Supprimer 
+    </a>
+
+    <form role="form" method="POST" enctype="multipart/form-data" action = "{{ path('add_commentaire_meet_up', {'id': meet_up.id}) }}" >
+    <div class="form-group">
+    <input type= "text"   name="commentaire" placeholder="Commentaire" class="form-control">
+    <input type= "file"  name="image" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-default">Envoyer</button>
+    </form>
+
+
+    {% for commentaireMeetUp in meet_up.commentairesMeetUp %}
+        <div class="col-md-10 col-md-offset-1 profil-comments">
+            <i> Par {{ commentaireMeetUp.auteur }} à {{commentaireMeetUp.date | date('d/m/Y')}} : Commentaire ID :  {{ commentaireMeetUp.id }} </i>
+                <div class="col-md-6">
+                    <h4>Titre du commentaire</h4>
+                        <p>
+                            {{ commentaireMeetUp.contenu }}
+                        </p>
+                </div>
+                {%if app.user.username==commentaireMeetUp.auteur%}
+                <a href="{{ path('delete_commentaire_meet_up', {'id': commentaireMeetUp.id}) }}" class="btn btn-danger">
+                    <i class="glyphicon glyphicon-trash"></i>
+                        Supprimer 
+                    </a>
+                {% endif %}
+                <br>            
+                </div>
+                    {% if not loop.last %},{% endif %}
+    {% endfor %}
+
+
+
 
 
   <div class="col-md-12 bandeau">

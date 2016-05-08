@@ -44,7 +44,7 @@ class MeetUpType extends AbstractType
 		->add('jour2', DateType::class)
 		->add('jour3', DateType::class)
 		->add('description', TextareaType::class)
-		->add('image', ImageType::class)
+		->add('image', ImageType::class, array('required' => false))
 		->add('save', SubmitType::class);
 	}
 }	
