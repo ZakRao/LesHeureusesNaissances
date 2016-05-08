@@ -49,11 +49,11 @@ fos_user_change_password:
 lesrencontres_all:
     resource: "@MeetUpBundle/Resources/config/routing.yml"
 
-messagerie:
-    resource: "@MessagerieBundle/Resources/config/routing.yml"
-    prefix:   /
+#messagerie:
+#    resource: "@MessagerieBundle/Resources/config/routing.yml"
+#    prefix:   /
 
 fos_message:
     resource: "@MessagerieBundle/Resources/config/routing.xml"
-    prefix: /
+    prefix: /messagerie
 
