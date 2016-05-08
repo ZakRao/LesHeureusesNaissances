@@ -5,8 +5,10 @@
 {%block body%}
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
+
+<div class="row bandeau-profil">
   <!-- Bandeau supérieur -->
-<div class="col-md-12 bandeau-profil">
+  <div class="col-md-12">
     <div class="col-md-4 text-center">
       
 
@@ -36,8 +38,7 @@
           <a class="btn btn-filled" href="{{path('fos_user_profile_edit')}}">Modifier mon Profil</a>
       {%endif%}
     </div>
-
-
+  </div>
 </div>
 
 
@@ -51,12 +52,14 @@
                   <!-- Description -->
                   {{user.description}}
                 </p>
-                
-                
-                <!-- Si l'utilisatrice est enceinte -->
+            </div>
+            <div class="col-md-6">
+              <!-- Si l'utilisatrice est enceinte -->
                 {% if user.enceinte == 1%}
-                <h3>Je suis enceinte en ce moment</h3>
-                <p class="lead">
+
+                  <h3 class="uppercase mt20">Je suis enceinte</h3>
+
+                  <p class="lead">
 
                   <!-- Date de fin de grossesse -->
                   Terme prévu en : {{user.datef.format('m/Y')}} <br>
@@ -81,10 +84,8 @@
                   {% endif %}
 
                 </p>
-                </div>
-                <div class="col-md-6">
                   {% else %}
-                    <h3>Je ne suis pas enceinte en ce moment</h3>
+                    <h3>Je ne suis pas enceinte</h3>
                     {% if not user.enfants.empty%} 
                       <!-- Nombre d'enfants -->
                       J'ai {{user.enfants.count}} enfants
@@ -105,6 +106,8 @@
                     Je n'ai pas encore d'enfant
                   {% endif %}
                 {% endif %}
+            </div>
+
               </div>
             </div>
             </div>

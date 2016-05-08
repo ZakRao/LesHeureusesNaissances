@@ -116,7 +116,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="anniversaire", type="datetime", nullable=true)
+     * @ORM\Column(name="anniversaire", type="date", nullable=true)
      */
     private $anniversaire;
 

@@ -4,7 +4,7 @@ meet_up_homepage:
 
 add_meet_up:
   path: /add_meet_up
-  defaults: { _controller: MeetUpBundle:MeetUp:add}    
+  defaults: { _controller: MeetUpBundle:MeetUp:add}
 
 meet_up_view:
   path: /meet_up/{id_meetup}
@@ -23,3 +23,7 @@ edit_meet_up:
   defaults: { _controller: MeetUpBundle:MeetUp:edit}
   requirements:
     id: \d+        
+
+lesrencontres:
+  path: /lesrencontres
+  defaults: { _controller: MeetUpBundle:MeetUp:lesrencontres}
