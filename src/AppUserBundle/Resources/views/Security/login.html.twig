@@ -6,7 +6,9 @@
 {% endif %}
 {% block lesheureusesnaissancesplatform_body %}
 <div class="col-md-12 bandeau">
+
     <h1 class="text-center">Connexion</h1>
+
 </div>
 
 <div class="container">
@@ -21,7 +23,7 @@
 
                     <input type="password" id="password" name="_password" required="required" placeholder="mot de passe"/>
                     
-                    <a href=""><p class="lead pull-right">
+                    <a href="{{path('fos_user_resetting_request')}}"><p class="lead pull-right">
                                     Mot de passe oublié ?
                     </p></a>
 
