@@ -66,6 +66,10 @@ class RegistrationController extends BaseController
                     $url = $this->container->get('router')->generate($route);
                     $response = new RedirectResponse($url);
 
+                    $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+              // On passe le token créé au service security context afin que l'utilisateur soit authentifié
+              $this->container->get('security.context')->setToken($token);  
+
                     if ($authUser) {
                         $this->authenticateUser($user, $response);
                     }
@@ -74,12 +78,7 @@ class RegistrationController extends BaseController
                 }
             }
 
-            //Pour la connection automatique
-            
-            // Création d'un nouveau token basé sur l'utilisateur qui vient de s'inscrire
-              $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
-              // On passe le token créé au service security context afin que l'utilisateur soit authentifié
-              $this->get('security.context')->setToken($token);  
+         
         }
 
         
