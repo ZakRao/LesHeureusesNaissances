@@ -56,10 +56,10 @@ class RegistrationController extends BaseController
                     $authUser = false;
                     if ($confirmationEnabled) {
                         $this->container->get('session')->set('fos_user_send_confirmation_email/email', $user->getEmail());
-                        $route = 'fos_user_registration_check_email';
+                        $route = 'fos_user_profile_edit';
                     } else {
                         $authUser = true;
-                        $route = 'fos_user_registration_confirmed';
+                        $route = 'fos_user_profile_edit';
                     }
     
                     $this->setFlash('fos_user_success', 'registration.flash.user_created');
