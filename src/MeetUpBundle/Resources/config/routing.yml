@@ -53,11 +53,3 @@ add_vote_jour3:
   defaults: { _controller: MeetUpBundle:MeetUp:increment_vote}    
   requirements:
     id: \d+  
-
-lesrencontres:
-  path: /lesrencontres
-  defaults: { _controller:MeetUpBundle:MeetUp:lesrencontres}  
-
-mesrencontres:
-  path: /mesrencontres
-  defaults: { _controller:MeetUpBundle:MeetUp:mesrencontres}     
