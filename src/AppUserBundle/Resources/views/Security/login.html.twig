@@ -5,6 +5,18 @@
     <div>{{ error|trans({}, 'FOSUserBundle') }}</div>
 {% endif %}
 {% block lesheureusesnaissancesplatform_body %}
+
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    <div class="alert alert-danger alert-dismissible mt20 col-md-6 col-md-offset-3" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <strong>Attention !</strong> Vous êtes déjà connecté, vous ne pouvez pas atteindre cette page !
+    </div>
+    <div class="clearfix"></div>
+{% else %}
+
+
 <div class="col-md-12 bandeau">
 
     <h1 class="text-center">Connexion</h1>
@@ -36,6 +48,7 @@
                 </div>
             </div>
         </div>
+{% endif %}
 {% endblock %}
 
 {% endblock fos_user_content %}
