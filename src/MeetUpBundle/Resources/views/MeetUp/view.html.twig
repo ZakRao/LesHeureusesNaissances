@@ -31,10 +31,12 @@
   />
   {%endif%}
 
+   {%if app.user.username==meet_up.user%} 
    <a href="{{ path('delete_meet_up', {'id': meet_up.id}) }}" class="btn btn-danger">
    <i class="glyphicon glyphicon-trash"></i>
     Supprimer 
     </a>
+   {% endif %}
 
     <form role="form" method="POST" enctype="multipart/form-data" action = "{{ path('add_commentaire_meet_up', {'id': meet_up.id}) }}" >
     <div class="form-group">
