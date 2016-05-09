@@ -9,6 +9,14 @@ class SearchController extends Controller
 {
 
   public function searchAction(Request $request){
+
+     $user = $this->container->get('security.context')->getToken()->getUser();
+     if($user->getDescription()==null){
+
+
+            return $this->redirectToRoute('fos_user_profile_edit');
+
+    }
        $request = Request::createFromGlobals();
 
        $req = $request->request->get('username');
