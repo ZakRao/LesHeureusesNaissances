@@ -34,6 +34,15 @@ class MessageController extends ContainerAware
     {
         $threads = $this->getProvider()->getInboxThreads();
 
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        
+
+         if($user->getDescription()==null){
+
+             return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_edit'));
+
+        }
+
         return $this->container->get('templating')->renderResponse('MessagerieBundle:Message:inbox.html.twig', array(
             'threads' => $threads
         ));
@@ -48,6 +57,15 @@ class MessageController extends ContainerAware
     {
         $threads = $this->getProvider()->getSentThreads();
 
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        
+
+         if($user->getDescription()==null){
+
+             return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_edit'));
+
+        }
+
         return $this->container->get('templating')->renderResponse('MessagerieBundle:Message:sent.html.twig', array(
             'threads' => $threads
         ));
@@ -61,6 +79,16 @@ class MessageController extends ContainerAware
     public function deletedAction()
     {
         $threads = $this->getProvider()->getDeletedThreads();
+
+
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        
+
+         if($user->getDescription()==null){
+
+             return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_edit'));
+
+        }
 
         return $this->container->get('templating')->renderResponse('MessagerieBundle:Message:deleted.html.twig', array(
             'threads' => $threads
@@ -79,6 +107,16 @@ class MessageController extends ContainerAware
         $thread = $this->getProvider()->getThread($threadId);
         $form = $this->container->get('fos_message.reply_form.factory')->create($thread);
         $formHandler = $this->container->get('fos_message.reply_form.handler');
+
+
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        
+
+         if($user->getDescription()==null){
+
+             return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_edit'));
+
+        }
 
 
         //Mail 
@@ -128,6 +166,16 @@ class MessageController extends ContainerAware
 
         $form = $this->container->get('fos_message.new_thread_form.factory')->create();
         $formHandler = $this->container->get('fos_message.new_thread_form.handler');
+
+
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        
+
+         if($user->getDescription()==null){
+
+             return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_edit'));
+
+        }
         
       
 
@@ -183,6 +231,16 @@ class MessageController extends ContainerAware
         $this->container->get('fos_message.deleter')->markAsDeleted($thread);
         $this->container->get('fos_message.thread_manager')->saveThread($thread);
 
+
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        
+
+         if($user->getDescription()==null){
+
+             return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_edit'));
+
+        }
+
         return new RedirectResponse($this->container->get('router')->generate('fos_message_inbox'));
     }
     
@@ -199,6 +257,16 @@ class MessageController extends ContainerAware
         $this->container->get('fos_message.deleter')->markAsUndeleted($thread);
         $this->container->get('fos_message.thread_manager')->saveThread($thread);
 
+
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        
+
+         if($user->getDescription()==null){
+
+             return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_edit'));
+
+        }
+
         return new RedirectResponse($this->container->get('router')->generate('fos_message_inbox'));
     }
 
@@ -211,6 +279,16 @@ class MessageController extends ContainerAware
     {
         $query = $this->container->get('fos_message.search_query_factory')->createFromRequest();
         $threads = $this->container->get('fos_message.search_finder')->find($query);
+
+        
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        
+
+         if($user->getDescription()==null){
+
+             return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_edit'));
+
+        }
 
         return $this->container->get('templating')->renderResponse('MessagerieBundle:Message:search.html.twig', array(
             'query' => $query,
