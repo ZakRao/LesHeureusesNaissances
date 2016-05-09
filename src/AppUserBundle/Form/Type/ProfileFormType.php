@@ -29,7 +29,7 @@ class ProfileFormType extends BaseType
 		$builder
 			->add('nom', TextType::class ,array('required' => true))
       ->add('prenom', TextType::class ,array('required' => true))
-      ->add('anniversaire', DateType::class, array('required' => true))
+      ->add('anniversaire', BirthdayType::class, array('required' => true))
       ->add('adresse',  TextType::class , array('required' => true))
      
       ->add('departement', ChoiceType::class,array('choices'=>array(
