@@ -90,11 +90,34 @@ class MeetUp
     */
     private $commentairesMeetUp; //Une MeetUp est liée à plusieurs commentaires
 
+    /**
+    * @var int
+    * 
+    * @ORM\Column(name="vote_jour1", type="integer")
+    *
+    */
+    private $vote_jour1 = 0;
+
+    /**
+    * @var int
+    * 
+    * @ORM\Column(name="vote_jour2", type="integer")
+    *
+    */
+    private $vote_jour2 = 0;
+
+    /**
+    * @var int
+    * 
+    * @ORM\Column(name="vote_jour3", type="integer")
+    *
+    */
+    private $vote_jour3 = 0;
+
 
     public function __construct()
     {
         $this->commentairesMeetUp = new ArrayCollection();
-        
     }
 
     /**
@@ -405,4 +428,76 @@ class MeetUp
     {
         $this->commentairesMeetUp->removeElement($commentairesMeetUp);
     }
+
+    /**
+     * Set vote_jour1
+     *
+     * @param int $vote_jour1
+     *
+     * @return MeetUp
+     */
+    public function setVote_Jour1($vote_jour1)
+    {
+        $this->vote_jour1 = $vote_jour1;
+
+        return $this;
+    }
+
+    /**
+     * Get jour1
+     *
+     * @return int
+     */
+    public function getVote_Jour1()
+    {
+        return $this->vote_jour1;
+    }    
+
+    /**
+     * Set vote_jour2
+     *
+     * @param int $vote_jour2
+     *
+     * @return MeetUp
+     */
+    public function setVote_Jour2($vote_jour2)
+    {
+        $this->vote_jour2 = $vote_jour2;
+
+        return $this;
+    }
+
+    /**
+     * Get vote_jour2
+     *
+     * @return int
+     */
+    public function getVote_Jour2()
+    {
+        return $this->vote_jour2;
+    } 
+
+    /**
+     * Set vote_jour3
+     *
+     * @param int $vote_jour3
+     *
+     * @return MeetUp
+     */
+    public function setVote_Jour3($vote_jour3)
+    {
+        $this->vote_jour3 = $vote_jour3;
+
+        return $this;
+    }
+
+    /**
+     * Get vote_jour3
+     *
+     * @return int
+     */
+    public function getVote_Jour3()
+    {
+        return $this->vote_jour3;
+    } 
 }

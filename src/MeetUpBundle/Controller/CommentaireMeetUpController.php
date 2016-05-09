@@ -55,6 +55,7 @@ public function add_CommentaireMeetUpAction (MeetUp $meetup, Request $request)
 
     // On récupère l'annonce $id
     $commentaireMeetUp = $em->getRepository('MeetUpBundle:CommentaireMeetUp')->find($id);
+    $meetup = $commentaireMeetUp->getMeetUp();
 
     if (null === $commentaireMeetUp) {
       throw new NotFoundHttpException("Le commentaire meet up  d'id ".$id." n'existe pas.");
@@ -65,7 +66,7 @@ public function add_CommentaireMeetUpAction (MeetUp $meetup, Request $request)
       $em->remove($commentaireMeetUp);
       $em->flush();
 
-    return $this->redirectToRoute('meet_up_view', array('id' => $meetup));
+    return $this->redirectToRoute('meet_up_view', array('id' => $meetup->getId()));
 }
 
 }

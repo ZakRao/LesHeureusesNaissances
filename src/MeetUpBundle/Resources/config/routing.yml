@@ -35,3 +35,21 @@ delete_commentaire_meet_up:
   defaults: { _controller: MeetUpBundle:CommentaireMeetUp:delete_CommentaireMeetUp}    
   requirements:
     id: \d+  
+
+add_vote_jour1:
+  path: /ajout_vote_jour1/{id}
+  defaults: { _controller: MeetUpBundle:MeetUp:increment_vote}
+  requirements:
+    id: \d+  
+
+add_vote_jour2:
+  path: /ajout_vote_jour2/{id}
+  defaults: { _controller: MeetUpBundle:MeetUp:increment_vote}
+  requirements:
+    id: \d+  
+
+add_vote_jour3:
+  path: /ajout_vote_jour3/{id}
+  defaults: { _controller: MeetUpBundle:MeetUp:increment_vote}    
+  requirements:
+    id: \d+  

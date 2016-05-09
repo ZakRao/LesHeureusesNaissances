@@ -33,8 +33,6 @@ class MeetUpController extends Controller
 
 	if( $form->handleRequest($request)->isValid()){
 
-		
-		
 		$user = $this->container->get('security.context')->getToken()->getUser();
         $meetup->setUser($user);
 		$em->persist($meetup);
@@ -135,6 +133,39 @@ class MeetUpController extends Controller
       		'form' => $form->createView(),
       		'meet_up' => $meet_up));
 	}
+	
+	public function increment_voteAction($id, Request $request)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$meet_up = $em->getRepository('MeetUpBundle:MeetUp')->find($id);
+		$request = Request::createFromGlobals();
+	
+		if ($meet_up === null) {
+  		throw $this->createNotFoundException("La Rencontre d'id ".$id." n'existe pas.");
+  		  }
+		
+		$path = $request->getPathInfo();
+		if('/ajout_vote_jour1/'.$id === $path){
+			$vote1 = $meet_up->getVote_Jour1()+1;
+			$meet_up->setVote_Jour1($vote1);
+			$em->persist($meet_up);
+			$em->flush();
+		}
+  		elseif('/ajout_vote_jour2/'.$id === $path){
+			$vote2 = $meet_up->getVote_Jour2()+1;
+			$meet_up->setVote_Jour2($vote2);
+			$em->persist($meet_up);
+			$em->flush();
+		}
+		elseif('/ajout_vote_jour3/'.$id === $path){
+			$vote3 = $meet_up->getVote_Jour3()+1;
+			$meet_up->setVote_Jour3($vote3);
+			$em->persist($meet_up);
+			$em->flush();
+		}
 
+		return $this->redirectToRoute('meet_up_view', array('id' => $meet_up->getId()));
+	}
+	
 }
 ?>

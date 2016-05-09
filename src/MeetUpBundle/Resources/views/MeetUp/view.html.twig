@@ -9,9 +9,19 @@
   <h2>Rencontre</h2>
 
   {{ meet_up.id }}
-  <p> Jour 1 :{{ meet_up.jour1|date('Y-m-d')}} </p>
-  <p> Jour 2 :{{ meet_up.jour2|date('Y-m-d')}} </p>
-  <p> Jour 3 :{{ meet_up.jour3|date('Y-m-d')}} </p>
+
+  <p> 
+    Jour 1 : {{ meet_up.jour1|date('Y-m-d') }} , <a href="{{ path('add_vote_jour1', {'id' : meet_up.id}) }}" class="btn btn-danger"> Test </a>
+    {{ meet_up.vote_jour1 }} 
+  </p>
+  <p> 
+    Jour 2 : {{ meet_up.jour2|date('Y-m-d') }} , <a href="{{ path('add_vote_jour2', {'id' : meet_up.id}) }}"> Test </a>
+    {{ meet_up.vote_jour2 }} 
+  </p>
+  <p> 
+    Jour 3 : {{ meet_up.jour3|date('Y-m-d') }} , <a href="{{ path('add_vote_jour3', {'id' : meet_up.id}) }}"> Test </a>
+    {{ meet_up.vote_jour3 }} 
+  </p>
 
   {% if (meet_up.image != null) %}
   <img 
@@ -44,7 +54,7 @@
                         </p>
                 </div>
                 {%if app.user.username==commentaireMeetUp.auteur%}
-                <a href="{{ path('delete_commentaire_meet_up', {'id': commentaireMeetUp.id}) }}" class="btn btn-danger">
+                <a href="{{ path('delete_commentaire_meet_up', {'id': commentaireMeetUp.id}) }}" >
                     <i class="glyphicon glyphicon-trash"></i>
                         Supprimer 
                     </a>
