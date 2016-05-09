@@ -19,6 +19,12 @@ class MessageController extends ContainerAware
 {
 
 
+    public function indexAction()
+    {
+        return $this->container->get('templating')->renderResponse('MessagerieBundle:Message:formreplytest.html.twig');
+    }
+
+
     /**
      * Displays the authenticated participant inbox
 	 *

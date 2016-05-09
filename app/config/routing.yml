@@ -55,5 +55,5 @@ messagerie:
 
 fos_message:
     resource: "@MessagerieBundle/Resources/config/routing.xml"
-    prefix: /
+    prefix: /messagerie
 

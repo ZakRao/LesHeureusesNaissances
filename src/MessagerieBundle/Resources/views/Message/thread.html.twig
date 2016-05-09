@@ -17,29 +17,47 @@
 
 {% endfor %}
 
-<h2>{{ thread.subject }}</h2>
-
+<div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="page-header">
+                        <h2>{{ thread.subject }}</h2>
+                    </div>
 
 {% for message in thread.messages %}
-    <div class="messenger_thread_message">
-        <div class="messenger_thread_message_info">
-            {% trans with {'%sender%': message.sender|e, '%date%': message.createdAt|date} from 'FOSMessageBundle' %}message_info{% endtrans %}
-        </div>
+ <div class="comments-list">
+                       <div class="media">
+                            <p class="pull-right"><small>{% trans with {'%date%': message.createdAt|date} from 'FOSMessageBundle' %} on {% endtrans %} </small></p>
 
-        <div class="messenger_thread_message_body" id="message_{{ message.id }}">
-            {{ message.body }}
-        </div>
-    </div>
+                             <div class="media-body messenger_thread_message_body" id="message_{{ message.id }}">
+                                <h4 class="media-heading user_name">{# Mettre le nom du sender #} {% trans with {'%sender%': message.sender|e } from 'FOSMessageBundle' %} by {% endtrans %}  </h4>
+                                {# mettre le commentaire #} {{ message.body }}
+                            </div>
+                        </div>
+                    </div>
+
+                   <!-- <div class="messenger_thread_message">
+                        <div class="messenger_thread_message_info">
+                            {% trans with {'%sender%': message.sender|e, '%date%': message.createdAt|date} from 'FOSMessageBundle' %}message_info{% endtrans %}
+                        </div>
+
+                        <div class="messenger_thread_message_body" id="message_{{ message.id }}">
+                            {{ message.body }}
+                        </div>
+                    </div>-->
 {% endfor %}
+                
 
-<h3>{% trans from 'FOSMessageBundle' %}reply{% endtrans %}</h3>
+
 
 <form action="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}" method="post">
     {{ form_widget(form) }}
 
-    <input type="submit" />
+    <input type="submit" value="Envoyer"/>
 </form>
 
-
+            </div>
+        </div>
+</div>
 
 {% endblock %}
