@@ -114,6 +114,12 @@ class MeetUp
     */
     private $vote_jour3 = 0;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="titre", type="string", length=255)
+     */
+    private $titre;
 
     public function __construct()
     {
@@ -500,4 +506,29 @@ class MeetUp
     {
         return $this->vote_jour3;
     } 
+
+    /**
+     * Set titre
+     *
+     * @param string $titre
+     *
+     * @return MeetUp
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    /**
+     * Get titre
+     *
+     * @return string
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+
 }

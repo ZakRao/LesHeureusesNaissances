@@ -25,6 +25,7 @@ class MeetUpType extends AbstractType
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options){
 		$builder
+		->add('titre', TextType::class)
 		->add('departement', ChoiceType::class,array('choices'=>array(
 		'75 - Paris'=>'75 - Paris',
       '77 - Seine et Marne'=>'77 - Seine et Marne',

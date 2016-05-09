@@ -9,6 +9,7 @@
   <h2>Rencontre</h2>
 
   {{ meet_up.id }}
+  {{ meet_up.titre }}
 
   <p> 
     Jour 1 : {{ meet_up.jour1|date('Y-m-d') }} , <a href="{{ path('add_vote_jour1', {'id' : meet_up.id}) }}" class="btn btn-danger"> Test </a>
