@@ -57,3 +57,8 @@ fos_message:
     resource: "@MessagerieBundle/Resources/config/routing.xml"
     prefix: /messagerie
 
+message_to_user:
+    pattern:  /messagerie/nouveau_message/{username}
+    defaults:   { _controller: MessagerieBundle:Message:newThreadFromProfile }
+    requirements:
+        _method: GET

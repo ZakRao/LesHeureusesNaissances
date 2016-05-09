@@ -36,7 +36,7 @@
       {%if app.user.id==user.id%}
           <a class="btn btn-filled" href="{{path('fos_user_profile_edit')}}">Modifier mon Profil</a>
       {% else %}
-      <a class="btn btn-filled" href="">Envoyez moi un message </a>
+      <a class="btn btn-filled" href="{{ path('message_to_user', {'username': user.getUsername}) }}">Envoyez moi un message </a>
 
       {% endif %}
 

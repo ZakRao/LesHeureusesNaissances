@@ -1,0 +1,50 @@
+{#  Nouveau message #}
+
+
+{% extends '::layout.html.twig' %}
+
+{% block body %}
+
+{% include "MessagerieBundle:Message:onglets.html.twig" %}
+
+<h2><center>{% trans from 'FOSMessageBundle' %}send_new{% endtrans %}</center></h2>
+
+<form action="{{ url('fos_message_thread_new') }}" method="post">
+    {{form_label(form.recipient,'Destinataire')}}
+    {{form_widget(form.recipient,{'attr':{'class':'form-control'}})}}
+    {{form_errors(form.recipient)}}
+
+    {# Enlever peut-être la partie sujet... #}
+    {{form_label(form.subject,'Sujet')}}
+    {{form_widget(form.subject,{'attr':{'class':'form-control'}})}}
+    {{form_errors(form.subject)}}
+
+    {{form_label(form.body,'Message')}}
+    {{form_widget(form.body,{'attr':{'class':'form-control'}})}}
+    {{form_errors(form.body)}}
+
+<!--Faire marcher le setData dans le controleur pour que le code en dessous marche -->
+
+<!--<div class="form-group">
+    <label for="recipient">Destinataire:</label>
+    <input type="text" class="form-control" id="recipient" readonly>
+  </div>
+  <div class="form-group">
+    <label for="subject">Sujet:</label>
+    <input type="subject" class="form-control" id="subject">
+  </div>
+
+  <div class="form-group">
+    <label for="body">Message:</label>
+    <input type="body" class="form-control" id="body">
+  </div>-->
+  
+    {{form_rest(form)}}
+
+    <input type="submit" value="Envoyer message"/>
+</form>
+
+
+
+
+{% endblock %}

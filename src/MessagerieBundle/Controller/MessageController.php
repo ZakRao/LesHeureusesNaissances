@@ -9,6 +9,8 @@ use FOS\MessageBundle\Provider\ProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use MessagerieBundle\Entity\Thread;
+use AppUserBundle\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 //use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -166,6 +168,71 @@ class MessageController extends ContainerAware
 
         $form = $this->container->get('fos_message.new_thread_form.factory')->create();
         $formHandler = $this->container->get('fos_message.new_thread_form.handler');
+
+
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        
+
+         if($user->getDescription()==null){
+
+             return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_edit'));
+
+        }
+        
+      
+
+        //Bloc du mail 
+        if ($message = $formHandler->process($form)) {
+    
+           $mailRecipient = $form->get('recipient')->getData()->getEmailCanonical(); 
+           $messagemail = \Swift_Message::newInstance()
+            ->setSubject('Message reçu')
+
+            //Mettre l'adresse mail des Heureuses naissances à la place de la mienne!!
+            ->setFrom(array('mbey.emmanuel@gmail.com' => "Les Heureuses Naissances")) 
+
+            ->setTo($mailRecipient)
+            ->setCharset('utf-8')
+            ->setBody(
+                $this->container->get('templating')->render(
+                    'MessagerieBundle:Emails:notification.html.twig'
+                ),
+                'text/html'
+            );
+                            
+            $this->container->get('mailer')->send($messagemail);
+
+            //Message d'alerte 
+            $this->container->get('session')->getFlashBag()->add(
+                'notice',
+                'Votre message a bien été envoyé !'
+            );
+
+            //Redirection
+            return new RedirectResponse($this->container->get('router')->generate('fos_message_thread_view', array(
+                'threadId' => $message->getThread()->getId()
+            )));
+        }
+        //Formulaire du nouveau message
+        return $this->container->get('templating')->renderResponse('MessagerieBundle:Message:newThread.html.twig', array(
+            'form' => $form->createView(),
+            'data' => $form->getData()
+        ));
+    }
+
+    /**
+     * Create a new message thread
+     *
+     *@ParamConverter("post", class="AppUserBundle:User", options={"username" = "userProfile"})
+     * @return Response
+     */
+    public function newThreadFromProfileAction(User $userProfile)
+    {
+
+        $form = $this->container->get('fos_message.new_thread_form.factory')->create();
+        $formHandler = $this->container->get('fos_message.new_thread_form.handler');
+
+        $form->get('recipient')->setData($userProfile);
 
 
         $user = $this->container->get('security.context')->getToken()->getUser();
