@@ -76,7 +76,7 @@ fos_user:
         form:
             type: AppUserBundle\Form\Type\RegistrationFormType 
         confirmation:
-            enabled:    true
+            enabled:    false
             from_email:
                 address:        testmaillesheureusesnaissances@gmail.com
                 sender_name:    Les Heureuses Naissances

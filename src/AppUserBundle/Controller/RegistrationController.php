@@ -19,6 +19,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\AccountStatusException;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
+use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken; 
 
 /**
  * Controller managing the registration
@@ -70,7 +72,14 @@ class RegistrationController extends BaseController
                     return $response;
 
                 }
-            }  
+            }
+
+            //Pour la connection automatique
+            
+            // Création d'un nouveau token basé sur l'utilisateur qui vient de s'inscrire
+              $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+              // On passe le token créé au service security context afin que l'utilisateur soit authentifié
+              $this->get('security.context')->setToken($token);  
         }
 
         
