@@ -1,0 +1,274 @@
+
+
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+  Modifier Profile - {{ parent() }}
+{% endblock %}
+
+{% block lesheureusesnaissancesplatform_body %}
+
+  <div class="col-md-12 bandeau">
+      <h1 class="text-center">Mes disponibilités</h1>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+
+      <form role="form" method="POST" action="{{path('app_user_edit_dispos')}}">
+            <div class="col-md-12">
+                {% for dispo in app.user.disponibilites %}
+                <h6 class="uppercase">
+                Lundi
+                </h6>
+                <div class="col-sm-3">
+                  <p class="mb16">
+                    Matin
+                  </p>
+                  <input type="checkbox" name="1" value="1"  defaultValue="{{dispo.disponibilite}}">
+                </div>
+                 <div class="col-sm-3">
+                  
+                </div>
+
+
+                
+                {% endfor %}
+{#
+                <div class="col-sm-3">
+                  <p class="mb16">
+                    Après-midi
+                  </p>
+                  <div class="checkbox-option text-left">
+                                <div class="inner"></div>
+                                <input type="checkbox" name="2" value="2">
+                            </div>
+                </div>
+                <div class="col-sm-3">
+                  <p class="mb16">
+                    Soir
+                  </p>
+                  <div class="checkbox-option text-left">
+                                <div class="inner"></div>
+                                <input type="checkbox" name="3" value="3">
+                            </div>
+                </div>
+            </div>
+            
+            
+            <div class="col-md-12">
+
+                <h6 class="uppercase">
+                Mardi
+                </h6>
+                <div class="col-sm-3">
+                  <p class="mb16">
+                    Matin
+                  </p>
+                  <div class="checkbox-option text-left">
+                                <div class="inner"></div>
+                                <input type="checkbox" name="4" value="4">
+                            </div>
+                </div>
+                <div class="col-sm-3">
+                  <p class="mb16">
+                    Après-midi
+                  </p>
+                  <div class="checkbox-option text-left">
+                                <div class="inner"></div>
+                                <input type="checkbox" name="5" value="5">
+                            </div>
+                </div>
+                <div class="col-sm-3">
+                  <p class="mb16">
+                    Soir
+                  </p>
+                  <div class="checkbox-option text-left">
+                                <div class="inner"></div>
+                                <input type="checkbox" name="6" value="6">
+                            </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+
+                <h6 class="uppercase">
+                Mercredi
+                </h6>
+                <div class="col-sm-3">
+                  <p class="mb16">
+                    Matin
+                  </p>
+                  <div class="checkbox-option text-left">
+                                <div class="inner"></div>
+                                <input type="checkbox" name="7" value="7">
+                            </div>
+                </div>
+                <div class="col-sm-3">
+                  <p class="mb16">
+                    Après-midi
+                  </p>
+                  <div class="checkbox-option text-left">
+                                <div class="inner"></div>
+                                <input type="checkbox" name="8" value="branding">
+                            </div>
+                </div>
+                <div class="col-sm-3">
+                  <p class="mb16">
+                    Soir
+                  </p>
+                  <div class="checkbox-option text-left">
+                                <div class="inner"></div>
+                                <input type="checkbox" name="9" value="print">
+                            </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+
+                <h6 class="uppercase">
+                Jeudi
+                </h6>
+                <div class="col-sm-3">
+                  <p class="mb16">
+                    Matin
+                  </p>
+                  <div class="checkbox-option text-left">
+                                <div class="inner"></div>
+                                <input type="checkbox" name="10" value="webdesign">
+                            </div>
+                </div>
+                <div class="col-sm-3">
+                  <p class="mb16">
+                    Après-midi
+                  </p>
+                  <div class="checkbox-option text-left">
+                                <div class="inner"></div>
+                                <input type="checkbox" name="11" value="branding">
+                            </div>
+                </div>
+                <div class="col-sm-3">
+                  <p class="mb16">
+                    Soir
+                  </p>
+                  <div class="checkbox-option text-left">
+                                <div class="inner"></div>
+                                <input type="checkbox" name="12" value="print">
+                            </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+
+                <h6 class="uppercase">
+                Vendredi
+                </h6>
+                <div class="col-sm-3">
+                  <p class="mb16">
+                    Matin
+                  </p>
+                  <div class="checkbox-option text-left">
+                                <div class="inner"></div>
+                                <input type="checkbox" name="13" value="webdesign">
+                            </div>
+                </div>
+                <div class="col-sm-3">
+                  <p class="mb16">
+                    Après-midi
+                  </p>
+                  <div class="checkbox-option text-left">
+                                <div class="inner"></div>
+                                <input type="checkbox" name="14" value="branding">
+                            </div>
+                </div>
+                <div class="col-sm-3">
+                  <p class="mb16">
+                    Soir
+                  </p>
+                  <div class="checkbox-option text-left">
+                                <div class="inner"></div>
+                                <input type="checkbox" name="15" value="print">
+                            </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+
+                <h6 class="uppercase">
+                Samedi
+                </h6>
+                <div class="col-sm-3">
+                  <p class="mb16">
+                    Matin
+                  </p>
+                  <div class="checkbox-option text-left">
+                                <div class="inner"></div>
+                                <input type="checkbox" name="16" value="webdesign">
+                            </div>
+                </div>
+                <div class="col-sm-3">
+                  <p class="mb16">
+                    Après-midi
+                  </p>
+                  <div class="checkbox-option text-left">
+                                <div class="inner"></div>
+                                <input type="checkbox" name="17" value="branding">
+                            </div>
+                </div>
+                <div class="col-sm-3">
+                  <p class="mb16">
+                    Soir
+                  </p>
+                  <div class="checkbox-option text-left">
+                                <div class="inner"></div>
+                                <input type="checkbox" name="18" value="print">
+                            </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+
+                <h6 class="uppercase">
+                Dimanche
+                </h6>
+                <div class="col-sm-3">
+                  <p class="mb16">
+                    Matin
+                  </p>
+                  <div class="checkbox-option text-left">
+                                <div class="inner"></div>
+                                <input type="checkbox" name="19" value="webdesign">
+                            </div>
+                </div>
+                <div class="col-sm-3">
+                  <p class="mb16">
+                    Après-midi
+                  </p>
+                  <div class="checkbox-option text-left">
+                                <div class="inner"></div>
+                                <input type="checkbox" name="20" value="branding">
+                            </div>
+                </div>
+                <div class="col-sm-3">
+                  <p class="mb16">
+                    Soir
+                  </p>
+                  <div class="checkbox-option text-left">
+                                <div class="inner"></div>
+                                <input type="checkbox" name="21" value="print">
+                            </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+              <button type="submit" class="btn btn-default">Envoyer</button>
+            </div>
+#}
+
+        </form>
+      </div>
+  </div>
+</div>
+
+
+{% endblock %}

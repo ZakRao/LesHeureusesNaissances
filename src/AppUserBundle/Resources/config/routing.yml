@@ -25,3 +25,7 @@ app_user_delete_commentaire:
 oc_userbundle_search:
     path: /recherche 
     defaults: {_controller:AppUserBundle:Search:search}
+
+app_user_edit_dispos:
+    path: /mes_disponibilites 
+    defaults: {_controller:AppUserBundle:Dispos:edit_dispos}
