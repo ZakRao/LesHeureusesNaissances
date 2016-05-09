@@ -10,12 +10,7 @@
   <!-- Bandeau supérieur -->
   <div class="col-md-12">
     <div class="col-md-4 text-center">
-      {% if app.user.description==null%}
-<div class="alert alert-warning">
-  <strong>Warning!</strong> Pensez à compléter votre profil
-</div>
-    {% endif %}
-
+      
       {% if (user.image)!=null %}
         <img  class="img-circle img-responsive" src= "{{ asset(user.image.webPath) }}" alt="{{ user.image.alt }}">
       {% else %}

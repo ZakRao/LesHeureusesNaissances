@@ -27,10 +27,10 @@ class ProfileFormType extends BaseType
 
         
 		$builder
-			->add('nom')
-      ->add('prenom')
-      ->add('anniversaire', DateType::class)
-      ->add('adresse')
+			->add('nom', TextType::class ,array('required' => true))
+      ->add('prenom', TextType::class ,array('required' => true))
+      ->add('anniversaire', DateType::class, array('required' => true))
+      ->add('adresse',  TextType::class , array('required' => true))
      
       ->add('departement', ChoiceType::class,array('choices'=>array(
         '75 - Paris'=>'75 - Paris',
@@ -41,11 +41,11 @@ class ProfileFormType extends BaseType
         '93 - Seine St Denis'=>'93 - Seine St Denis',
         '94 - Val de Marne'=>'94 - Val de Marne',
         '95 - Val d\'Oise'=>'95 - Val d\'Oise')))
-      ->add('ville')
-      ->add('profession')
-			->add('telephone')
+      ->add('ville',  TextType::class ,array('required' => true))
+      ->add('profession',  TextType::class , array('required' => true))
+			->add('telephone',  TextType::class , array('required' => true))
 			->add('image', ImageType::class, array('required' => false))
-			->add('description', TextareaType::class)
+			->add('description', TextareaType::class, array('required' => true))
 			->add('personnalite', ChoiceType::class,array('choices'=>array(
       'Rêveuse'=>'Rêveuse',
       'Gourmande'=>'Gourmande',

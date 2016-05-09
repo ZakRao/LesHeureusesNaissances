@@ -11,6 +11,12 @@
   <div class="col-md-12 bandeau">
       <h1 class="text-center">Modifier mon profil</h1>
   </div>
+    {% if app.user.description==null%}
+<div class="alert alert-warning">
+  <strong>Warning!</strong> Pensez à compléter votre profil
+</div>
+    {% endif %}
+
 
 <div class="container">
   <div class="row">
