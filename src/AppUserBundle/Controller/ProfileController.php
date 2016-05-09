@@ -32,6 +32,15 @@ class ProfileController extends BaseController
  */
     public function showAction(User $user = null )
     {
+        $connecter = $this->container->get('security.context')->getToken()->getUser();
+        if($connecter->getDescription()==null){
+
+
+             return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_edit'));
+
+    }
+        
+       
         if( $user === null ) {
             $user = $this->getUser();
             if (!is_object($user) || !$user instanceof UserInterface) {
@@ -40,7 +49,6 @@ class ProfileController extends BaseController
         }
 
         
-
 return $this->container->get('templating')->renderResponse('AppUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user));
     }
 
@@ -48,6 +56,13 @@ return $this->container->get('templating')->renderResponse('AppUserBundle:Profil
     public function profilAction()
     {
         $user = $this->container->get('security.context')->getToken()->getUser();
+
+        if($user->getDescription()==null){
+
+
+             return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_edit'));
+
+    }
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
@@ -102,4 +117,6 @@ return $this->container->get('templating')->renderResponse('AppUserBundle:Profil
     {
         $this->container->get('session')->getFlashBag()->set($action, $value);
     }
+
+
 }

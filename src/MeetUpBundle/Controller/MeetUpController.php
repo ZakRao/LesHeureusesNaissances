@@ -23,6 +23,12 @@ class MeetUpController extends Controller
 {
 	public function addAction(Request $request)
 	{
+	 $user = $this->container->get('security.context')->getToken()->getUser();
+
+	     if($user->getDescription()==null){
+	     	return $this->redirectToRoute('fos_user_profile_edit');
+
+	    }
 	$meetup = new MeetUp();
 	$form = $this->createForm(MeetUpType::class, $meetup);
 	$em = $this->getDoctrine()->getManager();
@@ -33,7 +39,6 @@ class MeetUpController extends Controller
 
 	if( $form->handleRequest($request)->isValid()){
 
-		$user = $this->container->get('security.context')->getToken()->getUser();
         $meetup->setUser($user);
 		$em->persist($meetup);
 		$em->flush();

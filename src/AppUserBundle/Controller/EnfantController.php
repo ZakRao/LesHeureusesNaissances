@@ -16,6 +16,14 @@ class EnfantController extends Controller
   
   public function add_enfantAction (Request $request)
   {
+
+      $user = $this->container->get('security.context')->getToken()->getUser();
+     if($user->getDescription()==null){
+
+
+            return $this->redirectToRoute('fos_user_profile_edit');
+
+    }
   
     $enfant = new Enfant();
         $form = $this->createForm(EnfantType::class, $enfant);
@@ -24,7 +32,6 @@ class EnfantController extends Controller
             $em = $this->getDoctrine()->getManager();
 
            // Associate User Entity To Product 
-            $user = $this->container->get('security.context')->getToken()->getUser();
             $enfant->setUser($user);
 
             $em->persist($enfant);
