@@ -46,3 +46,24 @@ security:
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/profil, roles: ROLE_USER  }
+        - { path: ^/ajout_enfant, roles: ROLE_USER }
+        - { path: ^/ajout_enfant/, roles: ROLE_USER }
+        - { path: ^/nouvelle_rencontre, roles: ROLE_USER }
+        - { path: ^/lesrencontres, roles: ROLE_USER }
+        - { path: ^/mesrencontres, roles: ROLE_USER }
+        - { path: ^/boite_de_reception, roles: ROLE_USER }
+        - { path: ^/suppression_enfant, roles: ROLE_USER }
+        - { path: ^/suppression_enfant/, roles: ROLE_USER }
+        - { path: ^/ajouter_commentaire/, roles: ROLE_USER }
+        - { path: ^/supprimer_commentaire/, roles: ROLE_USER }
+        - { path: ^/ajout_vote_jour1/, roles: ROLE_USER }
+        - { path: ^/ajout_vote_jour2/, roles: ROLE_USER }
+        - { path: ^/ajout_vote_jour3/, roles: ROLE_USER }
+        - { path: ^/messages_envoyes, roles: ROLE_USER }
+        - { path: ^/messages_supprimes, roles: ROLE_USER }
+        - { path: ^/search, roles: ROLE_USER }
+        - { path: ^/nouveau_message/, roles: ROLE_USER }
+        - { path: ^/recherche, roles: ROLE_USER }
+        - { path: ^/rencontre/, roles: ROLE_USER }
+
