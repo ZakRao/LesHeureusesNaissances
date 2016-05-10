@@ -32,7 +32,7 @@ class User extends BaseUser implements ParticipantInterface
 
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string",nullable=true)
      */
     protected $nom;
 
@@ -47,7 +47,7 @@ class User extends BaseUser implements ParticipantInterface
     protected $prenom;
 
      /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string",nullable=true)
      */
     protected $adresse;
 

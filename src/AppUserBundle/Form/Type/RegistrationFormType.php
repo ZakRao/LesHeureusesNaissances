@@ -15,9 +15,6 @@ class RegistrationFormType extends BaseType
         parent::buildForm($builder, $options);
         
 		$builder
-			->add('nom',TextType::class,array('required' => true))
-
-			->add('adresse',TextType::class, array('required' => true))
       		->add('parrain',EmailType::class, array('required' => true));
     }
 	
