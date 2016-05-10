@@ -1,11 +1,39 @@
+{# Liste des messages envoyes #}
+
 {% extends '::layout.html.twig' %}
 
 {% block body %}
 
 {% include "MessagerieBundle:Message:onglets.html.twig" %}
 
-<h2><center>{% trans from 'FOSMessageBundle' %}sent{% endtrans %}</center></h2>
+<div class="col-md-12 bandeau">
+    <h1 class="text-center">Messages envoyés</h1>
+</div>
 
-{% include 'MessagerieBundle:Message:threads_list.html.twig' with {'threads': threads} %}
+<div class="container">
+		<!-- 1ere partie de la page-->
+		<div class="col-md-4" style="margin-top:20px;">
+			<div class="col-md-8 col-md-offset-2">
+				<a class="btn col-md-12" href="{{ url('fos_message_thread_new' )}}">Nouveau message</a>
+			</div>
+			<div class="col-md-8 col-md-offset-2">
+				<a class="btn col-md-12" href="{{ url('fos_message_inbox') }}">{% trans from 'FOSMessageBundle' %}inbox{% endtrans %}</a>
+			</div>
+			<div class="col-md-8 col-md-offset-2">
+				<a class="btn  btn-filled col-md-12" href="{{ url('fos_message_sent') }}">{% trans from 'FOSMessageBundle' %}sent{% endtrans %}</a>
+			</div>
+			<div class="col-md-8 col-md-offset-2">
+				<a class="btn col-md-12" href="{{ url('fos_message_deleted') }}">{% trans from 'FOSMessageBundle' %}deleted{% endtrans %}</a>
+			</div>
+		</div>
+
+
+		<!-- 2eme partie de la page-->
+		<div class="col-md-8" style="margin-top:10px;">
+		<!--<a href="{{ url('fos_message_thread_new' )}}">{% trans from 'FOSMessageBundle' %}send_new{% endtrans %}</a>-->
+
+
+		{% include 'MessagerieBundle:Message:threads_list.html.twig' with {'threads': threads} %}
+</div>
 
 {% endblock %}
