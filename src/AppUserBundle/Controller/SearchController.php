@@ -4,6 +4,7 @@ namespace AppUserBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use MeetUpBundle\Entity\MeetUp;
 
 class SearchController extends Controller
 {
@@ -27,20 +28,33 @@ class SearchController extends Controller
       ->getRepository('AppUserBundle:User')
       ->findByUsername($req);                      // À partir du premie 
 
+       $listMeetUps = $this->getDoctrine()
+      ->getManager()
+      ->getRepository('MeetUpBundle:MeetUp')
+      ->findByTitre($req);                      
 
-        $listUsersByDpt = $this->getDoctrine()
+
+        $listMeetUpsByDpt = $this->getDoctrine()
+          ->getManager()
+          ->getRepository('MeetUpBundle:MeetUp')
+          ->findByDepartement($req); 
+
+
+        /*$listUsersByDpt = $this->getDoctrine()
           ->getManager()
           ->getRepository('AppUserBundle:User')
           ->findByDepartement($req); 
 
 
-      if($listUsers) {
+      if($listUsers) {*/
         
        return $this->render('AppUserBundle:Profile:result.html.twig', array(
-      'listUsers' => $listUsers
+      'listUsers' => $listUsers,
+      'listMeetUps' => $listMeetUps,
+      'listUsersByDpt' => $listMeetUpsByDpt
       ));
 
-       }
+      /* }
 
        else {
          return $this->render('AppUserBundle:Profile:resultDpt.html.twig', array(
@@ -48,7 +62,7 @@ class SearchController extends Controller
       ));
         
 
-       } 
+       }*/ 
 
   }
 }
