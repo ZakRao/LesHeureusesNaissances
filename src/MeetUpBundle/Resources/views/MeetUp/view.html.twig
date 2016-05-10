@@ -57,7 +57,7 @@
     <button type="submit" class="btn btn-default">Envoyer</button>
     </form>
 
-
+    {% if meet_up.commentairesMeetUp != null %}
     {% for commentaireMeetUp in meet_up.commentairesMeetUp %}
         <div class="col-md-10 col-md-offset-1 profil-comments">
             <i> Par {{ commentaireMeetUp.auteur }} à {{commentaireMeetUp.date | date('d/m/Y')}} : Commentaire ID :  {{ commentaireMeetUp.id }} </i>
@@ -90,7 +90,7 @@
                   {% else %}
                     Pas de participants
                   {% endif %}
-
+{% endif %}
 
 
 
