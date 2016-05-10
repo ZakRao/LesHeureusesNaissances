@@ -60,4 +60,16 @@ lesrencontres:
  
 mesrencontres: 
   path: /mesrencontres 
-  defaults: { _controller:MeetUpBundle:MeetUp:mesrencontres}      
+  defaults: { _controller:MeetUpBundle:MeetUp:mesrencontres}   
+
+ajout_participante:
+  path: /ajout_participante/{id}
+  defaults: { _controller:MeetUpBundle:MeetUp:ajoutparticipante}     
+  requirements:
+    id: \d+  
+
+suppression_participante:
+  path: /suppression_participante/{id}
+  defaults: { _controller:MeetUpBundle:MeetUp:suppressionparticipante}     
+  requirements:
+    id: \d+    

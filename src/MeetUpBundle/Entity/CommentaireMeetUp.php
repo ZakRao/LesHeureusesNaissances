@@ -46,7 +46,7 @@ class CommentaireMeetUp
      * @ORM\ManyToOne(targetEntity="MeetUpBundle\Entity\MeetUp", inversedBy="commentairesMeetUp")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $meetup;
+    private $meetups;
 
     public function __construct()
     {

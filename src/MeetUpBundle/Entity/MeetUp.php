@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 
+
 /**
  * MeetUp
  *
@@ -85,7 +86,7 @@ class MeetUp
     private $image;
 
     /**
-    * @ORM\OneToMany(targetEntity="MeetUpBundle\Entity\CommentaireMeetUp", mappedBy="meetup", cascade={"persist","remove"})
+    * @ORM\OneToMany(targetEntity="MeetUpBundle\Entity\CommentaireMeetUp", mappedBy="meetups", cascade={"persist","remove"})
     *
     */
     private $commentairesMeetUp; //Une MeetUp est liée à plusieurs commentaires
@@ -121,10 +122,21 @@ class MeetUp
      */
     private $titre;
 
+    /**
+     * @var array
+     * 
+     * @ORM\ManyToMany(targetEntity="AppUserBundle\Entity\User", inversedBy="meetups")
+     */
+    private $listeparticipantes;
+
     public function __construct()
     {
         $this->commentairesMeetUp = new ArrayCollection();
+        $this->listeparticipantes = new ArrayCollection();
     }
+
+
+    
 
     /**
     * @param CommentaireMeetUp $commentaireMeetUp
@@ -531,4 +543,110 @@ class MeetUp
         return $this->titre;
     }
 
+
+    /**
+     * Set voteJour1
+     *
+     * @param integer $voteJour1
+     *
+     * @return MeetUp
+     */
+    public function setVoteJour1($voteJour1)
+    {
+        $this->vote_jour1 = $voteJour1;
+
+        return $this;
+    }
+
+    /**
+     * Get voteJour1
+     *
+     * @return integer
+     */
+    public function getVoteJour1()
+    {
+        return $this->vote_jour1;
+    }
+
+    /**
+     * Set voteJour2
+     *
+     * @param integer $voteJour2
+     *
+     * @return MeetUp
+     */
+    public function setVoteJour2($voteJour2)
+    {
+        $this->vote_jour2 = $voteJour2;
+
+        return $this;
+    }
+
+    /**
+     * Get voteJour2
+     *
+     * @return integer
+     */
+    public function getVoteJour2()
+    {
+        return $this->vote_jour2;
+    }
+
+    /**
+     * Set voteJour3
+     *
+     * @param integer $voteJour3
+     *
+     * @return MeetUp
+     */
+    public function setVoteJour3($voteJour3)
+    {
+        $this->vote_jour3 = $voteJour3;
+
+        return $this;
+    }
+
+    /**
+     * Get voteJour3
+     *
+     * @return integer
+     */
+    public function getVoteJour3()
+    {
+        return $this->vote_jour3;
+    }
+
+    /**
+     * Add listeparticipante
+     *
+     * @param \AppUserBundle\Entity\User $listeparticipante
+     *
+     * @return MeetUp
+     */
+    public function addListeparticipante(\AppUserBundle\Entity\User $listeparticipante)
+    {
+        $this->listeparticipantes[] = $listeparticipante;
+
+        return $this;
+    }
+
+    /**
+     * Remove listeparticipante
+     *
+     * @param \AppUserBundle\Entity\User $listeparticipante
+     */
+    public function removeListeparticipante(\AppUserBundle\Entity\User $listeparticipante)
+    {
+        $this->listeparticipantes->removeElement($listeparticipante);
+    }
+
+    /**
+     * Get listeparticipantes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getListeparticipantes()
+    {
+        return $this->listeparticipantes;
+    }
 }

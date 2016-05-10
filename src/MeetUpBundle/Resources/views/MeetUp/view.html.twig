@@ -29,7 +29,19 @@
   src="{{ asset(meet_up.image.webPath) }}"
   alt="{{ meet_up.image.alt }}"
   />
-  {%endif%}
+  {% endif %}
+
+  {% if app.user.username!=meet_up.user and  not (meet_up.listeparticipantes.contains(app.user)) %}
+  <a href="{{ path('ajout_participante', {'id' : meet_up.id}) }}"> Je participe
+  </a> 
+
+  {% elseif  meet_up.listeparticipantes.contains(app.user) %}
+  <a href="{{ path('suppression_participante', {'id' : meet_up.id}) }}"> Je ne participe plus
+  </a> 
+
+  {% endif %}
+
+
 
    {%if app.user.username==meet_up.user%} 
    <a href="{{ path('delete_meet_up', {'id': meet_up.id}) }}" class="btn btn-danger">
@@ -65,7 +77,19 @@
                 </div>
                     {% if not loop.last %},{% endif %}
     {% endfor %}
-
+ {% if not meet_up.listeparticipantes.empty%} 
+                      <!-- Nombre d'enfants -->
+                     Il y'a  {{meet_up.listeparticipantes.count}} participants
+                      <div class="profil-enfants">
+                        {% for participant in meet_up.listeparticipantes %}
+                          <div>
+                              <p>{{participant.getUsername()}}</p>
+                          </div>
+                        {% endfor %}
+                      </div>
+                  {% else %}
+                    Pas de participants
+                  {% endif %}
 
 
 

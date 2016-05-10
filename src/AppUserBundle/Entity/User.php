@@ -125,6 +125,11 @@ class User extends BaseUser implements ParticipantInterface
      */
     private $disponibilites; // Notez le « s », une annonce est liée à plusieurs commentaires
 
+    /**
+     * @ORM\ManyToMany (targetEntity="MeetUpBundle\Entity\MeetUp", cascade={"persist"}, inversedBy="listeparticipantes")
+     *
+     */
+    private $meetups;
 
 
     public function __construct()
@@ -590,4 +595,62 @@ class User extends BaseUser implements ParticipantInterface
       {
         return $this->disponibilites;
       }
+
+    /**
+     * Add disponibilite
+     *
+     * @param \AppUserBundle\Entity\Dispos $disponibilite
+     *
+     * @return User
+     */
+    public function addDisponibilite(\AppUserBundle\Entity\Dispos $disponibilite)
+    {
+        $this->disponibilites[] = $disponibilite;
+
+        return $this;
+    }
+
+    /**
+     * Remove disponibilite
+     *
+     * @param \AppUserBundle\Entity\Dispos $disponibilite
+     */
+    public function removeDisponibilite(\AppUserBundle\Entity\Dispos $disponibilite)
+    {
+        $this->disponibilites->removeElement($disponibilite);
+    }
+
+    /**
+     * Add meetup
+     *
+     * @param \MeetUpBundle\Entity\MeetUp $meetup
+     *
+     * @return User
+     */
+    public function addMeetup(\MeetUpBundle\Entity\MeetUp $meetup)
+    {
+        $this->meetups[] = $meetup;
+
+        return $this;
+    }
+
+    /**
+     * Remove meetup
+     *
+     * @param \MeetUpBundle\Entity\MeetUp $meetup
+     */
+    public function removeMeetup(\MeetUpBundle\Entity\MeetUp $meetup)
+    {
+        $this->meetups->removeElement($meetup);
+    }
+
+    /**
+     * Get meetups
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMeetups()
+    {
+        return $this->meetups;
+    }
 }

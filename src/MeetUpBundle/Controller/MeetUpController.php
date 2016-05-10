@@ -10,6 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use MeetUpBundle\Entity\MeetUp;
 use MeetUpBundle\Form\MeetUpType;
 use AppBundle\Entity\Image;
+
+use AppUserBundle\Entity\User;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -62,11 +66,12 @@ class MeetUpController extends Controller
 	
 	$meet_up = $em->getRepository('MeetUpBundle:MeetUp')->find($id);
 
-
+	
 	// On vérifie que la rencontre avec cet id existe bien
 	if ($meet_up === null) {
   		throw $this->createNotFoundException("La Rencontre d'id ".$id." n'existe pas.");
   		  }
+  	
 
 	return $this->render('MeetUpBundle:MeetUp:view.html.twig', array('meet_up' => $meet_up));
 	}
@@ -188,6 +193,41 @@ class MeetUpController extends Controller
         'listMeetUp' => $listMeetUp 
       )); 
   }   
-	
+	public function ajoutparticipanteAction($id){
+
+		$user = $this->container->get('security.context')->getToken()->getUser();
+
+    	$em = $this->getDoctrine()->getManager();
+    	$meet_up = $em->getRepository('MeetUpBundle:MeetUp')->find($id);
+
+    	if($meet_up->getListeparticipantes()->contains($user)){
+    		throw new NotFoundHttpException("Déjà présent ");
+    	}
+
+    	$meet_up->addListeparticipante($user);
+    	$user->addMeetup($meet_up);
+    	$em->persist($meet_up);
+    	$em->flush();
+
+    	return $this->redirectToRoute('meet_up_view', array('id' => $meet_up->getId()));
+
+	}
+
+	public function suppressionparticipanteAction($id){
+
+		$user = $this->container->get('security.context')->getToken()->getUser();
+
+    	$em = $this->getDoctrine()->getManager();
+    	$meet_up = $em->getRepository('MeetUpBundle:MeetUp')->find($id);
+
+    	$meet_up->removeListeparticipante($user);
+    	$user->removeMeetup($meet_up);
+    	$em->persist($meet_up);
+    	$em->flush();
+
+    	return $this->redirectToRoute('meet_up_view', array('id' => $meet_up->getId()));
+
+	}
+
 }
 ?>

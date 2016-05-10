@@ -47,6 +47,9 @@
                                 <li>
                                     <strong>Date : </strong> {{meetup.jour1.format('j/m/Y')}}
                                 </li>
+                                <li>
+                                    <strong>Nombre de participantes : </strong> {{meetup.listeparticipantes.count}}   
+                                </li>    
                             </ul>
                             <div class="text-center">
                                 <a class="btn btn-filled btn-lg" href="{{ path('meet_up_view', {'id': meetup.id}) }}">Voir la rencontre</a> 

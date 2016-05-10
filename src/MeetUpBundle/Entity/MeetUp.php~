@@ -4,6 +4,8 @@ namespace MeetUpBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * MeetUp
@@ -79,21 +81,62 @@ class MeetUp
 
     /**
     *  @ORM\OneToOne(targetEntity="AppBundle\Entity\Image", cascade={"persist", "remove"})
-    *  
+    * 
     */
     private $image;
 
     /**
-    * @ORM\OneToMany(targetEntity="MeetUpBundle\Entity\CommentaireMeetUp", mappedBy="meet_up", cascade={"persist"})
+    * @ORM\OneToMany(targetEntity="MeetUpBundle\Entity\CommentaireMeetUp", mappedBy="meetups", cascade={"persist","remove"})
     *
     */
     private $commentairesMeetUp; //Une MeetUp est liée à plusieurs commentaires
 
+    /**
+    * @var int
+    * 
+    * @ORM\Column(name="vote_jour1", type="integer")
+    *
+    */
+    private $vote_jour1 = 0;
+
+    /**
+    * @var int
+    * 
+    * @ORM\Column(name="vote_jour2", type="integer")
+    *
+    */
+    private $vote_jour2 = 0;
+
+    /**
+    * @var int
+    * 
+    * @ORM\Column(name="vote_jour3", type="integer")
+    *
+    */
+    private $vote_jour3 = 0;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="titre", type="string", length=255)
+     */
+    private $titre;
+
+    /**
+     * @var array
+     * 
+     * @ORM\ManyToMany(targetEntity="AppUserBundle\Entity\User", inversedBy="meetups")
+     */
+    private $listeparticipantes;
 
     public function __construct()
     {
         $this->commentairesMeetUp = new ArrayCollection();
+        $this->listeparticipantes = new ArrayCollection();
     }
+
+
+    
 
     /**
     * @param CommentaireMeetUp $commentaireMeetUp
@@ -361,7 +404,7 @@ class MeetUp
      *
      * @param \MeetUpBundle\Entity\MeetUp $meetup
      *
-     * @return CommentaireMeetUp
+     * @return MeetUp
      */
     public function setMeetUp(\MeetUpBundle\Entity\MeetUp $meetup)
     {
@@ -379,4 +422,125 @@ class MeetUp
     {
         return $this->meetup;
     }
+
+    /**
+     * Add commentairesMeetUp
+     *
+     * @param \MeetUpBundle\Entity\CommentaireMeetUp $commentairesMeetUp
+     *
+     * @return MeetUp
+     */
+    public function addCommentairesMeetUp(\MeetUpBundle\Entity\CommentaireMeetUp $commentairesMeetUp)
+    {
+        $this->commentairesMeetUp[] = $commentairesMeetUp;
+
+        return $this;
+    }
+
+    /**
+     * Remove commentairesMeetUp
+     *
+     * @param \MeetUpBundle\Entity\CommentaireMeetUp $commentairesMeetUp
+     */
+    public function removeCommentairesMeetUp(\MeetUpBundle\Entity\CommentaireMeetUp $commentairesMeetUp)
+    {
+        $this->commentairesMeetUp->removeElement($commentairesMeetUp);
+    }
+
+    /**
+     * Set vote_jour1
+     *
+     * @param int $vote_jour1
+     *
+     * @return MeetUp
+     */
+    public function setVote_Jour1($vote_jour1)
+    {
+        $this->vote_jour1 = $vote_jour1;
+
+        return $this;
+    }
+
+    /**
+     * Get jour1
+     *
+     * @return int
+     */
+    public function getVote_Jour1()
+    {
+        return $this->vote_jour1;
+    }    
+
+    /**
+     * Set vote_jour2
+     *
+     * @param int $vote_jour2
+     *
+     * @return MeetUp
+     */
+    public function setVote_Jour2($vote_jour2)
+    {
+        $this->vote_jour2 = $vote_jour2;
+
+        return $this;
+    }
+
+    /**
+     * Get vote_jour2
+     *
+     * @return int
+     */
+    public function getVote_Jour2()
+    {
+        return $this->vote_jour2;
+    } 
+
+    /**
+     * Set vote_jour3
+     *
+     * @param int $vote_jour3
+     *
+     * @return MeetUp
+     */
+    public function setVote_Jour3($vote_jour3)
+    {
+        $this->vote_jour3 = $vote_jour3;
+
+        return $this;
+    }
+
+    /**
+     * Get vote_jour3
+     *
+     * @return int
+     */
+    public function getVote_Jour3()
+    {
+        return $this->vote_jour3;
+    } 
+
+    /**
+     * Set titre
+     *
+     * @param string $titre
+     *
+     * @return MeetUp
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    /**
+     * Get titre
+     *
+     * @return string
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+
 }

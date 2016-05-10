@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Entity\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use FOS\MessageBundle\Model\ParticipantInterface;
 
 /**
  * User
@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppUserBundle\Repository\UserRepository")
  */
-class User extends BaseUser
+class User extends BaseUser implements ParticipantInterface
 {
     /**
      * @var int
@@ -109,11 +109,27 @@ class User extends BaseUser
 
 
     /**
-     * @ORM\OneToMany(targetEntity="AppUserBundle\Entity\Commentaire", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="AppUserBundle\Entity\Commentaire", mappedBy="user", cascade={"persist"})
      */
     private $commentaires; // Notez le « s », une annonce est liée à plusieurs commentaires
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="anniversaire", type="date", nullable=true)
+     */
+    private $anniversaire;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppUserBundle\Entity\Dispos", mappedBy="user", cascade={"persist"})
+     */
+    private $disponibilites; // Notez le « s », une annonce est liée à plusieurs commentaires
+
+    /**
+     * @ORM\ManyToMany (targetEntity="MeetUpBundle\Entity\MeetUp", cascade={"persist"})
+     *
+     */
+    private $meetups;
 
 
     public function __construct()
@@ -121,6 +137,7 @@ class User extends BaseUser
     parent::__construct();
     $this->enfants   = new ArrayCollection();
     $this->commentaires = new ArrayCollection();
+    $this->disponibilites = new ArrayCollection();
 }
 
 
@@ -479,7 +496,7 @@ class User extends BaseUser
     $this->commentaire[] = $commentaire;
 
     // On lie l'annonce à la candidature
-    $commentaire->setAdvert($this);
+    $commentaire->setUser($this);
 
     return $this;
   }
@@ -500,7 +517,82 @@ class User extends BaseUser
    */
   public function getCommentaires()
   {
-    return $this->commentaire;
+    return $this->commentaires;
   }
 
+   public function increaseCommentaire()
+  {
+    $this->nbCommentaires++;
+  }
+
+  public function decreaseCommentaire()
+  {
+    $this->nbCommentaires--;
+  }
+
+
+  /**
+     * Set anniversaire
+     *
+     * @param \DateTime $anniversaire
+     *
+     * @return Enfant
+     */
+    public function setAnniversaire($anniversaire)
+    {
+        $this->anniversaire = $anniversaire;
+
+        return $this;
+    }
+
+    /**
+     * Get anniversaire
+     *
+     * @return \DateTime
+     */
+    public function getAnniversaire()
+    {
+        return $this->anniversaire;
+    }
+
+    public function getAge()
+    {
+        $dateInterval = $this->anniversaire->diff(new \DateTime());
+ 
+        return $dateInterval->y;
+    }
+
+
+     /**
+       * @param Dispos $dispos
+       * @return Dispos
+       */
+      public function addDispos(Dispos $dispos)
+      {
+        $this->dispos[] = $dispos;
+
+        // On lie l'annonce à la candidature
+        $dispos->setUser($this);
+
+        return $this;
+      }
+
+      /**
+       * @param Dispos $dispos
+       */
+      public function removeDispos(Dispos $dispos)
+      {
+        $this->dispos->removeElement($dispos);
+
+        // Et si notre relation était facultative (nullable=true, ce qui n'est pas notre cas ici attention) :
+        // $dispos->setUser(null);
+      }
+
+      /**
+       * @return ArrayCollection
+       */
+      public function getDisponibilites()
+      {
+        return $this->disponibilites;
+      }
 }
