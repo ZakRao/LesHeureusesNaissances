@@ -7,10 +7,9 @@
     <thead>
     
         <tr>
-             <th>{% trans from 'FOSMessageBundle' %}subject{% endtrans %}</th>
-            <th>{% trans from 'FOSMessageBundle' %}starter{% endtrans %}</th>
+            <th>Auteur</th>
+            <th>{% trans from 'FOSMessageBundle' %}subject{% endtrans %}</th>
             <th>{% trans from 'FOSMessageBundle' %}startdate{% endtrans %}</th>
-            <th>{% trans from 'FOSMessageBundle' %}messages{% endtrans %}</th>
             <th>{% trans from 'FOSMessageBundle' %}last_message{% endtrans %}</th>
             <th class="text-center">{% trans from 'FOSMessageBundle' %}actions{% endtrans %}</th>
         </tr>
@@ -22,6 +21,9 @@
         {% for thread in threads %}
             <tr>
                 <td>
+                   {% trans with {'%sender%': thread.lastMessage.sender|e } from 'FOSMessageBundle' %}by{% endtrans %}
+                </td>
+                <td>
                     <a href="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}">
                         {{ thread.subject }}
                     </a>
@@ -31,13 +33,7 @@
                     {% endif %}
                 </td>
                 <td>
-                    {{ thread.createdBy }}
-                </td>
-                <td>
                     {{ thread.createdAt|date }}
-                </td>
-                <td>
-                    {{ thread.messages|length }}
                 </td>
                 <td>
                     {% if thread.lastMessage %}
