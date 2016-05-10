@@ -86,7 +86,7 @@ class MeetUp
     private $image;
 
     /**
-    * @ORM\OneToMany(targetEntity="MeetUpBundle\Entity\CommentaireMeetUp", mappedBy="meetups", cascade={"persist","remove"})
+    * @ORM\OneToMany(targetEntity="MeetUpBundle\Entity\CommentaireMeetUp", mappedBy="meetup", cascade={"persist","remove"})
     *
     */
     private $commentairesMeetUp; //Une MeetUp est liée à plusieurs commentaires
