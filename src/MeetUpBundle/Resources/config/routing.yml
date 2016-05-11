@@ -73,3 +73,7 @@ suppression_participante:
   defaults: { _controller:MeetUpBundle:MeetUp:suppressionparticipante}     
   requirements:
     id: \d+    
+    
+recherche_departement_meetup: 
+  path: /recherche_departement_meetup 
+  defaults: { _controller:MeetUpBundle:SearchMeetup:search}    
