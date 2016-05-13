@@ -123,9 +123,8 @@
                     <h3 class="uppercase mt20">Mes disponibilités</h3>
                     
 
-                    {% set possibilites = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21'] %}
 
-
+                     <a class="btn btn-filled" href="{{path('app_user_edit_dispos')}}">Modifier mes Dispos</a>
                     <table class="table table-bordered">
                       <thead>
                         <tr>
@@ -143,157 +142,139 @@
                         <tr>
                           <th scope="row">Matin</th>
                           <td class="lundi-m
-                          {% for dispo in user.disponibilites %}
-                            {% if dispo.disponibilite == 1%}
+                          
+                            {% if user.getLundiMatin() == true %}
                               success
                             {% endif %} 
-                          {% endfor %}
                           "></td>
                           <td class="mardi-m
-                          {% for dispo in user.disponibilites %}
-                            {% if dispo.disponibilite == 4%}
+                          
+                            
+                              {% if user.getMardiMatin() == true %}
                               success
-                            {% endif %} 
-                          {% endfor %}
+                            {% endif %}
+                          
+                          
                           "></td>
-                          <td class="mercredi-m
-                          {% for dispo in user.disponibilites %}
-                            {% if dispo.disponibilite == 7%}
+                          <td class="mercredi-m 
+                          
+                            {% if user.getMercrediMatin() == true %}
                               success
-                            {% endif %} 
-                          {% endfor %}
+                            {% endif %}
                           "></td>
                           <td class="jeudi-m
-                          {% for dispo in user.disponibilites %}
-                            {% if dispo.disponibilite == 10%}
+                          
+                            {% if user.getJeudiMatin() == true %}
                               success
-                            {% endif %} 
-                          {% endfor %}
+                            {% endif %}
                           "></td>
                           <td class="vendredi-m
-                          {% for dispo in user.disponibilites %}
-                            {% if dispo.disponibilite == 13%}
+                          
+                            {% if user.getVendrediMatin() == true %}
                               success
-                            {% endif %} 
-                          {% endfor %}
+                            {% endif %}
                           "></td>
                           <td class="samedi-m
-                          {% for dispo in user.disponibilites %}
-                            {% if dispo.disponibilite == 16%}
+                          
+                            {% if user.getSamediMatin() == true %}
                               success
-                            {% endif %} 
-                          {% endfor %}
+                            {% endif %}
                           "></td>
                           <td class="dimanche-m
-                          {% for dispo in user.disponibilites %}
-                            {% if dispo.disponibilite == 19%}
+                          
+                            {% if user.getDimancheMatin() == true %}
                               success
-                            {% endif %} 
-                          {% endfor %}
+                            {% endif %}
                           "></td>
                         </tr>
                         <tr>
                           <th scope="row">Après-midi</th>
                           <td class="lundi-am
-                          {% for dispo in user.disponibilites %}
-                            {% if dispo.disponibilite == 2%}
+                          
+                            {% if user.getLundiMidi() == true %}
                               success
-                            {% endif %} 
-                          {% endfor %}
+                            {% endif %}
                           "></td>
                           <td class="mardi-am
-                          {% for dispo in user.disponibilites %}
-                            {% if dispo.disponibilite == 5%}
+                          
+                            {% if user.getMardiMidi() == true %}
                               success
-                            {% endif %} 
-                          {% endfor %}
+                            {% endif %}
                           "></td>
                           <td class="mercredi-am
-                          {% for dispo in user.disponibilites %}
-                            {% if dispo.disponibilite == 8%}
+                          
+                            {% if user.getMercrediMidi() == true %}
                               success
-                            {% endif %} 
-                          {% endfor %}
+                            {% endif %}
                           "></td>
                           <td class="jeudi-am
-                          {% for dispo in user.disponibilites %}
-                            {% if dispo.disponibilite == 11%}
+                          
+                            {% if user.getJeudiMidi() == true %}
                               success
-                            {% endif %} 
-                          {% endfor %}
+                            {% endif %}
                           "></td>
                           <td class="vendredi-am
-                          {% for dispo in user.disponibilites %}
-                            {% if dispo.disponibilite == 14%}
+                          
+                            {% if user.getVendrediMidi() == true %}
                               success
-                            {% endif %} 
-                          {% endfor %}
+                            {% endif %}
                           "></td>
                           <td class="samedi-am
-                          {% for dispo in user.disponibilites %}
-                            {% if dispo.disponibilite == 17%}
+                          
+                            {% if user.getSamediMidi() == true %}
                               success
-                            {% endif %} 
-                          {% endfor %}
+                            {% endif %}
                           "></td>
                           <td class="dimanche-am
-                          {% for dispo in user.disponibilites %}
-                            {% if dispo.disponibilite == 20%}
+                          
+                            {% if user.getDimancheMidi() == true %}
                               success
-                            {% endif %} 
-                          {% endfor %}
+                            {% endif %}
                           "></td>
                         </tr>
                         <tr>
                           <th scope="row">Soirée</th>
                           <td class="lundi-s
-                          {% for dispo in user.disponibilites %}
-                            {% if dispo.disponibilite == 3%}
+                          
+                            {% if user.getLundiSoir() == true %}
                               success
-                            {% endif %} 
-                          {% endfor %}
+                            {% endif %}
                           "></td>
                           <td class="mardi-s
-                          {% for dispo in user.disponibilites %}
-                            {% if dispo.disponibilite == 6%}
+                          
+                            {% if user.getMardiSoir() == true %}
                               success
-                            {% endif %} 
-                          {% endfor %}
+                            {% endif %}
                           "></td>
                           <td class="mercredi-s
-                          {% for dispo in user.disponibilites %}
-                            {% if dispo.disponibilite == 9%}
+                          
+                            {% if user.getMercrediSoir() == true %}
                               success
-                            {% endif %} 
-                          {% endfor %}
+                            {% endif %}
                           "></td>
                           <td class="jeudi-s
-                          {% for dispo in user.disponibilites %}
-                            {% if dispo.disponibilite == 12%}
+                          
+                            {% if user.getJeudiSoir() == true %}
                               success
-                            {% endif %} 
-                          {% endfor %}
+                            {% endif %}
                           "></td>
                           <td class="vendredi-s
-                          {% for dispo in user.disponibilites %}
-                            {% if dispo.disponibilite == 15%}
+                          
+                            {% if user.getVendrediSoir() == true %}
                               success
-                            {% endif %} 
-                          {% endfor %}
+                            {% endif %}
                           "></td>
                           <td class="samedi-s
-                          {% for dispo in user.disponibilites %}
-                            {% if dispo.disponibilite == 18%}
+                          
+                            {% if user.getSamediSoir() == true %}
                               success
-                            {% endif %} 
-                          {% endfor %}
+                            {% endif %}
                           "></td>
                           <td class="dimanche-s
-                          {% for dispo in user.disponibilites %}
-                            {% if dispo.disponibilite == 21%}
+                          
+                            {% if user.getDimancheSoir() == true %}
                               success
-                            {% endif %} 
-                          {% endfor %}
+                            {% endif %}
                           "></td>
                         </tr>
                       </tbody>

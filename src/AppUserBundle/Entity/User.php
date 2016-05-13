@@ -121,15 +121,117 @@ class User extends BaseUser implements ParticipantInterface
     private $anniversaire;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppUserBundle\Entity\Dispos", mappedBy="user", cascade={"persist"})
-     */
-    private $disponibilites; // Notez le « s », une annonce est liée à plusieurs commentaires
-
-    /**
      * @ORM\ManyToMany (targetEntity="MeetUpBundle\Entity\MeetUp", cascade={"persist"}, inversedBy="listeparticipantes")
      *
      */
     private $meetups;
+
+
+
+    /**
+     * @ORM\Column(type="boolean" , nullable = true )
+     */
+    protected $Lundi_Matin = '0' ;
+
+    /**
+     * @ORM\Column(type="boolean" , nullable = true )
+     */
+    protected $Lundi_Midi = '0';
+
+    /**
+     * @ORM\Column(type="boolean" , nullable = true )
+     */
+    protected $Lundi_Soir = '0' ;
+
+    /**
+     * @ORM\Column(type="boolean" , nullable = true )
+     */
+    protected $Mardi_Matin = '0';
+
+    /**
+     * @ORM\Column(type="boolean" , nullable = true )
+     */
+    protected $Mardi_Midi = '0';
+
+    /**
+     * @ORM\Column(type="boolean" , nullable = true )
+     */
+    protected $Mardi_Soir = '0';
+
+    /**
+     * @ORM\Column(type="boolean" , nullable = true )
+     */
+    protected $Mercredi_Matin = '0';
+
+    /**
+     * @ORM\Column(type="boolean" , nullable = true )
+     */
+    protected $Mercredi_Midi = '0';
+
+    /**
+     * @ORM\Column(type="boolean" , nullable = true )
+     */
+    protected $Mercredi_Soir = '0';
+
+    /**
+     * @ORM\Column(type="boolean" , nullable = true )
+     */
+    protected $Jeudi_Matin = '0';
+
+    /**
+     * @ORM\Column(type="boolean" , nullable = true )
+     */
+    protected $Jeudi_Midi = '0';
+
+    /**
+     * @ORM\Column(type="boolean" , nullable = true )
+     */
+    protected $Jeudi_Soir = '0';
+
+    /**
+     * @ORM\Column(type="boolean" , nullable = true )
+     */
+    protected $Vendredi_Matin = '0';
+
+    /**
+     * @ORM\Column(type="boolean" , nullable = true )
+     */
+    protected $Vendredi_Midi = '0';
+
+    /**
+     * @ORM\Column(type="boolean" , nullable = true )
+     */
+    protected $Vendredi_Soir = '0';
+
+    /**
+     * @ORM\Column(type="boolean" , nullable = true )
+     */
+    protected $Samedi_Matin = '0';
+
+    /**
+     * @ORM\Column(type="boolean" , nullable = true )
+     */
+    protected $Samedi_Midi = '0';
+
+    /**
+     * @ORM\Column(type="boolean" , nullable = true )
+     */
+    protected $Samedi_Soir = '0';
+
+    /**
+     * @ORM\Column(type="boolean" , nullable = true )
+     */
+    protected $Dimanche_Matin = '0';
+
+    /**
+     * @ORM\Column(type="boolean" , nullable = true )
+     */
+    protected $Dimanche_Midi = '0';
+
+    /**
+     * @ORM\Column(type="boolean" , nullable = true )
+     */
+    protected $Dimanche_Soir = '0';
 
 
     public function __construct()
@@ -137,7 +239,6 @@ class User extends BaseUser implements ParticipantInterface
     parent::__construct();
     $this->enfants   = new ArrayCollection();
     $this->commentaires = new ArrayCollection();
-    $this->disponibilites = new ArrayCollection();
 }
 
 
@@ -563,63 +664,6 @@ class User extends BaseUser implements ParticipantInterface
     }
 
 
-     /**
-       * @param Dispos $dispos
-       * @return Dispos
-       */
-      public function addDispos(Dispos $dispos)
-      {
-        $this->dispos[] = $dispos;
-
-        // On lie l'annonce à la candidature
-        $dispos->setUser($this);
-
-        return $this;
-      }
-
-      /**
-       * @param Dispos $dispos
-       */
-      public function removeDispos(Dispos $dispos)
-      {
-        $this->dispos->removeElement($dispos);
-
-        // Et si notre relation était facultative (nullable=true, ce qui n'est pas notre cas ici attention) :
-        // $dispos->setUser(null);
-      }
-
-      /**
-       * @return ArrayCollection
-       */
-      public function getDisponibilites()
-      {
-        return $this->disponibilites;
-      }
-
-    /**
-     * Add disponibilite
-     *
-     * @param \AppUserBundle\Entity\Dispos $disponibilite
-     *
-     * @return User
-     */
-    public function addDisponibilite(\AppUserBundle\Entity\Dispos $disponibilite)
-    {
-        $this->disponibilites[] = $disponibilite;
-
-        return $this;
-    }
-
-    /**
-     * Remove disponibilite
-     *
-     * @param \AppUserBundle\Entity\Dispos $disponibilite
-     */
-    public function removeDisponibilite(\AppUserBundle\Entity\Dispos $disponibilite)
-    {
-        $this->disponibilites->removeElement($disponibilite);
-    }
-
     /**
      * Add meetup
      *
@@ -652,5 +696,533 @@ class User extends BaseUser implements ParticipantInterface
     public function getMeetups()
     {
         return $this->meetups;
+    }
+
+    /**
+     * Set dispos
+     *
+     * @param \AppUserBundle\Entity\Dispos $dispos
+     *
+     * @return User
+     */
+    public function setDispos(\AppUserBundle\Entity\Dispos $dispos = null)
+    {
+        $this->dispos = $dispos;
+
+        return $this;
+    }
+
+    /**
+     * Get dispos
+     *
+     * @return \AppUserBundle\Entity\Dispos
+     */
+    public function getDispos()
+    {
+        return $this->dispos;
+    }
+
+    /**
+     * Set lundiMatin
+     *
+     * @param boolean $lundiMatin
+     *
+     * @return User
+     */
+    public function setLundiMatin($lundiMatin)
+    {
+        $this->Lundi_Matin = $lundiMatin;
+
+        return $this;
+    }
+
+    /**
+     * Get lundiMatin
+     *
+     * @return boolean
+     */
+    public function getLundiMatin()
+    {
+        return $this->Lundi_Matin;
+    }
+
+    /**
+     * Set lundiMidi
+     *
+     * @param boolean $lundiMidi
+     *
+     * @return User
+     */
+    public function setLundiMidi($lundiMidi)
+    {
+        $this->Lundi_Midi = $lundiMidi;
+
+        return $this;
+    }
+
+    /**
+     * Get lundiMidi
+     *
+     * @return boolean
+     */
+    public function getLundiMidi()
+    {
+        return $this->Lundi_Midi;
+    }
+
+    /**
+     * Set lundiSoir
+     *
+     * @param boolean $lundiSoir
+     *
+     * @return User
+     */
+    public function setLundiSoir($lundiSoir)
+    {
+        $this->Lundi_Soir = $lundiSoir;
+
+        return $this;
+    }
+
+    /**
+     * Get lundiSoir
+     *
+     * @return boolean
+     */
+    public function getLundiSoir()
+    {
+        return $this->Lundi_Soir;
+    }
+
+    /**
+     * Set mardiMatin
+     *
+     * @param boolean $mardiMatin
+     *
+     * @return User
+     */
+    public function setMardiMatin($mardiMatin)
+    {
+        $this->Mardi_Matin = $mardiMatin;
+
+        return $this;
+    }
+
+    /**
+     * Get mardiMatin
+     *
+     * @return boolean
+     */
+    public function getMardiMatin()
+    {
+        return $this->Mardi_Matin;
+    }
+
+    /**
+     * Set mardiMidi
+     *
+     * @param boolean $mardiMidi
+     *
+     * @return User
+     */
+    public function setMardiMidi($mardiMidi)
+    {
+        $this->Mardi_Midi = $mardiMidi;
+
+        return $this;
+    }
+
+    /**
+     * Get mardiMidi
+     *
+     * @return boolean
+     */
+    public function getMardiMidi()
+    {
+        return $this->Mardi_Midi;
+    }
+
+    /**
+     * Set mardiSoir
+     *
+     * @param boolean $mardiSoir
+     *
+     * @return User
+     */
+    public function setMardiSoir($mardiSoir)
+    {
+        $this->Mardi_Soir = $mardiSoir;
+
+        return $this;
+    }
+
+    /**
+     * Get mardiSoir
+     *
+     * @return boolean
+     */
+    public function getMardiSoir()
+    {
+        return $this->Mardi_Soir;
+    }
+
+    /**
+     * Set mercrediMatin
+     *
+     * @param boolean $mercrediMatin
+     *
+     * @return User
+     */
+    public function setMercrediMatin($mercrediMatin)
+    {
+        $this->Mercredi_Matin = $mercrediMatin;
+
+        return $this;
+    }
+
+    /**
+     * Get mercrediMatin
+     *
+     * @return boolean
+     */
+    public function getMercrediMatin()
+    {
+        return $this->Mercredi_Matin;
+    }
+
+    /**
+     * Set mercrediMidi
+     *
+     * @param boolean $mercrediMidi
+     *
+     * @return User
+     */
+    public function setMercrediMidi($mercrediMidi)
+    {
+        $this->Mercredi_Midi = $mercrediMidi;
+
+        return $this;
+    }
+
+    /**
+     * Get mercrediMidi
+     *
+     * @return boolean
+     */
+    public function getMercrediMidi()
+    {
+        return $this->Mercredi_Midi;
+    }
+
+    /**
+     * Set mercrediSoir
+     *
+     * @param boolean $mercrediSoir
+     *
+     * @return User
+     */
+    public function setMercrediSoir($mercrediSoir)
+    {
+        $this->Mercredi_Soir = $mercrediSoir;
+
+        return $this;
+    }
+
+    /**
+     * Get mercrediSoir
+     *
+     * @return boolean
+     */
+    public function getMercrediSoir()
+    {
+        return $this->Mercredi_Soir;
+    }
+
+    /**
+     * Set jeudiMatin
+     *
+     * @param boolean $jeudiMatin
+     *
+     * @return User
+     */
+    public function setJeudiMatin($jeudiMatin)
+    {
+        $this->Jeudi_Matin = $jeudiMatin;
+
+        return $this;
+    }
+
+    /**
+     * Get jeudiMatin
+     *
+     * @return boolean
+     */
+    public function getJeudiMatin()
+    {
+        return $this->Jeudi_Matin;
+    }
+
+    /**
+     * Set jeudiMidi
+     *
+     * @param boolean $jeudiMidi
+     *
+     * @return User
+     */
+    public function setJeudiMidi($jeudiMidi)
+    {
+        $this->Jeudi_Midi = $jeudiMidi;
+
+        return $this;
+    }
+
+    /**
+     * Get jeudiMidi
+     *
+     * @return boolean
+     */
+    public function getJeudiMidi()
+    {
+        return $this->Jeudi_Midi;
+    }
+
+    /**
+     * Set jeudiSoir
+     *
+     * @param boolean $jeudiSoir
+     *
+     * @return User
+     */
+    public function setJeudiSoir($jeudiSoir)
+    {
+        $this->Jeudi_Soir = $jeudiSoir;
+
+        return $this;
+    }
+
+    /**
+     * Get jeudiSoir
+     *
+     * @return boolean
+     */
+    public function getJeudiSoir()
+    {
+        return $this->Jeudi_Soir;
+    }
+
+    /**
+     * Set vendrediMatin
+     *
+     * @param boolean $vendrediMatin
+     *
+     * @return User
+     */
+    public function setVendrediMatin($vendrediMatin)
+    {
+        $this->Vendredi_Matin = $vendrediMatin;
+
+        return $this;
+    }
+
+    /**
+     * Get vendrediMatin
+     *
+     * @return boolean
+     */
+    public function getVendrediMatin()
+    {
+        return $this->Vendredi_Matin;
+    }
+
+    /**
+     * Set vendrediMidi
+     *
+     * @param boolean $vendrediMidi
+     *
+     * @return User
+     */
+    public function setVendrediMidi($vendrediMidi)
+    {
+        $this->Vendredi_Midi = $vendrediMidi;
+
+        return $this;
+    }
+
+    /**
+     * Get vendrediMidi
+     *
+     * @return boolean
+     */
+    public function getVendrediMidi()
+    {
+        return $this->Vendredi_Midi;
+    }
+
+    /**
+     * Set vendrediSoir
+     *
+     * @param boolean $vendrediSoir
+     *
+     * @return User
+     */
+    public function setVendrediSoir($vendrediSoir)
+    {
+        $this->Vendredi_Soir = $vendrediSoir;
+
+        return $this;
+    }
+
+    /**
+     * Get vendrediSoir
+     *
+     * @return boolean
+     */
+    public function getVendrediSoir()
+    {
+        return $this->Vendredi_Soir;
+    }
+
+    /**
+     * Set samediMatin
+     *
+     * @param boolean $samediMatin
+     *
+     * @return User
+     */
+    public function setSamediMatin($samediMatin)
+    {
+        $this->Samedi_Matin = $samediMatin;
+
+        return $this;
+    }
+
+    /**
+     * Get samediMatin
+     *
+     * @return boolean
+     */
+    public function getSamediMatin()
+    {
+        return $this->Samedi_Matin;
+    }
+
+    /**
+     * Set samediMidi
+     *
+     * @param boolean $samediMidi
+     *
+     * @return User
+     */
+    public function setSamediMidi($samediMidi)
+    {
+        $this->Samedi_Midi = $samediMidi;
+
+        return $this;
+    }
+
+    /**
+     * Get samediMidi
+     *
+     * @return boolean
+     */
+    public function getSamediMidi()
+    {
+        return $this->Samedi_Midi;
+    }
+
+    /**
+     * Set samediSoir
+     *
+     * @param boolean $samediSoir
+     *
+     * @return User
+     */
+    public function setSamediSoir($samediSoir)
+    {
+        $this->Samedi_Soir = $samediSoir;
+
+        return $this;
+    }
+
+    /**
+     * Get samediSoir
+     *
+     * @return boolean
+     */
+    public function getSamediSoir()
+    {
+        return $this->Samedi_Soir;
+    }
+
+    /**
+     * Set dimancheMatin
+     *
+     * @param boolean $dimancheMatin
+     *
+     * @return User
+     */
+    public function setDimancheMatin($dimancheMatin)
+    {
+        $this->Dimanche_Matin = $dimancheMatin;
+
+        return $this;
+    }
+
+    /**
+     * Get dimancheMatin
+     *
+     * @return boolean
+     */
+    public function getDimancheMatin()
+    {
+        return $this->Dimanche_Matin;
+    }
+
+    /**
+     * Set dimancheMidi
+     *
+     * @param boolean $dimancheMidi
+     *
+     * @return User
+     */
+    public function setDimancheMidi($dimancheMidi)
+    {
+        $this->Dimanche_Midi = $dimancheMidi;
+
+        return $this;
+    }
+
+    /**
+     * Get dimancheMidi
+     *
+     * @return boolean
+     */
+    public function getDimancheMidi()
+    {
+        return $this->Dimanche_Midi;
+    }
+
+    /**
+     * Set dimancheSoir
+     *
+     * @param boolean $dimancheSoir
+     *
+     * @return User
+     */
+    public function setDimancheSoir($dimancheSoir)
+    {
+        $this->Dimanche_Soir = $dimancheSoir;
+
+        return $this;
+    }
+
+    /**
+     * Get dimancheSoir
+     *
+     * @return boolean
+     */
+    public function getDimancheSoir()
+    {
+        return $this->Dimanche_Soir;
     }
 }

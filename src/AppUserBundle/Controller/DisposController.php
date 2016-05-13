@@ -3,7 +3,6 @@
 
 namespace AppUserBundle\Controller;
 use AppUserBundle\Entity\Dispos;
-use AppBundle\Entity\Image;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\UserBundle\Model\UserInterface;
@@ -18,19 +17,11 @@ class DisposController extends Controller
 
   public function edit_disposAction ()
   {
-    $request = request::createFromGlobals();
+    $request = request::createFromGlobals();     
 
     $user = $this->container->get('security.context')->getToken()->getUser();
 
-   // $liste_dispos = $em->getRepository('AppUserBundle:Dispos')->findByUser($user->getId());
-
     $em = $this->getDoctrine()->getManager();
-
-    $listDispos = $this->getDoctrine()
-      ->getManager()
-      ->getRepository('AppUserBundle:Dispos')
-      ->findByUser($user)
-    ;
 
     $un = $request->request->get('1');
     $deux = $request->request->get('2');
@@ -54,85 +45,285 @@ class DisposController extends Controller
     $vingt = $request->request->get('20');
     $vingt_un = $request->request->get('21');
 
-    $start = $user->getDisponibilites()->first()->getId();
+   
+      if($un ==  "1" ){
+        $user->setLundiMatin(true);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+      if($un == "0"){
+        $user->setLundiMatin(false);
+        $em->persist($user);
+        $em->flush();
+        
+      }
 
-    var_dump($start);
+      if($deux ==  "1" ){
+        $user->setLundiMidi(true);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+      if($deux == "0"){
+        $user->setLundiMidi(false);
+        $em->persist($user);
+        $em->flush();
+        }
 
-    foreach ($listDispos as $dispo) {
+      if($trois ==  "1" ){
+        $user->setLundiSoir(true);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+      if($trois == "0"){
+        $user->setLundiSoir(false);
+        $em->persist($user);
+        $em->flush();
+        
+      }
 
-        if($dispo->getId() == $start){
-          if($un == '1'){
-            $dispo->setDisponibilite('1');
-          }
-          else{
-            $dispo->setDisponibilite('0');
-          }
-          $em->persist($dispo);
-        }
-        if($dispo->getId() == $start+1){
-          var_dump($dispo->getDisponibilite());
-        }
-        if($dispo->getId() == $start+2){
-          var_dump($dispo->getDisponibilite());
-        }
-        if($dispo->getId() == $start+3){
-          var_dump($dispo->getDisponibilite());
-        }
-        if($dispo->getId() == $start+4){
-          var_dump($dispo->getDisponibilite());
-        }
-        if($dispo->getId() == $start+5){
-          var_dump($dispo->getDisponibilite());
-        }
-        if($dispo->getId() == $start+6){
-          var_dump($dispo->getDisponibilite());
-        }
-        if($dispo->getId() == $start+7){
-          var_dump($dispo->getDisponibilite());
-        }
-        if($dispo->getId() == $start+8){
-          var_dump($dispo->getDisponibilite());
-        }
-        if($dispo->getId() == $start+9){
-          var_dump($dispo->getDisponibilite());
-        }
-        if($dispo->getId() == $start+10){
-          var_dump($dispo->getDisponibilite());
-        }
-        if($dispo->getId() == $start+11){
-          var_dump($dispo->getDisponibilite());
-        }
-        if($dispo->getId() == $start+12){
-          var_dump($dispo->getDisponibilite());
-        }
-        if($dispo->getId() == $start+13){
-          var_dump($dispo->getDisponibilite());
-        }
-        if($dispo->getId() == $start+14){
-          var_dump($dispo->getDisponibilite());
-        }
-        if($dispo->getId() == $start+15){
-          var_dump($dispo->getDisponibilite());
-        }
-        if($dispo->getId() == $start+16){
-          var_dump($dispo->getDisponibilite());
-        }
-        if($dispo->getId() == $start+17){
-          var_dump($dispo->getDisponibilite());
-        }
-        if($dispo->getId() == $start+18){
-          var_dump($dispo->getDisponibilite());
-        }
-        if($dispo->getId() == $start+19){
-          var_dump($dispo->getDisponibilite());
-        }
-        if($dispo->getId() == $start+20){
-          var_dump($dispo->getDisponibilite());
-        }
+      if($quatre ==  "1" ){
+        $user->setMardiMatin(true);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+      if($quatre == "0"){
+        $user->setMardiMatin(false);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+
+      if($cinq ==  "1" ){
+        $user->setMardiMidi(true);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+      if($cinq == "0"){
+        $user->setMardiMidi(false);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+
+      if($six ==  "1" ){
+        $user->setMardiSoir(true);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+      if($six == "0"){
+        $user->setMardiSoir(false);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+
+      if($sept ==  "1" ){
+        $user->setMercrediMatin(true);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+      if($sept == "0"){
+        $user->setMercrediMatin(false);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+
+      if($huit ==  "1" ){
+        $user->setMercrediMidi(true);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+      if($huit == "0"){
+        $user->setMercrediMidi(false);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+
+      if($neuf ==  "1" ){
+        $user->setMercrediSoir(true);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+      if($neuf == "0"){
+        $user->setMercrediSoir(false);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+
+      if($dix ==  "1" ){
+        $user->setJeudiMatin(true);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+      if($dix == "0"){
+        $user->setJeudiMatin(false);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+
+      if($onze ==  "1" ){
+        $user->setJeudiMidi(true);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+      if($onze == "0"){
+        $user->setJeudiMidi(false);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+
+      if($douze ==  "1" ){
+        $user->setJeudiSoir(true);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+      if($douze == "0"){
+        $user->setJeudiSoir(false);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+
+      if($treize ==  "1" ){
+        $user->setVendrediMatin(true);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+      if($treize == "0"){
+        $user->setVendrediMatin(false);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+
+      if($quatorze ==  "1" ){
+        $user->setVendrediMidi(true);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+      if($quatorze == "0"){
+        $user->setVendrediMidi(false);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+
+      if($quinze ==  "1" ){
+        $user->setVendrediSoir(true);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+      if($quinze == "0"){
+        $user->setVendrediSoir(false);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+
+      if($seize ==  "1" ){
+        $user->setSamediMatin(true);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+      if($seize == "0"){
+        $user->setSamediMatin(false);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+
+      if($dix_sept ==  "1" ){
+        $user->setSamediMidi(true);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+      if($dix_sept == "0"){
+        $user->setSamediMidi(false);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+
+      if($dix_huit ==  "1" ){
+        $user->setSamediSoir(true);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+      if($dix_huit == "0"){
+        $user->setSamediSoir(false);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+
+      if($dix_neuf ==  "1" ){
+        $user->setDimancheMatin(true);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+      if($dix_neuf == "0"){
+        $user->setDimancheMatin(false);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+
+      if($vingt ==  "1" ){
+        $user->setDimancheMidi(true);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+      if($vingt == "0"){
+        $user->setDimancheMidi(false);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+
+      if($vingt_un ==  "1" ){
+        $user->setDimancheSoir(true);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+      if($vingt_un == "0"){
+        $user->setDimancheSoir(false);
+        $em->persist($user);
+        $em->flush();
+        
+      }
+
+
+      if($un != null ){
+        return $this->redirectToRoute('show', array('username' => $user));
+      }
 
       
-      $em->flush();
-
     //var_dump($listDispos->first());
 
 
@@ -363,7 +554,7 @@ class DisposController extends Controller
    
 
     var_dump("La liste est pleine donc je la met a jour avec les valeurs du form");*/
-  }
+  //}
     
     //$dispo->setUser($user);
     //$dispo->setDisponibilite($un);
@@ -371,9 +562,7 @@ class DisposController extends Controller
     
 
 
-    return $this->render('AppUserBundle:Profile:edit_dispos.html.twig',array(
-      "listDispos" => $listDispos));    
+    return $this->render('AppUserBundle:Profile:edit_dispos.html.twig');    
   }
-
 
 }

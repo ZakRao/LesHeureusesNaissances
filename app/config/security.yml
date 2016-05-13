@@ -46,6 +46,7 @@ security:
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/rencontre_maman, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/profil, roles: ROLE_USER  }
         - { path: ^/ajout_enfant, roles: ROLE_USER }
         - { path: ^/ajout_enfant/, roles: ROLE_USER }
@@ -65,5 +66,5 @@ security:
         - { path: ^/search, roles: ROLE_USER }
         - { path: ^/nouveau_message/, roles: ROLE_USER }
         - { path: ^/recherche, roles: ROLE_USER }
-        - { path: ^/rencontre/, roles: ROLE_USER }
+        - { path: ^/rencontre, roles: ROLE_USER }
 

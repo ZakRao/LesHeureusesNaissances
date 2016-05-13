@@ -8,6 +8,9 @@ oc_platform_homepage:
 # src/OC/PlatformBundle/Resources/config/routing.yml
 
 # src/OC/PlatformBundle/Resources/config/routing.yml
+recherche_off: 
+  path: /recherche_maman
+  defaults: { _controller:AppBundle:SearchMaman:search} 
 
 
 oc_platform_test:
