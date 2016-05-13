@@ -123,8 +123,9 @@
                     <h3 class="uppercase mt20">Mes disponibilités</h3>
                     
 
-
+                    {% if app.user.id==user.id %} 
                      <a class="btn btn-filled" href="{{path('app_user_edit_dispos')}}">Modifier mes Dispos</a>
+                    {% endif %}
                     <table class="table table-bordered">
                       <thead>
                         <tr>
