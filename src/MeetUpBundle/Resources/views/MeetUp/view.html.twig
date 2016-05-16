@@ -10,125 +10,144 @@
     <h1 class="text-center">{{ meet_up.titre }}</h1>
 </div>
 
-<div class="container">
+<div class="container" >
   <div class="row">
+    <div class="col-md-3" style="margin-top:30px;">
+        <div class="feature feature-2 bordered">
+            <div class="text-center">
+                <i class="ti-package icon-sm"></i>
+                <h5 class="uppercase">Informations</h5>
+            </div>
+            <p>
+              <strong>Département : </strong> {{meet_up.departement}}
+            </p>
+            <p>
+              <strong>Lieu : </strong> {{meet_up.localisation}}
+            </p>
+            <p>
+              <strong>Thème : </strong> {{meet_up.theme}}
+            </p>
+            <p>
+              <strong>Propositions de date : </strong>
+            </p>
+            <p>
+              {{meet_up.jour1 | date('d/m/Y')}} : 
+              
+              {% if meet_up.vote_jour1 < '2' %}
+              {{ meet_up.vote_jour1 }} vote 
+              <a href="{{ path('add_vote_jour1', {'id' : meet_up.id}) }}"><strong>+</strong></a>
+              {% else %}
+              {{ meet_up.vote_jour1 }} votes
+              <a href="{{ path('add_vote_jour1', {'id' : meet_up.id}) }}"><strong>+</strong></a>
+              {% endif %}
+            </p>
+            <p>
+              {{meet_up.jour2 | date('d/m/Y')}}
+              {% if meet_up.vote_jour2 < '2' %}
+              {{ meet_up.vote_jour2 }} vote 
+              <a href="{{ path('add_vote_jour2', {'id' : meet_up.id}) }}"><strong>+</strong></a>
+              {% else %}
+              {{ meet_up.vote_jour2 }} votes
+              <a href="{{ path('add_vote_jour2', {'id' : meet_up.id}) }}"><strong>+</strong></a>
+              {% endif %}
+            </p>
+            <p>
+              {{meet_up.jour3 | date('d/m/Y')}}
+              {% if meet_up.vote_jour3 < '2' %}
+              {{ meet_up.vote_jour3 }} vote 
+              <a href="{{ path('add_vote_jour3', {'id' : meet_up.id}) }}"><strong>+</strong></a>
+              {% else %}
+              {{ meet_up.vote_jour3 }} votes
+              <a href="{{ path('add_vote_jour3', {'id' : meet_up.id}) }}"><strong>+</strong></a>
+              {% endif %}
+            </p>
 
-    <div class="tabbed-content button-tabs">
-          <ul class="tabs">
-              <li class="active">
-                  <div class="tab-title">
-                      <span>La rencontre</span>
-                  </div>
-                  
-              </li>
-              <li class="">
-                  <div class="tab-title">
-                      <span>Les informations</span>
-                  </div>
-                  
-              </li>
-              <li class="">
-                  <div class="tab-title">
-                      <span>Discussion</span>
-                  </div>
-                  
-              </li>
-              <li class="">
-                  <div class="tab-title">
-                      <span>Les participants</span>
-                  </div>
-                  
-              </li>
-          </ul>
-      <ul class="content"><li class="active"><div class="tab-content">
-                     <p>
-                      {{meet_up.description}}
-                    </p>
-                  </div></li><li class=""><div class="tab-content">
-                      <p>
-                          Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
-                      </p>
-                  </div></li><li class=""><div class="tab-content">
-                      <p>
-                          At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est.
-                      </p>
-                  </div></li><li class=""><div class="tab-content">
-                      <p>
-                          Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.
-                      </p>
-                  </div></li></ul></div>
-    <div class="col-md-3 box-infos-meet-up mt20">
-      <h2 class="text-center">Informations</h2>
-      <p>
-        <strong>Département : </strong> {{meet_up.departement}}
-      </p>
-      <p>
-        <strong>Lieu : </strong> {{meet_up.localisation}}
-      </p>
-      <p>
-        <strong>Thème : </strong> {{meet_up.theme}}
-      </p>
-      <p>
-        <strong>Propositions de date : </strong>
-      </p>
-      <p>
-        {{meet_up.jour1 | date('d/m/Y')}} : 
-        
-        {% if meet_up.vote_jour1 < '2' %}
-        {{ meet_up.vote_jour1 }} vote 
-        <a href="{{ path('add_vote_jour1', {'id' : meet_up.id}) }}"><strong>+</strong></a>
-        {% else %}
-        {{ meet_up.vote_jour1 }} votes
-        <a href="{{ path('add_vote_jour1', {'id' : meet_up.id}) }}"><strong>+</strong></a>
-        {% endif %}
-      </p>
-      <p>
-        {{meet_up.jour2 | date('d/m/Y')}}
-        {% if meet_up.vote_jour2 < '2' %}
-        {{ meet_up.vote_jour2 }} vote 
-        <a href="{{ path('add_vote_jour2', {'id' : meet_up.id}) }}"><strong>+</strong></a>
-        {% else %}
-        {{ meet_up.vote_jour2 }} votes
-        <a href="{{ path('add_vote_jour2', {'id' : meet_up.id}) }}"><strong>+</strong></a>
-        {% endif %}
-      </p>
-      <p>
-        {{meet_up.jour3 | date('d/m/Y')}}
-        {% if meet_up.vote_jour3 < '2' %}
-        {{ meet_up.vote_jour3 }} vote 
-        <a href="{{ path('add_vote_jour3', {'id' : meet_up.id}) }}"><strong>+</strong></a>
-        {% else %}
-        {{ meet_up.vote_jour3 }} votes
-        <a href="{{ path('add_vote_jour3', {'id' : meet_up.id}) }}"><strong>+</strong></a>
-        {% endif %}
-      </p>
+            <hr>
 
-      <hr>
+            <p class="text-center">
+              <strong>{{meet_up.listeparticipantes.count}}</strong>
+            </p>
+            <p class="text-center">
+              <strong>Participants</strong>
+            </p>
+            <div class="text-center">
 
-      <p class="text-center">
-        <strong>{{meet_up.listeparticipantes.count}}</strong>
-      </p>
-      <p class="text-center">
-        <strong>Participants</strong>
-      </p>
-      <div class="text-center">
+              {% if app.user.username!=meet_up.user and  not (meet_up.listeparticipantes.contains(app.user)) %}
+                <a class="btn" href="{{ path('ajout_participante', {'id' : meet_up.id}) }}">Je participe
+                </a> 
 
-        {% if app.user.username!=meet_up.user and  not (meet_up.listeparticipantes.contains(app.user)) %}
-          <a class="btn" href="{{ path('ajout_participante', {'id' : meet_up.id}) }}">Je participe
-          </a> 
+                {% elseif  meet_up.listeparticipantes.contains(app.user) %}
+                <a class="btn" href="{{ path('suppression_participante', {'id' : meet_up.id}) }}"> Je ne participe plus
+                </a> 
 
-          {% elseif  meet_up.listeparticipantes.contains(app.user) %}
-          <a class="btn" href="{{ path('suppression_participante', {'id' : meet_up.id}) }}"> Je ne participe plus
-          </a> 
-
-        {% endif %}
-      </div>
-
+              {% endif %}
+            </div>
+        </div>
+        <!--end of feature-->
     </div>
+    
+    <div class="col-md-9" style="margin-top:30px;">
+        <div class="feature feature-2 bordered">
+            <div class="text-center">
+                <i class="ti-pulse icon-sm"></i>
+                <h5 class="uppercase">La rencontre</h5>
+            </div>
+            <div class="text-center">
+             <img alt="café" class="img-responsive" src="{{asset('front/img/cafe.jpg')}}"/>
+            </div>
+            <!-- La rencontre-->
+            <div>
+              <p>
+                {{meet_up.description}}
+              </p>
+            </div>
+            
+            <!-- Commentaires -->
+            <hr>
 
+            <h2 class="text-center">Discussion</h2>
+            <div>
+              {% if meet_up.commentairesMeetUp != null %}
+                {% for commentaireMeetUp in meet_up.commentairesMeetUp %}
+
+                  <p>{{ commentaireMeetUp.contenu }}</p>
+                  <p>Par {{ commentaireMeetUp.auteur }} à {{commentaireMeetUp.date | date('d/m/Y')}}
+                  {% if app.user.username==commentaireMeetUp.auteur %}
+                            <a href="{{ path('delete_commentaire_meet_up', {'id': commentaireMeetUp.id}) }}" >
+                                <i class="glyphicon glyphicon-trash"></i>
+                                    Supprimer 
+                                </a>
+                            {% endif %}
+                  </p>
+        
+                  {% if not loop.last %}{% endif %}
+                  {% endfor %}
+              {% endif %}
+
+
+               {%if app.user.username==meet_up.user%} 
+               <a href="{{ path('delete_meet_up', {'id': meet_up.id}) }}" class="btn btn-danger">
+               <i class="glyphicon glyphicon-trash"></i>
+                Supprimer 
+                </a>
+                {% endif %} 
+                <form role="form" method="POST" enctype="multipart/form-data" action = "{{ path('add_commentaire_meet_up', {'id': meet_up.id}) }}" >
+                <div class="form-group">
+                <input type= "text"   name="commentaire" placeholder="Commentaire" class="form-control">
+                <input type= "file"  name="image" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-default">Envoyer</button>
+                </form>
+            </div>
+        </div>
+        <!--end of feature-->
+    </div>
     <div class="col-md-9 box-infos-meet-up mt20">
       
       <h2 class="text-center">La rencontre</h2>
+      <div class="text-center">
+       <img alt="café" class="img-responsive" src="{{asset('front/img/cafe.jpg')}}"/>
+      </div>
       <!-- La rencontre-->
       <div>
         <p>

@@ -83,3 +83,11 @@
 .box-infos-meet-up{
 	border: 1px solid #ccc;
 }
+
+.center-icon{
+	margin: 0 auto;
+}
+
+.color-blk{
+	color: black !important;
+}
