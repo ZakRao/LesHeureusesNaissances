@@ -20,7 +20,7 @@
 
     <div class="col-md-4 text-center">
       <!-- Pseudo -->
-      <h3 class="profil-username">{{ user.username }}</h4>
+      <h3 class="profil-username user-name-profil uppercase">{{ user.username }}</h4>
       
       <!-- Age -->
       <h3 >{{user.getAge()}} ans</h4>
@@ -121,11 +121,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h3 class="uppercase mt20">Mes disponibilités</h3>
-                    
 
-                    {% if app.user.id==user.id %} 
-                     <a class="btn btn-filled" href="{{path('app_user_edit_dispos')}}">Modifier mes Dispos</a>
-                    {% endif %}
                     <table class="table table-bordered">
                       <thead>
                         <tr>
@@ -280,7 +276,12 @@
                         </tr>
                       </tbody>
                     </table>
-      
+
+
+                    {% if app.user.id==user.id %} 
+                      <div class="text-center"> <a class="btn btn-filled" href="{{path('app_user_edit_dispos')}}">Modifier mes Dispos</a></div>
+                     
+                    {% endif %}
                 </div>
             </div>
         </div>
