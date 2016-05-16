@@ -6,17 +6,81 @@
 
 {% block body %}
 
-  <h2>Créer une Rencontre</h2>
+<div class="col-md-12 bandeau">
+    <h1 class="text-center">Créer une rencontre</h1>
+</div>
 
-  { {{ include("MeetUpBundle:MeetUp:form.html.twig") }} }
+<div class="container">
+	{{ form_start(form) }}
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				{{ form_label(form.titre, "Titre") }}
+		        {{ form_errors(form.titre) }}
+		        <div class="clearfix"></div>
+		        {{ form_widget(form.titre) }}
+		    </div>
+		    <div class="form-group">
+				{{ form_label(form.departement, "Departement") }}
+		        {{ form_errors(form.departement) }}
+		        <div class="clearfix"></div>
+		        {{ form_widget(form.departement) }}
+		    </div>
+			<div class="form-group">
+				{{ form_label(form.description, "Description") }}
+		        {{ form_errors(form.description) }}
+		        <div class="clearfix"></div>
+		        {{ form_widget(form.description) }}
+		    </div>
+		    <div class="form-group">
+				{{ form_label(form.localisation, "Lieu de la rencontre") }}
+		        {{ form_errors(form.localisation) }}
+		        <div class="clearfix"></div>
+		        {{ form_widget(form.localisation) }}
+		    </div>
+		    <div class="form-group">
+				{{ form_label(form.theme, "Thème") }}
+		        {{ form_errors(form.theme) }}
+		        <div class="clearfix"></div>
+		        {{ form_widget(form.theme) }}
+		    </div>
+			<div class="form-group">
+				{{ form_label(form.jour1, "Proposition n°1 de date de la rencontre") }}
+		        {{ form_errors(form.jour1) }}
+		        <div class="clearfix"></div>
+	            {{ form_widget(form.jour1.day,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
+	            {{ form_widget(form.jour1.month,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
+	            {{ form_widget(form.jour1.year,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
+		    </div>
+		    <div class="form-group">
+				{{ form_label(form.jour2, "Proposition n°2 de date de la rencontre") }}
+		        {{ form_errors(form.jour2) }}
+		        <div class="clearfix"></div>
+				{{ form_widget(form.jour2.day,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
+	            {{ form_widget(form.jour2.month,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
+	            {{ form_widget(form.jour2.year,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
+		    </div>
+		    <div class="form-group">
+				{{ form_label(form.jour3, "Proposition n°3 de date de la rencontre") }}
+		        {{ form_errors(form.jour3) }}
+		        <div class="clearfix"></div>
+				{{ form_widget(form.jour3.day,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
+	            {{ form_widget(form.jour3.month,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
+	            {{ form_widget(form.jour3.year,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
+		    </div>
+		    <div class="form-group">
+				{{ form_label(form.image, "Image") }}
+		        {{ form_errors(form.image) }}
+		        <div class="clearfix"></div>
+		        {{ form_widget(form.image) }}
+		    </div>
+		    <div class="form-group">
 
-  <p>
-    Vous éditez une rencontre déjà existante, merci de ne pas changer
-    l'esprit générale de l'annonce déjà publiée.
-  </p>
-
-  <p>
-   
-  </p>
-
+		        <div class="clearfix"></div>
+		        <input type="submit" value="Créer la rencontre">
+		    </div>
+			
+				{{ form_errors(form) }}
+		</div>
+	{{ form_end(form) }}
+</div>
 {% endblock %}

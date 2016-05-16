@@ -6,191 +6,190 @@
 
 {% block body %}
 
-  <h2>Rencontre</h2>
-
-  {{ meet_up.id }}
-  {{ meet_up.titre }}
-
-  <p> 
-    Jour 1 : {{ meet_up.jour1|date('Y-m-d') }} , <a href="{{ path('add_vote_jour1', {'id' : meet_up.id}) }}" class="btn btn-danger"> Test </a>
-    {{ meet_up.vote_jour1 }} 
-  </p>
-  <p> 
-    Jour 2 : {{ meet_up.jour2|date('Y-m-d') }} , <a href="{{ path('add_vote_jour2', {'id' : meet_up.id}) }}"> Test </a>
-    {{ meet_up.vote_jour2 }} 
-  </p>
-  <p> 
-    Jour 3 : {{ meet_up.jour3|date('Y-m-d') }} , <a href="{{ path('add_vote_jour3', {'id' : meet_up.id}) }}"> Test </a>
-    {{ meet_up.vote_jour3 }} 
-  </p>
-
-  {% if (meet_up.image != null) %}
-  <img 
-  src="{{ asset(meet_up.image.webPath) }}"
-  alt="{{ meet_up.image.alt }}"
-  />
-  {% endif %}
-
-  {% if app.user.username!=meet_up.user and  not (meet_up.listeparticipantes.contains(app.user)) %}
-  <a href="{{ path('ajout_participante', {'id' : meet_up.id}) }}"> Je participe
-  </a> 
-
-  {% elseif  meet_up.listeparticipantes.contains(app.user) %}
-  <a href="{{ path('suppression_participante', {'id' : meet_up.id}) }}"> Je ne participe plus
-  </a> 
-
-  {% endif %}
-
-
-
-   {%if app.user.username==meet_up.user%} 
-   <a href="{{ path('delete_meet_up', {'id': meet_up.id}) }}" class="btn btn-danger">
-   <i class="glyphicon glyphicon-trash"></i>
-    Supprimer 
-    </a>
-    {% endif %} 
-    <form role="form" method="POST" enctype="multipart/form-data" action = "{{ path('add_commentaire_meet_up', {'id': meet_up.id}) }}" >
-    <div class="form-group">
-    <input type= "text"   name="commentaire" placeholder="Commentaire" class="form-control">
-    <input type= "file"  name="image" class="form-control">
-    </div>
-    <button type="submit" class="btn btn-default">Envoyer</button>
-    </form>
-
-    {% if meet_up.commentairesMeetUp != null %}
-    {% for commentaireMeetUp in meet_up.commentairesMeetUp %}
-        <div class="col-md-10 col-md-offset-1 profil-comments">
-            <i> Par {{ commentaireMeetUp.auteur }} à {{commentaireMeetUp.date | date('d/m/Y')}} : Commentaire ID :  {{ commentaireMeetUp.id }} </i>
-                <div class="col-md-6">
-                    <h4>Titre du commentaire</h4>
-                        <p>
-                            {{ commentaireMeetUp.contenu }}
-                        </p>
-                </div>
-                {%if app.user.username==commentaireMeetUp.auteur%}
-                <a href="{{ path('delete_commentaire_meet_up', {'id': commentaireMeetUp.id}) }}" >
-                    <i class="glyphicon glyphicon-trash"></i>
-                        Supprimer 
-                    </a>
-                {% endif %}
-                <br>            
-                </div>
-                    {% if not loop.last %},{% endif %}
-    {% endfor %}
- {% if not meet_up.listeparticipantes.empty%} 
-                      <!-- Nombre d'enfants -->
-                     Il y'a  {{meet_up.listeparticipantes.count}} participants
-                      <div class="profil-enfants">
-                        {% for participant in meet_up.listeparticipantes %}
-                          <div>
-                              <p>{{participant.getUsername()}}</p>
-                          </div>
-                        {% endfor %}
-                      </div>
-                  {% else %}
-                    Pas de participants
-                  {% endif %}
-{% endif %}
-
-
-
-  <div class="col-md-12 bandeau">
-    <h1 class="text-center">Les Rencontres</h1>
+<div class="col-md-12 bandeau">
+    <h1 class="text-center">{{ meet_up.titre }}</h1>
 </div>
 
-{% block lesheureusesnaissancesplatform_body %}
+<div class="container">
+  <div class="row">
 
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 text-center">
-                    <div class="select-option">
-                        <i class="ti-angle-down"></i>
-                        <select>
-                            <option selected="" value="Default">Votre département</option>
-                            <option value="Small">Small</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Larger">Large</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <!--end of row-->
-            <div class="row">
-                <div class="col-md-4 col-sm-6">
-                    <div class="pricing-table pt-2 text-center">
-                        <h5 class="uppercase">Starter</h5>
-                        <span class="price">$12</span>
-                        <p class="lead">Per Month</p>
-                        <a class="btn btn-filled btn-lg" href="#">Get Started</a>
-                        <ul>
-                            <li>
-                                <strong>Unlimited</strong> access to content
-                            </li>
-                            <li>
-                                <strong>Fully Secure</strong> online backup
-                            </li>
-                            <li>
-                                <strong>One Year</strong> round the clock support
-                            </li>
-                            <li>
-                                <strong>FREE</strong> complimentary lanyard
-                            </li>
-                        </ul>
-                    </div>
-                    <!--end of pricing table-->
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="pricing-table pt-2 boxed text-center">
-                        <h5 class="uppercase">Starter</h5>
-                        <span class="price">$12</span>
-                        <p class="lead">Per Month</p>
-                        <a class="btn btn-filled btn-lg" href="#">Get Started</a>
-                        <ul>
-                            <li>
-                                <strong>Unlimited</strong> access to content
-                            </li>
-                            <li>
-                                <strong>Fully Secure</strong> online backup
-                            </li>
-                            <li>
-                                <strong>One Year</strong> round the clock support
-                            </li>
-                            <li>
-                                <strong>FREE</strong> complimentary lanyard
-                            </li>
-                        </ul>
-                    </div>
-                    <!--end of pricing table-->
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="pricing-table pt-2 emphasis text-center">
-                        <h5 class="uppercase">Starter</h5>
-                        <span class="price">$12</span>
-                        <p class="lead">Per Month</p>
-                        <a class="btn btn-white btn-lg" href="#">Get Started</a>
-                        <ul>
-                            <li>
-                                <strong>Unlimited</strong> access to content
-                            </li>
-                            <li>
-                                <strong>Fully Secure</strong> online backup
-                            </li>
-                            <li>
-                                <strong>One Year</strong> round the clock support
-                            </li>
-                            <li>
-                                <strong>FREE</strong> complimentary lanyard
-                            </li>
-                        </ul>
-                    </div>
-                    <!--end of pricing table-->
-                </div>
-            </div>
-            <!--end of row-->
-        </div>
-        <!--end of container-->
+    <div class="tabbed-content button-tabs">
+          <ul class="tabs">
+              <li class="active">
+                  <div class="tab-title">
+                      <span>La rencontre</span>
+                  </div>
+                  
+              </li>
+              <li class="">
+                  <div class="tab-title">
+                      <span>Les informations</span>
+                  </div>
+                  
+              </li>
+              <li class="">
+                  <div class="tab-title">
+                      <span>Discussion</span>
+                  </div>
+                  
+              </li>
+              <li class="">
+                  <div class="tab-title">
+                      <span>Les participants</span>
+                  </div>
+                  
+              </li>
+          </ul>
+      <ul class="content"><li class="active"><div class="tab-content">
+                     <p>
+                      {{meet_up.description}}
+                    </p>
+                  </div></li><li class=""><div class="tab-content">
+                      <p>
+                          Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+                      </p>
+                  </div></li><li class=""><div class="tab-content">
+                      <p>
+                          At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est.
+                      </p>
+                  </div></li><li class=""><div class="tab-content">
+                      <p>
+                          Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.
+                      </p>
+                  </div></li></ul></div>
+    <div class="col-md-3 box-infos-meet-up mt20">
+      <h2 class="text-center">Informations</h2>
+      <p>
+        <strong>Département : </strong> {{meet_up.departement}}
+      </p>
+      <p>
+        <strong>Lieu : </strong> {{meet_up.localisation}}
+      </p>
+      <p>
+        <strong>Thème : </strong> {{meet_up.theme}}
+      </p>
+      <p>
+        <strong>Propositions de date : </strong>
+      </p>
+      <p>
+        {{meet_up.jour1 | date('d/m/Y')}} : 
+        
+        {% if meet_up.vote_jour1 < '2' %}
+        {{ meet_up.vote_jour1 }} vote 
+        <a href="{{ path('add_vote_jour1', {'id' : meet_up.id}) }}"><strong>+</strong></a>
+        {% else %}
+        {{ meet_up.vote_jour1 }} votes
+        <a href="{{ path('add_vote_jour1', {'id' : meet_up.id}) }}"><strong>+</strong></a>
+        {% endif %}
+      </p>
+      <p>
+        {{meet_up.jour2 | date('d/m/Y')}}
+        {% if meet_up.vote_jour2 < '2' %}
+        {{ meet_up.vote_jour2 }} vote 
+        <a href="{{ path('add_vote_jour2', {'id' : meet_up.id}) }}"><strong>+</strong></a>
+        {% else %}
+        {{ meet_up.vote_jour2 }} votes
+        <a href="{{ path('add_vote_jour2', {'id' : meet_up.id}) }}"><strong>+</strong></a>
+        {% endif %}
+      </p>
+      <p>
+        {{meet_up.jour3 | date('d/m/Y')}}
+        {% if meet_up.vote_jour3 < '2' %}
+        {{ meet_up.vote_jour3 }} vote 
+        <a href="{{ path('add_vote_jour3', {'id' : meet_up.id}) }}"><strong>+</strong></a>
+        {% else %}
+        {{ meet_up.vote_jour3 }} votes
+        <a href="{{ path('add_vote_jour3', {'id' : meet_up.id}) }}"><strong>+</strong></a>
+        {% endif %}
+      </p>
 
-       
-    
-{% endblock %}
+      <hr>
+
+      <p class="text-center">
+        <strong>{{meet_up.listeparticipantes.count}}</strong>
+      </p>
+      <p class="text-center">
+        <strong>Participants</strong>
+      </p>
+      <div class="text-center">
+
+        {% if app.user.username!=meet_up.user and  not (meet_up.listeparticipantes.contains(app.user)) %}
+          <a class="btn" href="{{ path('ajout_participante', {'id' : meet_up.id}) }}">Je participe
+          </a> 
+
+          {% elseif  meet_up.listeparticipantes.contains(app.user) %}
+          <a class="btn" href="{{ path('suppression_participante', {'id' : meet_up.id}) }}"> Je ne participe plus
+          </a> 
+
+        {% endif %}
+      </div>
+
+    </div>
+
+    <div class="col-md-9 box-infos-meet-up mt20">
+      
+      <h2 class="text-center">La rencontre</h2>
+      <!-- La rencontre-->
+      <div>
+        <p>
+          {{meet_up.description}}
+        </p>
+      </div>
+      
+      <!-- Commentaires -->
+      <hr>
+
+      <h2 class="text-center">Discussion</h2>
+      <div>
+        {% if meet_up.commentairesMeetUp != null %}
+          {% for commentaireMeetUp in meet_up.commentairesMeetUp %}
+
+            <p>{{ commentaireMeetUp.contenu }}</p>
+            <p>Par {{ commentaireMeetUp.auteur }} à {{commentaireMeetUp.date | date('d/m/Y')}}
+            {% if app.user.username==commentaireMeetUp.auteur %}
+                      <a href="{{ path('delete_commentaire_meet_up', {'id': commentaireMeetUp.id}) }}" >
+                          <i class="glyphicon glyphicon-trash"></i>
+                              Supprimer 
+                          </a>
+                      {% endif %}
+            </p>
+  
+            {% if not loop.last %}{% endif %}
+            {% endfor %}
+        {% endif %}
+
+
+         {%if app.user.username==meet_up.user%} 
+         <a href="{{ path('delete_meet_up', {'id': meet_up.id}) }}" class="btn btn-danger">
+         <i class="glyphicon glyphicon-trash"></i>
+          Supprimer 
+          </a>
+          {% endif %} 
+          <form role="form" method="POST" enctype="multipart/form-data" action = "{{ path('add_commentaire_meet_up', {'id': meet_up.id}) }}" >
+          <div class="form-group">
+          <input type= "text"   name="commentaire" placeholder="Commentaire" class="form-control">
+          <input type= "file"  name="image" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-default">Envoyer</button>
+          </form>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <!-- Les participants -->
+    <div class="col-md-3 box-infos-meet-up mt20 mb50">
+      <h2 class="text-center">Participantes</h2>
+
+      {% if not meet_up.listeparticipantes.empty%} 
+        {% for participant in meet_up.listeparticipantes %}
+          <p>- {{participant.getUsername()}}</p>
+        {% endfor %}
+      {% else %}
+        <p>Pas encore de participantes</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
 {% endblock %}

@@ -27,6 +27,7 @@ class MeetUpType extends AbstractType
 		$builder
 		->add('titre', TextType::class)
 		->add('departement', ChoiceType::class,array('choices'=>array(
+<<<<<<< Updated upstream
 		'01'=>'01 Ain',
                 '02'=>'02 Aisne',
                 '03'=>'03 Allier',
@@ -132,6 +133,17 @@ class MeetUpType extends AbstractType
 
 
 		)))
+=======
+		'75 - Paris'=>'75 - Paris',
+	    '77 - Seine et Marne'=>'77 - Seine et Marne',
+	    '78 - Yvelines'=>'78 - Yvelines',
+	    '91 - Essonne'=>'91 - Essonne',
+	    '92 - Hauts de Seine'=>'92 - Hauts de Seine',
+	    '93 - Seine St Denis'=>'93 - Seine St Denis',
+	    '94 - Val de Marne'=>'94 - Val de Marne',
+	    '95 - Val d\'Oise'=>'95 - Val d\'Oise')))
+	    ->add('description', TextareaType::class)
+>>>>>>> Stashed changes
 		->add('localisation', TextType::class)
 		->add('theme', ChoiceType::class, array('choices'=>array(
 			'Un cafe'=>'Un cafe',
@@ -141,9 +153,8 @@ class MeetUpType extends AbstractType
 		->add('jour1', DateType::class)
 		->add('jour2', DateType::class)
 		->add('jour3', DateType::class)
-		->add('description', TextareaType::class)
-		->add('image', ImageType::class, array('required' => false))
-		->add('save', SubmitType::class);
+		
+		->add('image', ImageType::class, array('required' => false));
 	}
 }	
 ?>
