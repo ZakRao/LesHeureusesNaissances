@@ -178,7 +178,8 @@ class MeetUpController extends Controller
 	}
 
 	 public function mesrencontresAction(){ 
-    // Pour récupérer la liste de toutes les annonces : on utilise findAll() 
+
+
       $findlistMeetUp = $this->getDoctrine() 
         ->getManager() 
         ->getRepository('MeetUpBundle:MeetUp') 
@@ -187,9 +188,9 @@ class MeetUpController extends Controller
  
       $listMeetUp  = $this->get('knp_paginator')->paginate($findlistMeetUp, 
           $this->get('request')->query->get('page', 1)/*page number*/, 
-          2/*limit per page*/ 
+          6/*limit per page*/ 
       ); 
-      return $this->render('MeetUpBundle:MeetUp:lesrencontres.html.twig', array( 
+      return $this->render('MeetUpBundle:MeetUp:mesrencontres.html.twig', array( 
         'listMeetUp' => $listMeetUp 
       )); 
   }   

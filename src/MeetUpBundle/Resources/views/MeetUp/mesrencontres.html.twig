@@ -1,0 +1,65 @@
+{% extends "MeetUpBundle:MeetUp:layout.html.twig" %}
+
+{% block title %}
+  Rencontre {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="col-md-12 bandeau">
+        <h1 class="text-center">Mes rencontres</h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 text-center col-sm-offset-3 mt20">
+                
+            </div>
+        </div>
+
+        <!--end of row-->
+        <div class="row">
+            {%if listMeetUp%}
+            {% for meetup in listMeetUp %}
+            <div class="col-md-4 col-sm-6">
+                        {% if (meetup.image != null) %} 
+                                <img src="" alt=""> 
+                            {% endif %}
+                        <div class="pricing-table pt-2 boxed mb50">
+
+                             <h5 class="uppercase text-center">{{meetup.titre}}</h5> 
+                            <p class="pb10">{{meetup.description}}</p>
+                            <hr>
+                            <ul>
+                                <li>
+                                    <strong>Département : </strong> {{meetup.departement}}
+                                </li>
+                                <li>
+                                    <strong>Ville : </strong> {{meetup.localisation}}
+                                </li>
+                                <li>
+                                    <strong>Date : </strong> {{meetup.jour1.format('j/m/Y')}}
+                                </li>
+                                <li>
+                                    <strong>Nombre de participantes : </strong> {{meetup.listeparticipantes.count}}   
+                                </li>    
+                            </ul>
+                            <div class="text-center">
+                                <a class="btn btn-filled btn-lg" href="{{ path('meet_up_view', {'id': meetup.id}) }}">Voir la rencontre</a> 
+                            </div>
+                        </div>
+                <!--end of pricing table-->
+            </div>
+            {% endfor %}
+            {%else%}
+                <span>hell no</span>
+            {%endif%}
+        </div>
+        <!--end of row-->
+    </div>
+        <!--end of container-->
+    <div class="clearfix"></div>
+    <div class="navigation text-center">
+        {{ knp_pagination_render(listMeetUp) }}
+    </div>
+    <div class="clearfix"></div>
+{% endblock %}
