@@ -11,7 +11,9 @@
 	margin: 0 auto;
 	height : 200px;
 }
-
+.mt0{
+	margin-bottom: 0;
+}
 .mt20{
 	margin-top: 20px;
 }
@@ -98,4 +100,8 @@
 
 .precedent-bar{
 	width: 90px !important;
+}
+
+.btn-opacity{
+	opacity: 1 !important;
 }

@@ -137,7 +137,7 @@
                         <div class="pricing-table pt-2 boxed mb50">
 
                              <h5 class="uppercase text-center">{{meetup.titre}}</h5> 
-                            <p class="pb10">{{meetup.description}}</p>
+                            <p class="pb10">{{ meetup.description|length > 180 ? meetup.description|slice(0, 180) ~ '...' : meetup.description  }}</p>
                             <hr>
                             <ul>
                                 <li>
@@ -167,7 +167,7 @@
         <!--end of row-->
     </div>
         <!--end of container-->
-    <div class="navigation">
+   <div class="navigation text-center">
         {{ knp_pagination_render(listMeetUp) }}
     </div>
 {% endblock %}

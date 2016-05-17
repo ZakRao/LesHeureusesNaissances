@@ -12,13 +12,6 @@ recherche_off:
   path: /recherche_maman
   defaults: { _controller:AppBundle:SearchMaman:search} 
 
-
-oc_platform_test:
-    path: /test
-    defaults: { _controller: AppBundle:Advert:test }
-
-
-
 oc_platform_inscription2:
     path: /inscription2
     defaults: { _controller: AppBundle:Advert:inscription2 }

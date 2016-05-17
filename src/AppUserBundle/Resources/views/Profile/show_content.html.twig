@@ -6,47 +6,386 @@
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
 
-<div class="row bandeau-profil">
-  <!-- Bandeau supérieur -->
-  <div class="col-md-12">
-    <div class="col-md-4 text-center">
-      
-      {% if (user.image)!=null %}
-        <img  class="img-circle img-responsive" src= "{{ asset(user.image.webPath) }}" alt="{{ user.image.alt }}">
-      {% else %}
-        <img  class="img-circle img-responsive" src= "http://i57.servimg.com/u/f57/16/18/15/10/1866.jpg" height="">
-      {% endif %}
+
+<div class="row">
+  <div class="container">  
+    <div class="col-md-4 col-xs-12">
+      <div class="feature feature-1 boxed">
+          <div class="text-center">
+            <div class="profile-image">
+              {% if (user.image)!=null %}
+                <img  class="img-circle img-responsive" src= "{{ asset(user.image.webPath) }}" alt="{{ user.image.alt }}">
+              {% else %}
+                <img  class="img-circle img-responsive" src= "http://i57.servimg.com/u/f57/16/18/15/10/1866.jpg" height="">
+              {% endif %}
+            </div>
+            <div class="clearfix mt20"></div>
+            <h5>Yannis Gil</h5>
+            <h6 class="mt0">{{user.getAge()}} ans</h6>
+            <h6 class="mt0">Je suis "{{user.personnalite}}"</h6>
+            <h6 class="mt0">{{ user.departement }}, {{user.ville}}</h6>
+          </div>
+          <p class="text-center">{{user.description}}</p>
+          <div class="text-center">          
+            {% if app.user.id==user.id %}
+                <a class="btn btn-filled" href="{{path('fos_user_profile_edit')}}">Modifier mon Profil</a>
+            {% else %}
+            <a class="btn btn-filled" href="{{ path('message_to_user', {'username': user.getUsername}) }}">Envoyez moi un message </a>
+
+            {% endif %}
+          </div>
+      </div>
     </div>
+    <div class="col-md-8 col-xs-12 mt20">
 
-    <div class="col-md-4 text-center">
-      <!-- Pseudo -->
-      <h3 class="profil-username user-name-profil uppercase">{{ user.username }}</h4>
-      
-      <!-- Age -->
-      <h3 >{{user.getAge()}} ans</h4>
+      <div id="user-principle">
+        {% if user.enceinte == 1%}
 
-      <!-- Age -->
-      <h3 >Je suis "{{user.personnalite}}"</h4>
+          <h4 class="mt20">Je suis enceinte, et mon terme est prévu en {{user.datef.format('m/Y')}}</h4>
+          <p class="lead">
+            {% if not user.enfants.empty%} <!-- Nombre d'enfants -->
+                <h4>
+                  J'ai {{user.enfants.count}} enfants
+                </h4>
+              <div class="clearfix"></div>             
+              <div class="profil-enfants">
+                {% for enfant in user.enfants %}
+                  <div class="col-xs-2 text-center">
+                      {% if enfant.sexe == 'F'%}
+                        <img src="{{asset('front/img/logo_fille.jpg')}}" alt="logo_fille">
+                      {% else %}
+                        <img src="{{asset('front/img/logo_garcon.jpg')}}" alt="logo_garcon">
+                      {% endif %}
+                      <p>{{enfant.getAge()}}</p>
+                      <p>{{enfant.prenom}}</p>
+                  </div>
+                {% endfor %}
+              </div>
+            {% else %}
+              Je n'ai pas encore d'enfant
+            {% endif %}
+          </p>
+        {% else %}
+          
+          {% if not user.enfants.empty%} <!-- Nombre d'enfants -->
+              <h4>Je ne suis pas enceinte, et j'ai {{user.enfants.count}} enfants :</h4>
+              <div class="clearfix"></div>             
+              <div class="profil-enfants">
+                {% for enfant in user.enfants %}
+                  <div class="col-xs-2 text-center">
+                      {% if enfant.sexe == 'F'%}
+                        <img src="{{asset('front/img/logo_fille.jpg')}}" alt="logo_fille">
+                      {% else %}
+                        <img src="{{asset('front/img/logo_garcon.jpg')}}" alt="logo_garcon">
+                      {% endif %}
+                      <p>{{enfant.getAge()}}</p>
+                      <p>{{enfant.prenom}}</p>
+                  </div>
+                {% endfor %}
+              </div>
+            {% else %}
+                        <h4>Je ne suis pas enceinte, et je n'ai pas encore d'enfant</h4>
+            {% endif %}
+        {% endif %}
+      </div>
 
-    </div>
+      <hr>
 
-    <div class="col-md-4 text-center">
-      <h3 class="profil-username">{{ user.departement }}</h4>
-      <h3>{{ user.ville }}</h4> 
-      {%if app.user.id==user.id%}
-          <a class="btn btn-filled" href="{{path('fos_user_profile_edit')}}">Modifier mon Profil</a>
-      {% else %}
-      <a class="btn btn-filled" href="{{ path('message_to_user', {'username': user.getUsername}) }}">Envoyez moi un message </a>
+          
+      <div id="user-dispo">
+        <h4 class="uppercase mt20">Mes disponibilités</h4>
 
-      {% endif %}
+        <table class="table table-responsive table-bordered">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Lundi</th>
+              <th>Mardi</th>
+              <th>Mercredi</th>
+              <th>Jeudi</th>
+              <th>Vendredi</th>
+              <th>Samedi</th>
+              <th>Dimanche</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Matin</th>
+              <td class="lundi-m
+              
+                {% if user.getLundiMatin() == true %}
+                  success
+                {% endif %} 
+              "></td>
+              <td class="mardi-m
+              
+                
+                  {% if user.getMardiMatin() == true %}
+                  success
+                {% endif %}
+              
+              
+              "></td>
+              <td class="mercredi-m 
+              
+                {% if user.getMercrediMatin() == true %}
+                  success
+                {% endif %}
+              "></td>
+              <td class="jeudi-m
+              
+                {% if user.getJeudiMatin() == true %}
+                  success
+                {% endif %}
+              "></td>
+              <td class="vendredi-m
+              
+                {% if user.getVendrediMatin() == true %}
+                  success
+                {% endif %}
+              "></td>
+              <td class="samedi-m
+              
+                {% if user.getSamediMatin() == true %}
+                  success
+                {% endif %}
+              "></td>
+              <td class="dimanche-m
+              
+                {% if user.getDimancheMatin() == true %}
+                  success
+                {% endif %}
+              "></td>
+            </tr>
+            <tr>
+              <th scope="row">Après-midi</th>
+              <td class="lundi-am
+              
+                {% if user.getLundiMidi() == true %}
+                  success
+                {% endif %}
+              "></td>
+              <td class="mardi-am
+              
+                {% if user.getMardiMidi() == true %}
+                  success
+                {% endif %}
+              "></td>
+              <td class="mercredi-am
+              
+                {% if user.getMercrediMidi() == true %}
+                  success
+                {% endif %}
+              "></td>
+              <td class="jeudi-am
+              
+                {% if user.getJeudiMidi() == true %}
+                  success
+                {% endif %}
+              "></td>
+              <td class="vendredi-am
+              
+                {% if user.getVendrediMidi() == true %}
+                  success
+                {% endif %}
+              "></td>
+              <td class="samedi-am
+              
+                {% if user.getSamediMidi() == true %}
+                  success
+                {% endif %}
+              "></td>
+              <td class="dimanche-am
+              
+                {% if user.getDimancheMidi() == true %}
+                  success
+                {% endif %}
+              "></td>
+            </tr>
+            <tr>
+              <th scope="row">Soirée</th>
+              <td class="lundi-s
+              
+                {% if user.getLundiSoir() == true %}
+                  success
+                {% endif %}
+              "></td>
+              <td class="mardi-s
+              
+                {% if user.getMardiSoir() == true %}
+                  success
+                {% endif %}
+              "></td>
+              <td class="mercredi-s
+              
+                {% if user.getMercrediSoir() == true %}
+                  success
+                {% endif %}
+              "></td>
+              <td class="jeudi-s
+              
+                {% if user.getJeudiSoir() == true %}
+                  success
+                {% endif %}
+              "></td>
+              <td class="vendredi-s
+              
+                {% if user.getVendrediSoir() == true %}
+                  success
+                {% endif %}
+              "></td>
+              <td class="samedi-s
+              
+                {% if user.getSamediSoir() == true %}
+                  success
+                {% endif %}
+              "></td>
+              <td class="dimanche-s
+              
+                {% if user.getDimancheSoir() == true %}
+                  success
+                {% endif %}
+              "></td>
+            </tr>
+          </tbody>
+        </table>
+
+
+        {% if app.user.id==user.id %} 
+          <div class="text-center"> <a class="btn btn-filled" href="{{path('app_user_edit_dispos')}}">Modifier mes Dispos</a></div>
+         
+        {% endif %}
+      </div>
+
+      <hr>
+
+      <div id="partage-temps">
+        <h4 class="uppercase mt20 mb50">J'ai partagé du temps avec ces mamans</h4>         
+        {% if user.commentaires != null %}
+          {% for commentaire in user.commentaires %}
+            
+            <div class="col-md-12 profil-comments">
+                <div class="pull-right">
+                  <i> Par {{ commentaire.auteur }} le {{commentaire.date | date('d/m/Y')}} </i>
+                </div>
+                <div class="pull-left">
+                  <h4 class="bold">{{commentaire.auteur}}</h4>
+                </div>
+                <!-- On test si l'utilisateur connecté est l'auteur du commentaire il peur supprimer le commentaire-->
+                {% if app.user.username==commentaire.auteur %}
+                  <div class="col-md-2">
+                    <a href="{{ path('app_user_delete_commentaire', {'id': commentaire.id}) }}" class="btn pull-right">
+                      <i class="glyphicon glyphicon-trash"></i>
+                      Supprimer 
+                    </a>
+                  </div>
+                {% endif %}
+
+                
+                <div class="clearfix"></div>
+                <!-- On test s'il le commentaire a une photo, S'il n'en a pas -->
+                {% if (commentaire.image)==null %}
+
+                  <!-- On affiche le text dans un col-md-12 -->
+                  <div class="col-md-12">
+                    <p>
+                        {{ commentaire.contenu }}
+                    </p>
+                  </div>
+
+                <!-- S'il le commentaire a une image-->  
+                {% else %}
+
+                  <!-- On affiche le contenu dans un col-md-6 -->
+                  <div class="col-md-12">
+                    <p>
+                        {{ commentaire.contenu }}
+                    </p>
+                  </div>
+
+                  <!-- On affiche l'image dans un col-md-6 -->
+                  <div class="col-md-8 col-md-offset-2 profil-comment-picture">
+                    <img  class="img-responsive" src= "{{ asset(commentaire.image.webPath) }}" alt="{{ commentaire.image.alt }}">
+                  </div>
+                {% endif %}
+            </div>
+            <hr>
+            
+            {% if not loop.last %} {% endif %}
+          {% endfor %}
+        {% else %}
+          Cette utilisateur n'a pas encore de commentaire
+        {% endif %}
+
+        <form role="form" method="POST"  enctype="multipart/form-data" action="{{path('app_user_add_commentaire', {'username' : user.username})}}">
+
+          <div class="col-md-12 text-center">
+            <textarea placeholder="Laissez un commentaire sur votre rencontre avec cette utilisatrice" name="commentaire" rows="3"></textarea>
+          </div>
+          <div class="input-with-label text-left col-md-10">
+            <span>Vous pouvez ajouter une photo à votre commentaire :</span>
+          </div>
+          <div class="col-md-5">
+            <input type= "file"  name="image" class="form-control">
+          </div>
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-default">Envoyer</button>
+          </div>
+        </form>
+      </div>
+
+
 
     </div>
   </div>
 </div>
 
+<hr>
+
+{# 
+  <div class="row bandeau-profil ">
+    <!-- Bandeau supérieur -->
+    <div class="col-md-12">
+      <div class="col-md-4 text-center">
+        
+        {% if (user.image)!=null %}
+          <img  class="img-circle img-responsive" src= "{{ asset(user.image.webPath) }}" alt="{{ user.image.alt }}">
+        {% else %}
+          <img  class="img-circle img-responsive" src= "http://i57.servimg.com/u/f57/16/18/15/10/1866.jpg" height="">
+        {% endif %}
+      </div>
+
+      <div class="col-md-4 text-center">
+        
+        <!-- Pseudo -->
+        <h3 class="profil-username user-name-profil uppercase">{{ user.username }}</h4>
+        
+        <!-- Age -->
+        <h3 >{{user.getAge()}} ans</h4>
+
+        <!-- Personnalite -->
+        <h3 >Je suis "{{user.personnalite}}"</h4>
+
+      </div>
+
+      <div class="col-md-4 text-center">
+        <h3 class="profil-username">{{ user.departement }}</h4>
+        <h3>{{ user.ville }}</h4> 
+        {%if app.user.id==user.id%}
+            <a class="btn btn-filled" href="{{path('fos_user_profile_edit')}}">Modifier mon Profil</a>
+        {% else %}
+        <a class="btn btn-filled" href="{{ path('message_to_user', {'username': user.getUsername}) }}">Envoyez moi un message </a>
+
+        {% endif %}
+
+      </div>
+    </div>
+  </div> 
+#}
 
 
-<div class="profil-firstsec">
+
+{# <div class="profil-firstsec ">
         <div class="container">
             <div class="row">
             <div class="col-md-6">
@@ -115,278 +454,279 @@
             </div>
             </div>
         </div>
-    </div>
-    <div class="profil-secondsec">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 class="uppercase mt20">Mes disponibilités</h3>
+</div> #}
+{# 
+  <div class="profil-secondsec ">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12">
+                  <h3 class="uppercase mt20">Mes disponibilités</h3>
 
-                    <table class="table table-bordered">
-                      <thead>
-                        <tr>
-                          <th></th>
-                          <th>Lundi</th>
-                          <th>Mardi</th>
-                          <th>Mercredi</th>
-                          <th>Jeudi</th>
-                          <th>Vendredi</th>
-                          <th>Samedi</th>
-                          <th>Dimanche</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">Matin</th>
-                          <td class="lundi-m
-                          
-                            {% if user.getLundiMatin() == true %}
-                              success
-                            {% endif %} 
-                          "></td>
-                          <td class="mardi-m
-                          
-                            
-                              {% if user.getMardiMatin() == true %}
-                              success
-                            {% endif %}
-                          
-                          
-                          "></td>
-                          <td class="mercredi-m 
-                          
-                            {% if user.getMercrediMatin() == true %}
-                              success
-                            {% endif %}
-                          "></td>
-                          <td class="jeudi-m
-                          
-                            {% if user.getJeudiMatin() == true %}
-                              success
-                            {% endif %}
-                          "></td>
-                          <td class="vendredi-m
-                          
-                            {% if user.getVendrediMatin() == true %}
-                              success
-                            {% endif %}
-                          "></td>
-                          <td class="samedi-m
-                          
-                            {% if user.getSamediMatin() == true %}
-                              success
-                            {% endif %}
-                          "></td>
-                          <td class="dimanche-m
-                          
-                            {% if user.getDimancheMatin() == true %}
-                              success
-                            {% endif %}
-                          "></td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Après-midi</th>
-                          <td class="lundi-am
-                          
-                            {% if user.getLundiMidi() == true %}
-                              success
-                            {% endif %}
-                          "></td>
-                          <td class="mardi-am
-                          
-                            {% if user.getMardiMidi() == true %}
-                              success
-                            {% endif %}
-                          "></td>
-                          <td class="mercredi-am
-                          
-                            {% if user.getMercrediMidi() == true %}
-                              success
-                            {% endif %}
-                          "></td>
-                          <td class="jeudi-am
-                          
-                            {% if user.getJeudiMidi() == true %}
-                              success
-                            {% endif %}
-                          "></td>
-                          <td class="vendredi-am
-                          
-                            {% if user.getVendrediMidi() == true %}
-                              success
-                            {% endif %}
-                          "></td>
-                          <td class="samedi-am
-                          
-                            {% if user.getSamediMidi() == true %}
-                              success
-                            {% endif %}
-                          "></td>
-                          <td class="dimanche-am
-                          
-                            {% if user.getDimancheMidi() == true %}
-                              success
-                            {% endif %}
-                          "></td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Soirée</th>
-                          <td class="lundi-s
-                          
-                            {% if user.getLundiSoir() == true %}
-                              success
-                            {% endif %}
-                          "></td>
-                          <td class="mardi-s
-                          
-                            {% if user.getMardiSoir() == true %}
-                              success
-                            {% endif %}
-                          "></td>
-                          <td class="mercredi-s
-                          
-                            {% if user.getMercrediSoir() == true %}
-                              success
-                            {% endif %}
-                          "></td>
-                          <td class="jeudi-s
-                          
-                            {% if user.getJeudiSoir() == true %}
-                              success
-                            {% endif %}
-                          "></td>
-                          <td class="vendredi-s
-                          
-                            {% if user.getVendrediSoir() == true %}
-                              success
-                            {% endif %}
-                          "></td>
-                          <td class="samedi-s
-                          
-                            {% if user.getSamediSoir() == true %}
-                              success
-                            {% endif %}
-                          "></td>
-                          <td class="dimanche-s
-                          
-                            {% if user.getDimancheSoir() == true %}
-                              success
-                            {% endif %}
-                          "></td>
-                        </tr>
-                      </tbody>
-                    </table>
-
-
-                    {% if app.user.id==user.id %} 
-                      <div class="text-center"> <a class="btn btn-filled" href="{{path('app_user_edit_dispos')}}">Modifier mes Dispos</a></div>
-                     
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="profil-thirdsec">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 class="uppercase mt20 mb50">J'ai partagé du temps avec ces mamans</h3> 
-                    
-                    {% if user.commentaires != null %}
-                      {% for commentaire in user.commentaires %}
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>Lundi</th>
+                        <th>Mardi</th>
+                        <th>Mercredi</th>
+                        <th>Jeudi</th>
+                        <th>Vendredi</th>
+                        <th>Samedi</th>
+                        <th>Dimanche</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">Matin</th>
+                        <td class="lundi-m
                         
-                        <div class="col-md-10 col-md-offset-1 profil-comments">
-                            <div class="col-md-10">
-                              <h4 class="bold">{{commentaire.auteur}}</h4>
-                            </div>
-                            <!-- On test si l'utilisateur connecté est l'auteur du commentaire il peur supprimer le commentaire-->
-                            {% if app.user.username==commentaire.auteur %}
-                              <div class="col-md-2">
-                                <a href="{{ path('app_user_delete_commentaire', {'id': commentaire.id}) }}" class="btn pull-right">
-                                  <i class="glyphicon glyphicon-trash"></i>
-                                  Supprimer 
-                                </a>
-                              </div>
-                            {% endif %}
-
-                            
-                            <div class="clearfix"></div>
-                            <!-- On test s'il le commentaire a une photo, S'il n'en a pas -->
-                            {% if (commentaire.image)==null %}
-
-                              <!-- On affiche le text dans un col-md-12 -->
-                              <div class="col-md-12">
-                                <p>
-                                    {{ commentaire.contenu }}
-                                </p>
-                              </div>
-
-                            <!-- S'il le commentaire a une image-->  
-                            {% else %}
-
-                              <!-- On affiche le contenu dans un col-md-6 -->
-                              <div class="col-md-12">
-                                <p>
-                                    {{ commentaire.contenu }}
-                                </p>
-                              </div>
-
-                              <!-- On affiche l'image dans un col-md-6 -->
-                              <div class="col-md-8 col-md-offset-2 profil-comment-picture">
-                                <img  class="img-responsive" src= "{{ asset(commentaire.image.webPath) }}" alt="{{ commentaire.image.alt }}">
-                              </div>
-                            {% endif %}
-
-                            
-                            <div class="col-md-10">
-                              <i> Par {{ commentaire.auteur }} le {{commentaire.date | date('d/m/Y')}} </i>
-                            </div>
-                        </div>
+                          {% if user.getLundiMatin() == true %}
+                            success
+                          {% endif %} 
+                        "></td>
+                        <td class="mardi-m
                         
-                        {% if not loop.last %} {% endif %}
-                      {% endfor %}
-                    {% else %}
-                      Cette utilisateur n'a pas encore de commentaire
-                    {% endif %}
-                    
+                          
+                            {% if user.getMardiMatin() == true %}
+                            success
+                          {% endif %}
+                        
+                        
+                        "></td>
+                        <td class="mercredi-m 
+                        
+                          {% if user.getMercrediMatin() == true %}
+                            success
+                          {% endif %}
+                        "></td>
+                        <td class="jeudi-m
+                        
+                          {% if user.getJeudiMatin() == true %}
+                            success
+                          {% endif %}
+                        "></td>
+                        <td class="vendredi-m
+                        
+                          {% if user.getVendrediMatin() == true %}
+                            success
+                          {% endif %}
+                        "></td>
+                        <td class="samedi-m
+                        
+                          {% if user.getSamediMatin() == true %}
+                            success
+                          {% endif %}
+                        "></td>
+                        <td class="dimanche-m
+                        
+                          {% if user.getDimancheMatin() == true %}
+                            success
+                          {% endif %}
+                        "></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Après-midi</th>
+                        <td class="lundi-am
+                        
+                          {% if user.getLundiMidi() == true %}
+                            success
+                          {% endif %}
+                        "></td>
+                        <td class="mardi-am
+                        
+                          {% if user.getMardiMidi() == true %}
+                            success
+                          {% endif %}
+                        "></td>
+                        <td class="mercredi-am
+                        
+                          {% if user.getMercrediMidi() == true %}
+                            success
+                          {% endif %}
+                        "></td>
+                        <td class="jeudi-am
+                        
+                          {% if user.getJeudiMidi() == true %}
+                            success
+                          {% endif %}
+                        "></td>
+                        <td class="vendredi-am
+                        
+                          {% if user.getVendrediMidi() == true %}
+                            success
+                          {% endif %}
+                        "></td>
+                        <td class="samedi-am
+                        
+                          {% if user.getSamediMidi() == true %}
+                            success
+                          {% endif %}
+                        "></td>
+                        <td class="dimanche-am
+                        
+                          {% if user.getDimancheMidi() == true %}
+                            success
+                          {% endif %}
+                        "></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Soirée</th>
+                        <td class="lundi-s
+                        
+                          {% if user.getLundiSoir() == true %}
+                            success
+                          {% endif %}
+                        "></td>
+                        <td class="mardi-s
+                        
+                          {% if user.getMardiSoir() == true %}
+                            success
+                          {% endif %}
+                        "></td>
+                        <td class="mercredi-s
+                        
+                          {% if user.getMercrediSoir() == true %}
+                            success
+                          {% endif %}
+                        "></td>
+                        <td class="jeudi-s
+                        
+                          {% if user.getJeudiSoir() == true %}
+                            success
+                          {% endif %}
+                        "></td>
+                        <td class="vendredi-s
+                        
+                          {% if user.getVendrediSoir() == true %}
+                            success
+                          {% endif %}
+                        "></td>
+                        <td class="samedi-s
+                        
+                          {% if user.getSamediSoir() == true %}
+                            success
+                          {% endif %}
+                        "></td>
+                        <td class="dimanche-s
+                        
+                          {% if user.getDimancheSoir() == true %}
+                            success
+                          {% endif %}
+                        "></td>
+                      </tr>
+                    </tbody>
+                  </table>
 
-                    <div class="col-md-10 col-md-offset-1">
-                      <hr>
-                      <form role="form" method="POST"  enctype="multipart/form-data" action="{{path('app_user_add_commentaire', {'username' : user.username})}}">
 
-                        <div class="col-md-12 text-center">
-                          <textarea placeholder="Laissez un commentaire sur votre rencontre avec cette utilisatrice" name="commentaire" rows="3"></textarea>
-                        </div>
-                        <div class="input-with-label text-left col-md-10">
-                          <span>Vous pouvez ajouter une photo à votre commentaire :</span>
-                        </div>
-                        <div class="col-md-5">
-                          <input type= "file"  name="image" class="form-control">
-                        </div>
-                        <div class="col-md-12">
-                          <button type="submit" class="btn btn-default">Envoyer</button>
-                        </div>
-                      </form>
-                    </div>
-                
-
-            </div>
-
-            
+                  {% if app.user.id==user.id %} 
+                    <div class="text-center"> <a class="btn btn-filled" href="{{path('app_user_edit_dispos')}}">Modifier mes Dispos</a></div>
+                   
+                  {% endif %}
+              </div>
           </div>
+      </div>
+  </div> #}
+{# 
+  <div class="profil-thirdsec ">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12">
+                  <h3 class="uppercase mt20 mb50">J'ai partagé du temps avec ces mamans</h3> 
+                  
+                  {% if user.commentaires != null %}
+                    {% for commentaire in user.commentaires %}
+                      
+                      <div class="col-md-10 col-md-offset-1 profil-comments">
+                          <div class="col-md-10">
+                            <h4 class="bold">{{commentaire.auteur}}</h4>
+                          </div>
+                          <!-- On test si l'utilisateur connecté est l'auteur du commentaire il peur supprimer le commentaire-->
+                          {% if app.user.username==commentaire.auteur %}
+                            <div class="col-md-2">
+                              <a href="{{ path('app_user_delete_commentaire', {'id': commentaire.id}) }}" class="btn pull-right">
+                                <i class="glyphicon glyphicon-trash"></i>
+                                Supprimer 
+                              </a>
+                            </div>
+                          {% endif %}
+
+                          
+                          <div class="clearfix"></div>
+                          <!-- On test s'il le commentaire a une photo, S'il n'en a pas -->
+                          {% if (commentaire.image)==null %}
+
+                            <!-- On affiche le text dans un col-md-12 -->
+                            <div class="col-md-12">
+                              <p>
+                                  {{ commentaire.contenu }}
+                              </p>
+                            </div>
+
+                          <!-- S'il le commentaire a une image-->  
+                          {% else %}
+
+                            <!-- On affiche le contenu dans un col-md-6 -->
+                            <div class="col-md-12">
+                              <p>
+                                  {{ commentaire.contenu }}
+                              </p>
+                            </div>
+
+                            <!-- On affiche l'image dans un col-md-6 -->
+                            <div class="col-md-8 col-md-offset-2 profil-comment-picture">
+                              <img  class="img-responsive" src= "{{ asset(commentaire.image.webPath) }}" alt="{{ commentaire.image.alt }}">
+                            </div>
+                          {% endif %}
+
+                          
+                          <div class="col-md-10">
+                            <i> Par {{ commentaire.auteur }} le {{commentaire.date | date('d/m/Y')}} </i>
+                          </div>
+                      </div>
+                      
+                      {% if not loop.last %} {% endif %}
+                    {% endfor %}
+                  {% else %}
+                    Cette utilisateur n'a pas encore de commentaire
+                  {% endif %}
+                  
+
+                  <div class="col-md-10 col-md-offset-1">
+                    <hr>
+                    <form role="form" method="POST"  enctype="multipart/form-data" action="{{path('app_user_add_commentaire', {'username' : user.username})}}">
+
+                      <div class="col-md-12 text-center">
+                        <textarea placeholder="Laissez un commentaire sur votre rencontre avec cette utilisatrice" name="commentaire" rows="3"></textarea>
+                      </div>
+                      <div class="input-with-label text-left col-md-10">
+                        <span>Vous pouvez ajouter une photo à votre commentaire :</span>
+                      </div>
+                      <div class="col-md-5">
+                        <input type= "file"  name="image" class="form-control">
+                      </div>
+                      <div class="col-md-12">
+                        <button type="submit" class="btn btn-default">Envoyer</button>
+                      </div>
+                    </form>
+                  </div>
+              
+
+          </div>
+
+          
         </div>
-    </div>
-    <div class="profil-secondsec">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 class="uppercase mt20">Je participe à ces rencontres</h3>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
+      </div>
+  </div>
+  <div class="profil-secondsec hidden">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12">
+                  <h3 class="uppercase mt20">Je participe à ces rencontres</h3>
+
+              </div>
+          </div>
+      </div>
+  </div> #}
 
 
 

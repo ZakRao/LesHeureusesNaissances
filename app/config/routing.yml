@@ -1,3 +1,7 @@
+home:
+    path: /
+    defaults: { _controller: AppBundle:Advert:test }
+
 app_user:
     resource: "@AppUserBundle/Controller/"
     type:     annotation
@@ -14,7 +18,7 @@ oc_platform:
 
 app_user_bis:
     resource: "@AppUserBundle/Resources/config/routing.yml"
-    
+
 
 
 show:
