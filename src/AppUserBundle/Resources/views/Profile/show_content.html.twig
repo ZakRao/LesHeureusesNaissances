@@ -271,16 +271,6 @@
                 <div class="pull-left">
                   <h4 class="bold">{{commentaire.auteur}}</h4>
                 </div>
-                <!-- On test si l'utilisateur connecté est l'auteur du commentaire il peur supprimer le commentaire-->
-                {% if app.user.username==commentaire.auteur %}
-                  <div class="col-md-2">
-                    <a href="{{ path('app_user_delete_commentaire', {'id': commentaire.id}) }}" class="btn pull-right">
-                      <i class="glyphicon glyphicon-trash"></i>
-                      Supprimer 
-                    </a>
-                  </div>
-                {% endif %}
-
                 
                 <div class="clearfix"></div>
                 <!-- On test s'il le commentaire a une photo, S'il n'en a pas -->
@@ -308,6 +298,14 @@
                     <img  class="img-responsive" src= "{{ asset(commentaire.image.webPath) }}" alt="{{ commentaire.image.alt }}">
                   </div>
                 {% endif %}
+                <!-- On test si l'utilisateur connecté est l'auteur du commentaire il peur supprimer le commentaire-->
+                {% if app.user.username==commentaire.auteur %}
+                    <a href="{{ path('app_user_delete_commentaire', {'id': commentaire.id}) }}" class="btn pull-right">
+                      <i class="glyphicon glyphicon-trash"></i>
+                      Supprimer 
+                    </a>
+                {% endif %}
+
             </div>
             <hr>
             
