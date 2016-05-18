@@ -1,0 +1,52 @@
+function addOption(val,txt){
+	var opt= document.createElement("Option");
+	opt.txt =txt;
+	opt.value = val;
+	child.options.add(opt);
+}
+
+function clickOpt(){
+	var parent = document.getElementById("parent");
+	var p_length = parent.option.length;
+	var child = document.getElementById("child");
+	var c_length = child.option.length;
+	if (c_length>0){
+		for (var i =0; i<c_length; i++){
+			child.options.remove(i);
+		}
+	}
+	if (p_value == "Paris"){
+		for (var i =0; i<20; i++){
+			addOption("","");
+		}
+	}
+}
+
+
+{#function addOption(val,txt){
+    var opt= document.createElement("Option");
+    opt.txt = txt;
+    opt.value = val;
+    child.options.add(opt);
+}
+
+function clickOpt(){
+    var parent = document.getElementById("parent");
+    var p_length = parent.options.length;
+    var child = document.getElementById("child");
+    var c_length = child.options.length;
+    var  p_value= parent.value;
+    if (c_length>0){
+        for (var i =0; i<c_length; i++){
+            child.options.remove(i);
+        }
+    }
+    if (p_value == "Paris"){
+        for (var i =0; i<20; i++){
+            addOption("Test","Test");
+        }
+
+    }
+}
+</script>
+#}
