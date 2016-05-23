@@ -8,56 +8,80 @@
 {% include "MessagerieBundle:Message:onglets.html.twig" %}
 
 
+
+
+<div class="row bandeau">
+    <h1 class="text-center">Boite de reception</h1>
+        <div class="pull-right learn-more">
+            <a class="btn btn-lg btn-modal" href="#" modal-link="0">En savoir plus</a>
+            <div class="modal-container">
+                <div class="foundry_modal">
+                    <h4>Hey there, I'm a cool multi-purpose modal.<br> Use me for almost anything!</h4>
+                    <hr>
+                    <p>
+                        Convergence unicorn thinker-maker-doer ideate thinker-maker-doer pitch deck piverate food-truck long shadow disrupt. Sticky note engaging latte integrate driven convergence food-truck pitch deck. Quantitative vs. qualitative disrupt sticky note piverate 360 campaign co-working bootstrapping long shadow actionable insight agile latte. Thinker-maker-doer bootstrapping integrate personas long shadow Steve Jobs entrepreneur sticky note ship it grok sticky note.
+                    </p>
+                    <p>
+                        Grok Steve Jobs user centered design driven earned media food-truck waterfall is so 2000 and late human-centered design workflow ideate sticky note actionable insight entrepreneur unicorn. Experiential parallax physical computing disrupt cortado human-centered design intuitive grok bootstrapping quantitative vs. qualitative driven.
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
+</div>
+
 {% for flashMessage in app.session.flashbag.get('notice') %}
 
 <div class="alert alert-success">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         {{ flashMessage }}
 </div>
+<div class="clearfix"></div>
 
 {% endfor %}
 
 <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="page-header">
-                        <h2>{{ thread.subject }}</h2>
-                    </div>
-
-{% for message in thread.messages %}
- <div class="comments-list">
-                       <div class="media">
-                            <p class="pull-right"><small>{% trans with {'%date%': message.createdAt|date} from 'FOSMessageBundle' %} on {% endtrans %} </small></p>
-
-                             <div class="media-body messenger_thread_message_body" id="message_{{ message.id }}">
-                                <h4 class="media-heading user_name">{# Mettre le nom du sender #} {% trans with {'%sender%': message.sender|e } from 'FOSMessageBundle' %} by {% endtrans %}  </h4>
-                                {# mettre le commentaire #} {{ message.body }}
-                            </div>
-                        </div>
-                    </div>
-
-                   <!-- <div class="messenger_thread_message">
-                        <div class="messenger_thread_message_info">
-                            {% trans with {'%sender%': message.sender|e, '%date%': message.createdAt|date} from 'FOSMessageBundle' %}message_info{% endtrans %}
-                        </div>
-
-                        <div class="messenger_thread_message_body" id="message_{{ message.id }}">
-                            {{ message.body }}
-                        </div>
-                    </div>-->
-{% endfor %}
-                
-
-
-
-<form action="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}" method="post">
-    {{ form_widget(form) }}
-
-    <input type="submit" value="Envoyer"/>
-</form>
-
+        <!-- 1ere partie de la page-->
+        <div class="col-md-4" style="margin-top:20px;">
+            <div class="col-md-8 col-md-offset-2">
+                <a class="btn col-md-12" href="{{ url('fos_message_thread_new' )}}">Nouveau message</a>
+            </div>
+            <div class="col-md-8 col-md-offset-2">
+                <a class="btn btn-filled col-md-12" href="{{ url('fos_message_inbox') }}">{% trans from 'FOSMessageBundle' %}inbox{% endtrans %}</a>
+            </div>
+            <div class="col-md-8 col-md-offset-2">
+                <a class="btn col-md-12" href="{{ url('fos_message_sent') }}">{% trans from 'FOSMessageBundle' %}sent{% endtrans %}</a>
+            </div>
+            <div class="col-md-8 col-md-offset-2">
+                <a class="btn col-md-12" href="{{ url('fos_message_deleted') }}">{% trans from 'FOSMessageBundle' %}deleted{% endtrans %}</a>
             </div>
         </div>
-</div>
 
+
+        <!-- 2eme partie de la page-->
+        <div class="col-md-8" style="margin-top:10px;">
+            <div class="page-header">
+                <h2>{{ thread.subject }}</h2>
+            </div>
+            {% for message in thread.messages %}
+                <div class="comments-list">
+                    <div class="media">
+                        <p class="pull-right"><small>{% trans with {'%date%': message.createdAt|date} from 'FOSMessageBundle' %} on {% endtrans %} </small></p>
+
+                        <div class="media-body messenger_thread_message_body" id="message_{{ message.id }}">
+                            <h4 class="media-heading user_name">{# Mettre le nom du sender #} {% trans with {'%sender%': message.sender|e } from 'FOSMessageBundle' %} by {% endtrans %}  </h4>
+                            {# mettre le commentaire #} {{ message.body }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <form action="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}" method="post">
+                
+                {{ form_widget(form) }}
+
+                <input type="submit" value="Envoyer"/>
+            </form>
+        </div>
+    
+    
 {% endblock %}
