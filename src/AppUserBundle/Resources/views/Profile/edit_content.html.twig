@@ -8,8 +8,24 @@
 
 {% block lesheureusesnaissancesplatform_body %}
 
-  <div class="col-md-12 bandeau">
+  <div class="row bandeau">
       <h1 class="text-center">Modifier mon profil</h1>
+        <div class="pull-right learn-more">
+            <a class="btn btn-lg btn-modal" href="#" modal-link="0">En savoir plus</a>
+            <div class="modal-container">
+                <div class="foundry_modal">
+                    <h4>Hey there, I'm a cool multi-purpose modal.<br> Use me for almost anything!</h4>
+                    <hr>
+                    <p>
+                        Convergence unicorn thinker-maker-doer ideate thinker-maker-doer pitch deck piverate food-truck long shadow disrupt. Sticky note engaging latte integrate driven convergence food-truck pitch deck. Quantitative vs. qualitative disrupt sticky note piverate 360 campaign co-working bootstrapping long shadow actionable insight agile latte. Thinker-maker-doer bootstrapping integrate personas long shadow Steve Jobs entrepreneur sticky note ship it grok sticky note.
+                    </p>
+                    <p>
+                        Grok Steve Jobs user centered design driven earned media food-truck waterfall is so 2000 and late human-centered design workflow ideate sticky note actionable insight entrepreneur unicorn. Experiential parallax physical computing disrupt cortado human-centered design intuitive grok bootstrapping quantitative vs. qualitative driven.
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
   </div>
     {% if app.user.description==null%}
     <div class="clearfix"></div>

@@ -105,3 +105,15 @@
 .btn-opacity{
 	opacity: 1 !important;
 }
+
+.learn-more{
+	margin-top:-20px; 
+	margin-right:20px;
+}
+@media (max-width: 767px) {
+	.learn-more{
+		margin-top: 0px;
+		float: inherit !important;
+		text-align: center;
+	}
+}
