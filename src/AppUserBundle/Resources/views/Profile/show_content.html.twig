@@ -56,8 +56,11 @@
                       {% else %}
                         <img src="{{asset('front/img/logo_garcon.jpg')}}" alt="logo_garcon">
                       {% endif %}
-                      <p>{{enfant.getAge()}}</p>
-                      <p>{{enfant.prenom}}</p>
+                      {% if enfant.getAge()!= 0 %} 
+                      <p>{{enfant.getAge()}} ans <a href="{{ path('app_user_delete_enfant', {'id': enfant.id}) }}"><i class="glyphicon glyphicon-remove"></i></a></p> 
+                      {% else  %} 
+                      <p>{{enfant.getMois()}} mois <a href="{{ path('app_user_delete_enfant', {'id': enfant.id}) }}"><i class="glyphicon glyphicon-remove"></i></a></p> 
+                      {% endif %}
                   </div>
                 {% endfor %}
               </div>
@@ -78,14 +81,25 @@
                       {% else %}
                         <img src="{{asset('front/img/logo_garcon.jpg')}}" alt="logo_garcon">
                       {% endif %}
-                      <p>{{enfant.getAge()}}</p>
-                      <p>{{enfant.prenom}}</p>
+                      {% if enfant.getAge()!= 0 %} 
+                      <p>{{enfant.getAge()}} ans <a href="{{ path('app_user_delete_enfant', {'id': enfant.id}) }}"><i class="glyphicon glyphicon-remove"></i></a></p> 
+                      {% else  %} 
+                      <p>{{enfant.getMois()}} mois <a href="{{ path('app_user_delete_enfant', {'id': enfant.id}) }}"><i class="glyphicon glyphicon-remove"></i></a></p> 
+                      {% endif %}
+
                   </div>
                 {% endfor %}
               </div>
             {% else %}
                         <h4>Je ne suis pas enceinte, et je n'ai pas encore d'enfant</h4>
             {% endif %}
+        {% endif %}
+
+        {% if app.user.id==user.id %} 
+          <div class="clearfix"></div>
+          <div class="text-center">
+            <a class="btn btn-filled" href="{{path('app_user_edit_dispos')}}">Modifier mon statut</a>
+          </div>
         {% endif %}
       </div>
 
@@ -252,10 +266,23 @@
 
 
         {% if app.user.id==user.id %} 
-          <div class="text-center"> <a class="btn btn-filled" href="{{path('app_user_edit_dispos')}}">Modifier mes Dispos</a></div>
+          <div class="text-center"> <a class="btn btn-filled" href="{{path('app_user_edit_dispos')}}">Modifier mes disponibilités</a></div>
          
         {% endif %}
       </div>
+
+      <hr>
+
+          
+      <div id="user-dispo">
+        <h4 class="uppercase mt20">Je participe à ces rencontres</h4>
+
+        {% if app.user.id==user.id %} 
+          <div class="text-center"> <a class="btn btn-filled" href="{{path('app_user_edit_dispos')}}">Modifier mes disponibilités</a></div>
+         
+        {% endif %}
+      </div>
+
 
       <hr>
 

@@ -79,7 +79,7 @@
                                     <a href="#">{{app.user.username}}</a>
                                     <ul>
                                         <li>
-                                            <a href="#">Mon menu</a>
+                                            <a href="{{ path('show', {'username': app.user.username}) }}">Mon profil</a>
                                         </li>
                                         <li>
                                             <a href="{{ url('mesrencontres') }}">Mes rencontres</a>

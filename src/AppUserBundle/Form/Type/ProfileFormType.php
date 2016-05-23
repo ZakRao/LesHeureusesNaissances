@@ -31,7 +31,10 @@ class ProfileFormType extends BaseType
       ->add('prenom', TextType::class ,array('required' => true))
       ->add('anniversaire', BirthdayType::class, array('required' => true))
       ->add('adresse',  TextType::class , array('required' => true))
-     
+     ->add('enceinte', CheckboxType::class, array(
+        'label'    => 'Êtes vous enceinte ?',
+        'required' => false,))
+    ->add('datef')
       ->add('departement', ChoiceType::class,array('choices'=>array(
                 '01'=>'01 Ain',
                 '02'=>'02 Aisne',
@@ -155,11 +158,8 @@ class ProfileFormType extends BaseType
         return 'oc_user_profile';
 	}	
 
-//
-//      ->add('enceinte', CheckboxType::class, array(
-//    'label'    => 'Êtes vous enceinte ?',
-//    'required' => false,))
-//      ->add('datef')
+
+    
 //    ->add('save',      SubmitType::class)
       
  

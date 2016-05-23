@@ -23,13 +23,6 @@ class Enfant
 
 
 
-    /**
-     * 
-     *
-     * @ORM\Column(name="prenom", type="string")
-     */
-    private $prenom;
-
 
     /**
      * 
@@ -135,5 +128,44 @@ class Enfant
     public function getSexe()
     {
         return $this->sexe;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppUserBundle\Entity\User $user
+     *
+     * @return Enfant
+     */
+    public function setUser(\AppUserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppUserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+
+    public function getAge()
+    {
+        $dateInterval = $this->anniversaire->diff(new \DateTime());
+ 
+        return $dateInterval->y;
+    }
+
+    public function getMois()
+    {
+        $dateInterval = $this->anniversaire->diff(new \DateTime());
+ 
+        return $dateInterval->m;
     }
 }
