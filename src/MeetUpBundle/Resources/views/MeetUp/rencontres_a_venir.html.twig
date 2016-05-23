@@ -1,0 +1,80 @@
+{% extends "MeetUpBundle:MeetUp:layout.html.twig" %}
+
+{% block title %}
+  Rencontre {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row bandeau">
+        <h1 class="text-center">Rencontres à venir</h1>
+        <div class="pull-right learn-more">
+            <a class="btn btn-lg btn-modal" href="#" modal-link="0">En savoir plus</a>
+            <div class="modal-container">
+                <div class="foundry_modal">
+                    <h4>Hey there, I'm a cool multi-purpose modal.<br> Use me for almost anything!</h4>
+                    <hr>
+                    <p>
+                        Convergence unicorn thinker-maker-doer ideate thinker-maker-doer pitch deck piverate food-truck long shadow disrupt. Sticky note engaging latte integrate driven convergence food-truck pitch deck. Quantitative vs. qualitative disrupt sticky note piverate 360 campaign co-working bootstrapping long shadow actionable insight agile latte. Thinker-maker-doer bootstrapping integrate personas long shadow Steve Jobs entrepreneur sticky note ship it grok sticky note.
+                    </p>
+                    <p>
+                        Grok Steve Jobs user centered design driven earned media food-truck waterfall is so 2000 and late human-centered design workflow ideate sticky note actionable insight entrepreneur unicorn. Experiential parallax physical computing disrupt cortado human-centered design intuitive grok bootstrapping quantitative vs. qualitative driven.
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="clearfix"></div>
+
+    <div class="container">
+        <div class="row">
+            {% if app.user.meetups.count() == 0 %}
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <strong>Vous ne participez pas encore à une rencontre, mais ne perdez pas de temps trouvez une rencontre près de chez vous ! </strong>
+                    </div>
+                </div>
+            {% else %}
+                {% for meetup in app.user.meetups %}
+                    <div class="col-md-4 col-sm-6">
+                        {% if (meetup.image != null) %} 
+                            <img src="" alt=""> 
+                        {% endif %}
+                        <div class="pricing-table pt-2 boxed mb50">
+                            <h5 class="uppercase text-center">{{meetup.titre}}</h5> 
+                            <p class="pb10">{{meetup.description}}</p>
+                            <hr>
+                            <ul>
+                                <li>
+                                    <strong>Département : </strong> {{meetup.departement}}
+                                </li>
+                                <li>
+                                    <strong>Ville : </strong> {{meetup.localisation}}
+                                </li>
+                                <li>
+                                    <strong>Date : </strong> {{meetup.jour1.format('j/m/Y')}}
+                                </li>
+                                <li>
+                                    <strong>Nombre de participantes : </strong> {{meetup.listeparticipantes.count}}   
+                                </li>    
+                            </ul>
+                            <div class="text-center">
+                                <a class="btn btn-filled btn-lg" href="{{ path('meet_up_view', {'id': meetup.id}) }}">Voir la rencontre</a> 
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="navigation text-center">
+        {{ knp_pagination_render(listMeetUp) }}
+    </div>
+    <div class="clearfix"></div>
+{% endblock %}

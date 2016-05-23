@@ -110,6 +110,13 @@
 	margin-top:-20px; 
 	margin-right:20px;
 }
+
+.navbarsearch{
+   	height: 35px !important;
+    position: relative;
+    top: -3px;
+}
+
 @media (max-width: 767px) {
 	.learn-more{
 		margin-top: 0px;

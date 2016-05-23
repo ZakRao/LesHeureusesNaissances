@@ -194,6 +194,26 @@ class MeetUpController extends Controller
         'listMeetUp' => $listMeetUp 
       )); 
   }   
+
+  public function rencontresavenirAction(){ 
+
+
+      $findlistMeetUp = $this->getDoctrine() 
+        ->getManager() 
+        ->getRepository('MeetUpBundle:MeetUp') 
+        ->findByUser($this->getUser()) 
+      ; 
+ 
+      $listMeetUp  = $this->get('knp_paginator')->paginate($findlistMeetUp, 
+          $this->get('request')->query->get('page', 1)/*page number*/, 
+          6/*limit per page*/ 
+      ); 
+      return $this->render('MeetUpBundle:MeetUp:rencontres_a_venir.html.twig', array( 
+        'listMeetUp' => $listMeetUp 
+      )); 
+  }   
+
+
 	public function ajoutparticipanteAction($id){
 
 		$user = $this->container->get('security.context')->getToken()->getUser();
