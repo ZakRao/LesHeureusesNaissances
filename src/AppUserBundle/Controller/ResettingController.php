@@ -149,7 +149,7 @@ class ResettingController extends BaseController
      */
     protected function getRedirectionUrl(UserInterface $user)
     {
-        return $this->container->get('router')->generate('fos_user_profile_show');
+        return $this->container->get('router')->generate('profile');
     }
 
     /**

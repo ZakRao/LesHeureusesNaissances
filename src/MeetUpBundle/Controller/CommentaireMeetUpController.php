@@ -40,10 +40,36 @@ public function add_CommentaireMeetUpAction (MeetUp $meetup, Request $request)
       $commentaireMeetUp->setContenu($req);
       $meetup->addCommentaireMeetUp($commentaireMeetUp);
 
+      $participants = $meetup->getListeparticipantes();
+
+          foreach ($participants as $participant ) {
+           $recipient = $participant->getEmailCanonical();
+
+      $messagemail = \Swift_Message::newInstance()
+            ->setSubject('Message reçu')
+
+            //Mettre l'adresse mail des Heureuses naissances à la place de la mienne!!
+            ->setFrom($this->getParameter('mailer_user')) 
+            ->setTo($recipient)
+            ->setCharset('utf-8')
+            ->setBody(
+                $this->container->get('templating')->render(
+                    'MessagerieBundle:Emails:notification_meetup_commentaire.html.twig'
+                ),
+                'text/html'
+            );
+                            
+            $this->container->get('mailer')->send($messagemail);
+          }
+
       $em->persist($commentaireMeetUp);
       $em->flush();
 
+
+      
+
     }
+
     return $this->redirectToRoute('meet_up_view', array('id' => $meetup->getId()));
     }
 
