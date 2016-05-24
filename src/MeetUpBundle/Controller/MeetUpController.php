@@ -10,6 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use MeetUpBundle\Entity\MeetUp;
 use MeetUpBundle\Form\MeetUpType;
 use AppBundle\Entity\Image;
+use MeetUpBundle\Entity\Vote1;
+use MeetUpBundle\Entity\Vote2;
+use MeetUpBundle\Entity\Vote3;
+
 
 use AppUserBundle\Entity\User;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -34,6 +38,9 @@ class MeetUpController extends Controller
 
 	    }
 	$meetup = new MeetUp();
+	$vote1 = new Vote1();
+	$vote2 = new Vote2();
+	$vote3 = new Vote3();
 	$form = $this->createForm(MeetUpType::class, $meetup);
 	$em = $this->getDoctrine()->getManager();
 
@@ -44,13 +51,28 @@ class MeetUpController extends Controller
 	if( $form->handleRequest($request)->isValid()){
 
         $meetup->setUser($user);
+
+  		$meetup->setVote1($vote1);
+        $vote1->setMeetUp1($meetup);
+
+        $meetup->setVote2($vote2);
+        $vote2->setMeetUp2($meetup);
+        
+        $meetup->setVote3($vote3);
+        $vote3->setMeetUp3($meetup);
+       	
+        $em->persist($vote1);
+        $em->persist($vote2);
+        $em->persist($vote3);
+
 		$em->persist($meetup);
 		$em->flush();
 	
 
 		$request->getSession()->getFlashBag()->add('notice', 'Rencontre bien enregistrée.');
 
-  		return $this->redirect($this->generateUrl('meet_up_view', array('id' => $meetup->getId())));
+  		return $this->redirect($this->generateUrl('meet_up_view', array(
+  			'id' => $meetup->getId())));
 
 	}
 
@@ -194,26 +216,6 @@ class MeetUpController extends Controller
         'listMeetUp' => $listMeetUp 
       )); 
   }   
-
-  public function rencontresavenirAction(){ 
-
-
-      $findlistMeetUp = $this->getDoctrine() 
-        ->getManager() 
-        ->getRepository('MeetUpBundle:MeetUp') 
-        ->findByUser($this->getUser()) 
-      ; 
- 
-      $listMeetUp  = $this->get('knp_paginator')->paginate($findlistMeetUp, 
-          $this->get('request')->query->get('page', 1)/*page number*/, 
-          6/*limit per page*/ 
-      ); 
-      return $this->render('MeetUpBundle:MeetUp:rencontres_a_venir.html.twig', array( 
-        'listMeetUp' => $listMeetUp 
-      )); 
-  }   
-
-
 	public function ajoutparticipanteAction($id){
 
 		$user = $this->container->get('security.context')->getToken()->getUser();

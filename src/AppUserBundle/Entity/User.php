@@ -127,7 +127,6 @@ class User extends BaseUser implements ParticipantInterface
     private $meetups;
 
 
-
     /**
      * @ORM\Column(type="boolean" , nullable = true )
      */
@@ -232,6 +231,27 @@ class User extends BaseUser implements ParticipantInterface
      * @ORM\Column(type="boolean" , nullable = true )
      */
     protected $Dimanche_Soir = '0';
+
+    /**
+     * @ORM\ManyToMany(targetEntity="MeetUpBundle\Entity\Vote1", mappedBy="vote1users") 
+     *
+     * 
+     */
+    private $users1vote;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="MeetUpBundle\Entity\Vote2", mappedBy="vote2users") 
+     *
+     * 
+     */
+    private $users2vote;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="MeetUpBundle\Entity\Vote3", mappedBy="vote3users") 
+     *
+     * 
+     */
+    private $users3vote;
 
 
     public function __construct()
@@ -1224,5 +1244,109 @@ class User extends BaseUser implements ParticipantInterface
     public function getDimancheSoir()
     {
         return $this->Dimanche_Soir;
+    }
+
+   
+
+    /**
+     * Add users1vote
+     *
+     * @param \MeetUpBundle\Entity\Vote1 $users1vote
+     *
+     * @return User
+     */
+    public function addUsers1vote(\MeetUpBundle\Entity\Vote1 $users1vote)
+    {
+        $this->users1vote[] = $users1vote;
+
+        return $this;
+    }
+
+    /**
+     * Remove users1vote
+     *
+     * @param \MeetUpBundle\Entity\Vote1 $users1vote
+     */
+    public function removeUsers1vote(\MeetUpBundle\Entity\Vote1 $users1vote)
+    {
+        $this->users1vote->removeElement($users1vote);
+    }
+
+    /**
+     * Get users1vote
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers1vote()
+    {
+        return $this->users1vote;
+    }
+
+    /**
+     * Add users2vote
+     *
+     * @param \MeetUpBundle\Entity\Vote2 $users2vote
+     *
+     * @return User
+     */
+    public function addUsers2vote(\MeetUpBundle\Entity\Vote2 $users2vote)
+    {
+        $this->users2vote[] = $users2vote;
+
+        return $this;
+    }
+
+    /**
+     * Remove users2vote
+     *
+     * @param \MeetUpBundle\Entity\Vote2 $users2vote
+     */
+    public function removeUsers2vote(\MeetUpBundle\Entity\Vote2 $users2vote)
+    {
+        $this->users2vote->removeElement($users2vote);
+    }
+
+    /**
+     * Get users2vote
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers2vote()
+    {
+        return $this->users2vote;
+    }
+
+    /**
+     * Add users3vote
+     *
+     * @param \MeetUpBundle\Entity\Vote3 $users3vote
+     *
+     * @return User
+     */
+    public function addUsers3vote(\MeetUpBundle\Entity\Vote3 $users3vote)
+    {
+        $this->users3vote[] = $users3vote;
+
+        return $this;
+    }
+
+    /**
+     * Remove users3vote
+     *
+     * @param \MeetUpBundle\Entity\Vote3 $users3vote
+     */
+    public function removeUsers3vote(\MeetUpBundle\Entity\Vote3 $users3vote)
+    {
+        $this->users3vote->removeElement($users3vote);
+    }
+
+    /**
+     * Get users3vote
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers3vote()
+    {
+        return $this->users3vote;
     }
 }

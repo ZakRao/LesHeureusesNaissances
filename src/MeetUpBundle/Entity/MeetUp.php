@@ -91,29 +91,6 @@ class MeetUp
     */
     private $commentairesMeetUp; //Une MeetUp est liée à plusieurs commentaires
 
-    /**
-    * @var int
-    * 
-    * @ORM\Column(name="vote_jour1", type="integer")
-    *
-    */
-    private $vote_jour1 = 0;
-
-    /**
-    * @var int
-    * 
-    * @ORM\Column(name="vote_jour2", type="integer")
-    *
-    */
-    private $vote_jour2 = 0;
-
-    /**
-    * @var int
-    * 
-    * @ORM\Column(name="vote_jour3", type="integer")
-    *
-    */
-    private $vote_jour3 = 0;
 
     /**
      * @var string
@@ -129,6 +106,27 @@ class MeetUp
      */
     private $listeparticipantes;
 
+    /**
+     *
+     * @ORM\OneToOne(targetEntity="MeetUpBundle\Entity\Vote1", cascade={"persist"})
+     *
+     */
+    private $vote1;
+
+    /**
+     *
+     * @ORM\OneToOne(targetEntity="MeetUpBundle\Entity\Vote2", cascade={"persist"})
+     *
+     */
+    private $vote2;
+
+    /**
+     *
+     * @ORM\OneToOne(targetEntity="MeetUpBundle\Entity\Vote3", cascade={"persist"})
+     *
+     */
+    private $vote3;
+
     public function __construct()
     {
         $this->commentairesMeetUp = new ArrayCollection();
@@ -136,7 +134,16 @@ class MeetUp
     }
 
 
-    
+    public function getVote1()
+    {
+        return $this->vote1;
+    }
+
+    public function setVote1(\MeetUpBundle\Entity\Vote1 $vote1)
+    {
+        $this->vote1 = $vote1;
+    }
+
 
     /**
     * @param CommentaireMeetUp $commentaireMeetUp
@@ -447,77 +454,6 @@ class MeetUp
         $this->commentairesMeetUp->removeElement($commentairesMeetUp);
     }
 
-    /**
-     * Set vote_jour1
-     *
-     * @param int $vote_jour1
-     *
-     * @return MeetUp
-     */
-    public function setVote_Jour1($vote_jour1)
-    {
-        $this->vote_jour1 = $vote_jour1;
-
-        return $this;
-    }
-
-    /**
-     * Get jour1
-     *
-     * @return int
-     */
-    public function getVote_Jour1()
-    {
-        return $this->vote_jour1;
-    }    
-
-    /**
-     * Set vote_jour2
-     *
-     * @param int $vote_jour2
-     *
-     * @return MeetUp
-     */
-    public function setVote_Jour2($vote_jour2)
-    {
-        $this->vote_jour2 = $vote_jour2;
-
-        return $this;
-    }
-
-    /**
-     * Get vote_jour2
-     *
-     * @return int
-     */
-    public function getVote_Jour2()
-    {
-        return $this->vote_jour2;
-    } 
-
-    /**
-     * Set vote_jour3
-     *
-     * @param int $vote_jour3
-     *
-     * @return MeetUp
-     */
-    public function setVote_Jour3($vote_jour3)
-    {
-        $this->vote_jour3 = $vote_jour3;
-
-        return $this;
-    }
-
-    /**
-     * Get vote_jour3
-     *
-     * @return int
-     */
-    public function getVote_Jour3()
-    {
-        return $this->vote_jour3;
-    } 
 
     /**
      * Set titre
@@ -543,78 +479,6 @@ class MeetUp
         return $this->titre;
     }
 
-
-    /**
-     * Set voteJour1
-     *
-     * @param integer $voteJour1
-     *
-     * @return MeetUp
-     */
-    public function setVoteJour1($voteJour1)
-    {
-        $this->vote_jour1 = $voteJour1;
-
-        return $this;
-    }
-
-    /**
-     * Get voteJour1
-     *
-     * @return integer
-     */
-    public function getVoteJour1()
-    {
-        return $this->vote_jour1;
-    }
-
-    /**
-     * Set voteJour2
-     *
-     * @param integer $voteJour2
-     *
-     * @return MeetUp
-     */
-    public function setVoteJour2($voteJour2)
-    {
-        $this->vote_jour2 = $voteJour2;
-
-        return $this;
-    }
-
-    /**
-     * Get voteJour2
-     *
-     * @return integer
-     */
-    public function getVoteJour2()
-    {
-        return $this->vote_jour2;
-    }
-
-    /**
-     * Set voteJour3
-     *
-     * @param integer $voteJour3
-     *
-     * @return MeetUp
-     */
-    public function setVoteJour3($voteJour3)
-    {
-        $this->vote_jour3 = $voteJour3;
-
-        return $this;
-    }
-
-    /**
-     * Get voteJour3
-     *
-     * @return integer
-     */
-    public function getVoteJour3()
-    {
-        return $this->vote_jour3;
-    }
 
     /**
      * Add listeparticipante
@@ -648,5 +512,53 @@ class MeetUp
     public function getListeparticipantes()
     {
         return $this->listeparticipantes;
+    }
+
+    /**
+     * Set vote2
+     *
+     * @param \MeetUpBundle\Entity\Vote2 $vote2
+     *
+     * @return MeetUp
+     */
+    public function setVote2(\MeetUpBundle\Entity\Vote2 $vote2 = null)
+    {
+        $this->vote2 = $vote2;
+
+        return $this;
+    }
+
+    /**
+     * Get vote2
+     *
+     * @return \MeetUpBundle\Entity\Vote2
+     */
+    public function getVote2()
+    {
+        return $this->vote2;
+    }
+
+    /**
+     * Set vote3
+     *
+     * @param \MeetUpBundle\Entity\Vote3 $vote3
+     *
+     * @return MeetUp
+     */
+    public function setVote3(\MeetUpBundle\Entity\Vote3 $vote3 = null)
+    {
+        $this->vote3 = $vote3;
+
+        return $this;
+    }
+
+    /**
+     * Get vote3
+     *
+     * @return \MeetUpBundle\Entity\Vote3
+     */
+    public function getVote3()
+    {
+        return $this->vote3;
     }
 }
