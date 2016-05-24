@@ -29,7 +29,7 @@ class Vote3
     private $vote3 =0;
 
     /**
-     * @ORM\OneToOne(targetEntity="MeetUpBundle\Entity\MeetUp", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="MeetUpBundle\Entity\MeetUp", cascade={"persist","remove"})
      *
      */
     private $meetup3;

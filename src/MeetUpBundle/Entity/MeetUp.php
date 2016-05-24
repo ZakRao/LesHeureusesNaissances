@@ -108,21 +108,21 @@ class MeetUp
 
     /**
      *
-     * @ORM\OneToOne(targetEntity="MeetUpBundle\Entity\Vote1", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="MeetUpBundle\Entity\Vote1", cascade={"persist","remove"})
      *
      */
     private $vote1;
 
     /**
      *
-     * @ORM\OneToOne(targetEntity="MeetUpBundle\Entity\Vote2", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="MeetUpBundle\Entity\Vote2", cascade={"persist","remove"})
      *
      */
     private $vote2;
 
     /**
      *
-     * @ORM\OneToOne(targetEntity="MeetUpBundle\Entity\Vote3", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="MeetUpBundle\Entity\Vote3", cascade={"persist","remove"})
      *
      */
     private $vote3;
