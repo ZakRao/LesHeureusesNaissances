@@ -2,7 +2,7 @@
   {% extends '::layout.html.twig'%}
   {% block body %}
   {% if is_granted("IS_AUTHENTICATED_FULLY") %}
-  {% if listMaman != null %}
+  {% if listMaman.count() != 0  %}
     <div class="col-md-12 bandeau">
         <h1 class="text-center">Résultat de la recherche</h1>
     </div>
@@ -49,21 +49,24 @@
         </div>
      
     {% endfor %}
-    {% endif %}
     
     
     
-  {% if listMaman == null %}
+  {% else %}
 
-    <h4>Recherche non aboutie</h4>
-      dzdzez
+    <div class="col-md-12 bandeau">
+        <h1 class="text-center"> Pas de mamans utilisatrice encore dans ce département  </h1>
+    </div>
 
   {% endif %}
 
   {% else %}
-  <h1 class="text-center">Il y a {{listMaman.count()}} dans ce département </h1>
-     
 
+    {% if listMaman.count()==0 or listMaman.count() == 1 %}
+   <h1 class="text-center">Il y a {{listMaman.count()}} maman dans ce département </h1>
+    {% else %}
+    <h1 class="text-center">Il y a {{listMaman.count()}} mamans  dans ce département </h1>
+    {% endif %}
   {% endif %}
     
 
