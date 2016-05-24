@@ -53,13 +53,9 @@ class MeetUpController extends Controller
         $meetup->setUser($user);
 
   		$meetup->setVote1($vote1);
-        $vote1->setMeetUp1($meetup);
-
-        $meetup->setVote2($vote2);
-        $vote2->setMeetUp2($meetup);
-        
+        $meetup->setVote2($vote2);        
         $meetup->setVote3($vote3);
-        $vote3->setMeetUp3($meetup);
+
        	
         $em->persist($vote1);
         $em->persist($vote2);

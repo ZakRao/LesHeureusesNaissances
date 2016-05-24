@@ -29,12 +29,6 @@ class Vote2
     private $vote2 = 0;
 
     /**
-     * @ORM\OneToOne(targetEntity="MeetUpBundle\Entity\MeetUp", cascade={"persist","remove"})
-     *
-     */
-    private $meetup2;
-
-    /**
      * @ORM\ManyToMany(targetEntity="AppUserBundle\Entity\User", inversedBy="users2vote") 
      *
      * @ORM\JoinTable(name="vote2_users")
@@ -117,27 +111,4 @@ class Vote2
         return $this->vote2users;
     }
 
-    /**
-     * Set meetup2
-     *
-     * @param \MeetUpBundle\Entity\MeetUp $meetup2
-     *
-     * @return Vote2
-     */
-    public function setMeetup2(\MeetUpBundle\Entity\MeetUp $meetup2 = null)
-    {
-        $this->meetup2 = $meetup2;
-
-        return $this;
-    }
-
-    /**
-     * Get meetup2
-     *
-     * @return \MeetUpBundle\Entity\MeetUp
-     */
-    public function getMeetup2()
-    {
-        return $this->meetup2;
-    }
 }

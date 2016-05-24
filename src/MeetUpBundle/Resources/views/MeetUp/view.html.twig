@@ -38,7 +38,7 @@
             {% if meet_up.vote1.vote1users.contains(app.user) %}
               <p>
               {{meet_up.jour1 | date('d/m/Y')}} : {{ meet_up.vote1.vote1}} vote - Vote1
-              <a href="{{ path('suppression_vote_jour1', {'id' : meet_up.vote1.id}) }}"><strong>-</strong></a>
+              <a href="{{ path('suppression_vote_jour1', {'id' : meet_up.id}) }}"><strong>-</strong></a>
             </p> 
             <p>
               {{meet_up.jour2 | date('d/m/Y')}} : {{ meet_up.vote2.vote2}} vote - Vote2
@@ -57,7 +57,7 @@
 
             <p>
               {{meet_up.jour2 | date('d/m/Y')}} : {{ meet_up.vote2.vote2}} vote - Vote2
-              <a href="{{ path('suppression_vote_jour2', {'id' : meet_up.vote2.id}) }}"><strong>-</strong></a>
+              <a href="{{ path('suppression_vote_jour2', {'id' : meet_up.id}) }}"><strong>-</strong></a>
             </p> 
             <p>
               {{meet_up.jour3 | date('d/m/Y')}} : {{ meet_up.vote3.vote3}} vote - Vote3
@@ -76,7 +76,7 @@
 
             <p>
               {{meet_up.jour3 | date('d/m/Y')}} : {{ meet_up.vote3.vote3}} vote - Vote3
-              <a href="{{ path('suppression_vote_jour3', {'id' : meet_up.vote3.id}) }}"><strong>-</strong></a>
+              <a href="{{ path('suppression_vote_jour3', {'id' : meet_up.id}) }}"><strong>-</strong></a>
             </p> 
             
            
@@ -84,15 +84,15 @@
 
             <p>
               {{meet_up.jour1 | date('d/m/Y')}} : {{ meet_up.vote1.vote1}} vote - Vote1
-              <a href="{{ path('ajout_vote_jour1', {'id' : meet_up.vote1.id}) }}"><strong>+</strong></a>
+              <a href="{{ path('ajout_vote_jour1', {'id' : meet_up.id}) }}"><strong>+</strong></a>
             </p> 
             <p>
               {{meet_up.jour2 | date('d/m/Y')}} : {{ meet_up.vote2.vote2}} vote - Vote2
-              <a href="{{ path('ajout_vote_jour2', {'id' : meet_up.vote2.id}) }}"><strong>+</strong></a>
+              <a href="{{ path('ajout_vote_jour2', {'id' : meet_up.id}) }}"><strong>+</strong></a>
             </p> 
             <p>
               {{meet_up.jour3 | date('d/m/Y')}} : {{ meet_up.vote3.vote3}} vote - Vote3
-              <a href="{{ path('ajout_vote_jour3', {'id' : meet_up.vote3.id}) }}"><strong>+</strong></a>
+              <a href="{{ path('ajout_vote_jour3', {'id' : meet_up.id}) }}"><strong>+</strong></a>
             </p> 
          
 

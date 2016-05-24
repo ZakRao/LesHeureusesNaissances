@@ -28,8 +28,9 @@ class VoteController extends Controller
 		$user = $this->container->get('security.context')->getToken()->getUser();
 
 		$em = $this->getDoctrine()->getManager();
-		$vote = $em->getRepository('MeetUpBundle:Vote1')->find($id);
 
+		$meetup = $em->getRepository('MeetUpBundle:MeetUp')->find($id);
+		$vote = $meetup->getVote1();
 
 		$request = request::createFromGlobals();
 		$path = $request->getPathInfo();
@@ -43,7 +44,7 @@ class VoteController extends Controller
 		$em->persist($vote);
 		$em->flush();
 
-		return $this->redirectToRoute('meet_up_view',array('id' => $vote->getMeetUp1()->getId()));
+		return $this->redirectToRoute('meet_up_view',array('id' => $meetup->getId()));
 	}
 
 
@@ -52,7 +53,9 @@ class VoteController extends Controller
 		$user = $this->container->get('security.context')->getToken()->getUser();
 
 		$em = $this->getDoctrine()->getManager();
-		$vote = $em->getRepository('MeetUpBundle:Vote1')->find($id);
+
+		$meetup = $em->getRepository('MeetUpBundle:MeetUp')->find($id);
+		$vote = $meetup->getVote1();
 
 		$request = request::createFromGlobals();
 		$path = $request->getPathInfo();
@@ -67,7 +70,7 @@ class VoteController extends Controller
 		$em->persist($vote);
 		$em->flush();
 
-		return $this->redirectToRoute('meet_up_view',array('id' => $vote->getMeetUp1()->getId()));
+		return $this->redirectToRoute('meet_up_view',array('id' => $meetup->getId()));
 	}
 
 	public function addVote2Action($id, Request $request)
@@ -75,7 +78,9 @@ class VoteController extends Controller
 		$user = $this->container->get('security.context')->getToken()->getUser();
 
 		$em = $this->getDoctrine()->getManager();
-		$vote = $em->getRepository('MeetUpBundle:Vote2')->find($id);
+
+		$meetup = $em->getRepository('MeetUpBundle:MeetUp')->find($id);
+		$vote = $meetup->getVote2();
 
 
 		$request = request::createFromGlobals();
@@ -90,7 +95,7 @@ class VoteController extends Controller
 		$em->persist($vote);
 		$em->flush();
 
-		return $this->redirectToRoute('meet_up_view',array('id' => $vote->getMeetUp2()->getId()));
+		return $this->redirectToRoute('meet_up_view',array('id' => $meetup->getId()));
 	}
 
 
@@ -99,7 +104,9 @@ class VoteController extends Controller
 		$user = $this->container->get('security.context')->getToken()->getUser();
 
 		$em = $this->getDoctrine()->getManager();
-		$vote = $em->getRepository('MeetUpBundle:Vote2')->find($id);
+
+		$meetup = $em->getRepository('MeetUpBundle:MeetUp')->find($id);
+		$vote = $meetup->getVote2();
 
 		$request = request::createFromGlobals();
 		$path = $request->getPathInfo();
@@ -114,7 +121,7 @@ class VoteController extends Controller
 		$em->persist($vote);
 		$em->flush();
 
-		return $this->redirectToRoute('meet_up_view',array('id' => $vote->getMeetUp2()->getId()));
+		return $this->redirectToRoute('meet_up_view',array('id' => $meetup->getId()));
 	}
 
 
@@ -123,8 +130,9 @@ class VoteController extends Controller
 		$user = $this->container->get('security.context')->getToken()->getUser();
 
 		$em = $this->getDoctrine()->getManager();
-		$vote = $em->getRepository('MeetUpBundle:Vote3')->find($id);
-
+		
+		$meetup = $em->getRepository('MeetUpBundle:MeetUp')->find($id);
+		$vote = $meetup->getVote3();
 
 		$request = request::createFromGlobals();
 		$path = $request->getPathInfo();
@@ -138,7 +146,7 @@ class VoteController extends Controller
 		$em->persist($vote);
 		$em->flush();
 
-		return $this->redirectToRoute('meet_up_view',array('id' => $vote->getMeetUp3()->getId()));
+		return $this->redirectToRoute('meet_up_view',array('id' => $meetup->getId()));
 	}
 
 
@@ -147,7 +155,9 @@ class VoteController extends Controller
 		$user = $this->container->get('security.context')->getToken()->getUser();
 
 		$em = $this->getDoctrine()->getManager();
-		$vote = $em->getRepository('MeetUpBundle:Vote3')->find($id);
+		
+		$meetup = $em->getRepository('MeetUpBundle:MeetUp')->find($id);
+		$vote = $meetup->getVote3();
 
 		$request = request::createFromGlobals();
 		$path = $request->getPathInfo();
@@ -162,7 +172,7 @@ class VoteController extends Controller
 		$em->persist($vote);
 		$em->flush();
 
-		return $this->redirectToRoute('meet_up_view',array('id' => $vote->getMeetUp3()->getId()));
+		return $this->redirectToRoute('meet_up_view',array('id' => $meetup->getId()));
 	}
 
 }
