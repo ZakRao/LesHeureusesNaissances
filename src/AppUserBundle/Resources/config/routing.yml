@@ -30,3 +30,8 @@ app_user_edit_dispos:
     path: /mes_disponibilites 
     defaults: {_controller:AppUserBundle:Dispos:edit_dispos}
 
+
+app_bloquer_son_compte:
+    path: /bloquer
+    defaults: {_controller: AppUserBundle:Bloquer:bloquer}
+
