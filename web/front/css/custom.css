@@ -11,7 +11,9 @@
 	margin: 0 auto;
 	height : 200px;
 }
-
+.mt0{
+	margin-bottom: 0;
+}
 .mt20{
 	margin-top: 20px;
 }
@@ -90,4 +92,35 @@
 
 .color-blk{
 	color: black !important;
+}
+
+.user-name-profil{
+	color:#47b475;
+}
+
+.precedent-bar{
+	width: 90px !important;
+}
+
+.btn-opacity{
+	opacity: 1 !important;
+}
+
+.learn-more{
+	margin-top:-20px; 
+	margin-right:20px;
+}
+
+.navbarsearch{
+   	height: 35px !important;
+    position: relative;
+    top: -3px;
+}
+
+@media (max-width: 767px) {
+	.learn-more{
+		margin-top: 0px;
+		float: inherit !important;
+		text-align: center;
+	}
 }

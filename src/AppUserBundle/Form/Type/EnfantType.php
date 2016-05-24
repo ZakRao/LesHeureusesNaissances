@@ -17,7 +17,6 @@ class EnfantType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('prenom')
             ->add('sexe', ChoiceType::class,array('choices'=>array(
       'M'=>'M',
       'F'=>'F')))

@@ -23,13 +23,6 @@ class Enfant
 
 
 
-    /**
-     * 
-     *
-     * @ORM\Column(name="prenom", type="string")
-     */
-    private $prenom;
-
 
     /**
      * 
@@ -89,29 +82,7 @@ class Enfant
         return $this->anniversaire;
     }
 
-    /**
-     * Set prenom
-     *
-     * @param string $prenom
-     *
-     * @return Enfant
-     */
-    public function setPrenom($prenom)
-    {
-        $this->prenom = $prenom;
 
-        return $this;
-    }
-
-    /**
-     * Get prenom
-     *
-     * @return string
-     */
-    public function getPrenom()
-    {
-        return $this->prenom;
-    }
 
     /**
      * Set sexe

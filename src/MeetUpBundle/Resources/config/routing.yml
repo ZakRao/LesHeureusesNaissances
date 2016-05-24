@@ -4,7 +4,7 @@ meet_up_homepage:
 
 add_meet_up:
   path: /nouvelle_rencontre
-  defaults: { _controller: MeetUpBundle:MeetUp:add}    
+  defaults: { _controller: MeetUpBundle:MeetUp:add}
 
 meet_up_view:
   path: /rencontre/{id}
@@ -26,13 +26,13 @@ edit_meet_up:
 
 add_commentaire_meet_up:
   path: /ajouter_commentaire/{id}
-  defaults: { _controller: MeetUpBundle:CommentaireMeetUp:add_CommentaireMeetUp}    
+  defaults: { _controller: MeetUpBundle:CommentaireMeetUp:add_CommentaireMeetUp}
   requirements:
     id: \d+  
 
 delete_commentaire_meet_up:
   path: /supprimer_commentaire/{id}
-  defaults: { _controller: MeetUpBundle:CommentaireMeetUp:delete_CommentaireMeetUp}    
+  defaults: { _controller: MeetUpBundle:CommentaireMeetUp:delete_CommentaireMeetUp}
   requirements:
     id: \d+  
 
@@ -50,30 +50,34 @@ add_vote_jour2:
 
 add_vote_jour3:
   path: /ajout_vote_jour3/{id}
-  defaults: { _controller: MeetUpBundle:MeetUp:increment_vote}    
+  defaults: { _controller: MeetUpBundle:MeetUp:increment_vote}
   requirements:
     id: \d+  
 
 lesrencontres: 
   path: /lesrencontres 
-  defaults: { _controller:MeetUpBundle:MeetUp:lesrencontres}   
- 
+  defaults: { _controller:MeetUpBundle:MeetUp:lesrencontres}
+
 mesrencontres: 
   path: /mesrencontres 
-  defaults: { _controller:MeetUpBundle:MeetUp:mesrencontres}   
+  defaults: { _controller:MeetUpBundle:MeetUp:mesrencontres}
 
 ajout_participante:
   path: /ajout_participante/{id}
-  defaults: { _controller:MeetUpBundle:MeetUp:ajoutparticipante}     
+  defaults: { _controller:MeetUpBundle:MeetUp:ajoutparticipante}
   requirements:
     id: \d+  
 
 suppression_participante:
   path: /suppression_participante/{id}
-  defaults: { _controller:MeetUpBundle:MeetUp:suppressionparticipante}     
+  defaults: { _controller:MeetUpBundle:MeetUp:suppressionparticipante}
   requirements:
     id: \d+    
-    
+
 recherche_departement_meetup: 
   path: /recherche_departement_meetup 
-  defaults: { _controller:MeetUpBundle:SearchMeetup:search}    
+  defaults: { _controller:MeetUpBundle:SearchMeetup:search}
+
+rencontres_a_venir: 
+  path: /rencontres_a_venir 
+  defaults: { _controller:MeetUpBundle:MeetUp:rencontresavenir}

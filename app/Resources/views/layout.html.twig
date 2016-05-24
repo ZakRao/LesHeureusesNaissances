@@ -32,7 +32,7 @@
             <nav>
                 <div class="nav-bar">
                     <div class="module left">
-                        <a href="index.html">
+                        <a href="{{path('home')}}">
                             <img class="logo logo-light" alt="Foundry" src="{{asset('front/img/logo-light.png')}}" />
                             <img class="logo logo-dark" alt="Foundry" src="{{asset('front/img/logo-dark.png')}}" />
                         </a>
@@ -44,6 +44,9 @@
                         {% if app.user %}
                         <div class="module left">
                             <ul class="menu">
+                                <li>
+                                    <a class="btn btn-filled btn-opacity" href="{{ url('add_meet_up') }}">Créer une rencontre</a>
+                                </li>
                                 <li>
                                     <a href="{{ url('lesrencontres') }}">
                                         Les rencontres
@@ -59,32 +62,25 @@
                         <!--end of menu module-->
                         <div class="module widget-handle search-widget-handle left">
                             <div class="search">
-                                <i class="ti-search"></i>
-                                <span class="title">Search Site</span>
-                            </div>
-                            <div class="function">
                                 <form class="search-form"role="form" method="POST" action="{{path('oc_userbundle_search')}}">
-                                    <input type="text" placeholder="Type Here" name="username"/>
-                                    <button type="submit" class="btn btn-default" href="{{path('oc_userbundle_search')}}"> <i class="fa fa-search"></i></button>
+                                    <input type="text" class="navbarsearch" placeholder="Chercher une maman" name="username"/>
                                 </form>
                             </div>
-
-
-
                         </div>
+
                         <div class="module widget-handle language left">
                             <ul class="menu">
                                 <li class="has-dropdown">
                                     <a href="#">{{app.user.username}}</a>
                                     <ul>
                                         <li>
-                                            <a href="#">Mon menu</a>
+                                            <a href="{{ path('show', {'username': app.user.username}) }}">Mon profil</a>
                                         </li>
                                         <li>
                                             <a href="{{ url('mesrencontres') }}">Mes rencontres</a>
                                         </li>
                                         <li>
-                                            <a href="#">Meet-up à venir</a>
+                                            <a href="{{url('rencontres_a_venir')}}">Meet-up à venir</a>
                                         </li>
                                         <li>
                                             <a href="{{path('fos_user_profile_edit')}}">Modifier mon profil</a>
@@ -99,6 +95,7 @@
                                 </li>
                             </ul>
                         </div>
+
                         {% else %}
 
                         <a href="{{path('fos_user_security_login')}}" class="btn">Connexion</a>

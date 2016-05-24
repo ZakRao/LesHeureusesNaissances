@@ -5,75 +5,91 @@
 {% endblock %}
 
 {% block body %}
-
-<div class="col-md-12 bandeau">
+<div class="row bandeau">
     <h1 class="text-center">Créer une rencontre</h1>
+    <div class="pull-right learn-more">
+		<a class="btn btn-lg btn-modal" href="#" modal-link="0">En savoir plus</a>
+	    <div class="modal-container">
+		    <div class="foundry_modal">
+		        <h4>Hey there, I'm a cool multi-purpose modal.<br> Use me for almost anything!</h4>
+		        <hr>
+		        <p>
+		            Convergence unicorn thinker-maker-doer ideate thinker-maker-doer pitch deck piverate food-truck long shadow disrupt. Sticky note engaging latte integrate driven convergence food-truck pitch deck. Quantitative vs. qualitative disrupt sticky note piverate 360 campaign co-working bootstrapping long shadow actionable insight agile latte. Thinker-maker-doer bootstrapping integrate personas long shadow Steve Jobs entrepreneur sticky note ship it grok sticky note.
+		        </p>
+		        <p>
+		            Grok Steve Jobs user centered design driven earned media food-truck waterfall is so 2000 and late human-centered design workflow ideate sticky note actionable insight entrepreneur unicorn. Experiential parallax physical computing disrupt cortado human-centered design intuitive grok bootstrapping quantitative vs. qualitative driven.
+		        </p>
+		        
+		    </div>
+		</div>
+	</div>
 </div>
 
-<div class="container">
-	{{ form_start(form) }}
-		<div class="col-md-8 col-md-offset-2">
-			<div class="form-group">
-				{{ form_label(form.titre, "Titre") }}
-		        {{ form_errors(form.titre) }}
-		        <div class="clearfix"></div>
-		        {{ form_widget(form.titre) }}
-		    </div>
-		    <div class="form-group">
-				{{ form_label(form.departement, "Departement") }}
-		        {{ form_errors(form.departement) }}
-		        <div class="clearfix"></div>
-		        {{ form_widget(form.departement) }}
-		    </div>
-			<div class="form-group">
-				{{ form_label(form.description, "Description") }}
-		        {{ form_errors(form.description) }}
-		        <div class="clearfix"></div>
-		        {{ form_widget(form.description) }}
-		    </div>
-		    <div class="form-group">
-				{{ form_label(form.localisation, "Lieu de la rencontre") }}
-		        {{ form_errors(form.localisation) }}
-		        <div class="clearfix"></div>
-		        {{ form_widget(form.localisation) }}
-		    </div>
-		    <div class="form-group">
-				{{ form_label(form.theme, "Thème") }}
-		        {{ form_errors(form.theme) }}
-		        <div class="clearfix"></div>
-		        {{ form_widget(form.theme) }}
-		    </div>
-			<div class="form-group">
-				{{ form_label(form.jour1, "Proposition n°1 de date de la rencontre") }}
-		        {{ form_errors(form.jour1) }}
-		        <div class="clearfix"></div>
-	            {{ form_widget(form.jour1.day,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
-	            {{ form_widget(form.jour1.month,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
-	            {{ form_widget(form.jour1.year,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
-		    </div>
-		    <div class="form-group">
-				{{ form_label(form.jour2, "Proposition n°2 de date de la rencontre") }}
-		        {{ form_errors(form.jour2) }}
-		        <div class="clearfix"></div>
-				{{ form_widget(form.jour2.day,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
-	            {{ form_widget(form.jour2.month,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
-	            {{ form_widget(form.jour2.year,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
-		    </div>
-		    <div class="form-group">
-				{{ form_label(form.jour3, "Proposition n°3 de date de la rencontre") }}
-		        {{ form_errors(form.jour3) }}
-		        <div class="clearfix"></div>
-				{{ form_widget(form.jour3.day,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
-	            {{ form_widget(form.jour3.month,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
-	            {{ form_widget(form.jour3.year,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
-		    </div>
-		    <div class="form-group">
-				{{ form_label(form.image, "Image") }}
-		        {{ form_errors(form.image) }}
-		        <div class="clearfix"></div>
-		        {{ form_widget(form.image) }}
-		    </div>
-		    <div class="form-group">
+<div class="row">
+	<div class="container">
+		{{ form_start(form) }}
+			<div class="col-md-8 col-md-offset-2">
+				<div class="form-group">
+					{{ form_label(form.titre, "Titre") }}
+			        {{ form_errors(form.titre) }}
+			        <div class="clearfix"></div>
+			        {{ form_widget(form.titre) }}
+			    </div>
+			    <div class="form-group">
+					{{ form_label(form.departement, "Departement") }}
+			        {{ form_errors(form.departement) }}
+			        <div class="clearfix"></div>
+			        {{ form_widget(form.departement) }}
+			    </div>
+				<div class="form-group">
+					{{ form_label(form.description, "Description") }}
+			        {{ form_errors(form.description) }}
+			        <div class="clearfix"></div>
+			        {{ form_widget(form.description) }}
+			    </div>
+			    <div class="form-group">
+					{{ form_label(form.localisation, "Lieu de la rencontre") }}
+			        {{ form_errors(form.localisation) }}
+			        <div class="clearfix"></div>
+			        {{ form_widget(form.localisation) }}
+			    </div>
+			    <div class="form-group">
+					{{ form_label(form.theme, "Thème") }}
+			        {{ form_errors(form.theme) }}
+			        <div class="clearfix"></div>
+			        {{ form_widget(form.theme) }}
+			    </div>
+				<div class="form-group">
+					{{ form_label(form.jour1, "Proposition n°1 de date de la rencontre") }}
+			        {{ form_errors(form.jour1) }}
+			        <div class="clearfix"></div>
+		            {{ form_widget(form.jour1.day,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
+		            {{ form_widget(form.jour1.month,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
+		            {{ form_widget(form.jour1.year,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
+			    </div>
+			    <div class="form-group">
+					{{ form_label(form.jour2, "Proposition n°2 de date de la rencontre") }}
+			        {{ form_errors(form.jour2) }}
+			        <div class="clearfix"></div>
+					{{ form_widget(form.jour2.day,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
+		            {{ form_widget(form.jour2.month,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
+		            {{ form_widget(form.jour2.year,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
+			    </div>
+			    <div class="form-group">
+					{{ form_label(form.jour3, "Proposition n°3 de date de la rencontre") }}
+			        {{ form_errors(form.jour3) }}
+			        <div class="clearfix"></div>
+					{{ form_widget(form.jour3.day,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
+		            {{ form_widget(form.jour3.month,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
+		            {{ form_widget(form.jour3.year,  { 'type': 'date', 'attr': {'style': 'width:100px;'}}) }}
+			    </div>
+			    <div class="form-group">
+					{{ form_label(form.image, "Image") }}
+			        {{ form_errors(form.image) }}
+			        <div class="clearfix"></div>
+			        {{ form_widget(form.image) }}
+			    </div>
+			    <div class="form-group">
 
 		        <div class="clearfix"></div>
 		         {{ form_widget(form.save, { 'label': 'Créer la rencontre' }, {'attr': {'class': 'btn btn-primary'}} ) }}
@@ -82,5 +98,6 @@
 				{{ form_errors(form) }}
 		</div>
 	{{ form_end(form) }}
+	</div>
 </div>
 {% endblock %}

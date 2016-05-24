@@ -129,14 +129,10 @@ class MeetUpType extends AbstractType
                 '974'=>'974 Réunion',
                 '975 - '=>'975 Saint Pierre et Miquelon',
                 '976 - Mayotte'=>'976 Mayotte',
-		'75 - Paris'=>'75 - Paris',
-	    '77 - Seine et Marne'=>'77 - Seine et Marne',
-	    '78 - Yvelines'=>'78 - Yvelines',
-	    '91 - Essonne'=>'91 - Essonne',
-	    '92 - Hauts de Seine'=>'92 - Hauts de Seine',
-	    '93 - Seine St Denis'=>'93 - Seine St Denis',
-	    '94 - Val de Marne'=>'94 - Val de Marne',
-	    '95 - Val d\'Oise'=>'95 - Val d\'Oise')))
+
+
+		)))
+
 	    ->add('description', TextareaType::class)
 
 		->add('localisation', TextType::class)
