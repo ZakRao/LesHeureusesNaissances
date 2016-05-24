@@ -1,4 +1,7 @@
-{% extends "MeetUpBundle:MeetUp:layout.html.twig" %}
+
+
+
+{% extends "AppBundle::layout.html.twig" %}
 
 {% block title %}
   Modifier une rencontre  {{ parent() }}
@@ -74,7 +77,6 @@
             {{ form_widget(form.image) }}
         </div>
         <div class="form-group">
-
             <div class="clearfix"></div>
              {{ form_widget(form.save, { 'label': 'Modifier la rencontre' }, {'attr': {'class': 'btn btn-primary'}} ) }}
         </div>
