@@ -6,6 +6,9 @@
 
 {% block body %}
 
+
+
+
 <div class="col-md-12 bandeau">
     <h1 class="text-center">{{ meet_up.titre }}</h1>
 </div>
@@ -123,7 +126,29 @@
         <div class="feature feature-2 bordered">
             <h3 class="text-center">La rencontre</h3>
             <div class="text-center col-md-4">
+              {% if meet_up.image ==  null and meet_up.theme == "Un cafe" %}
+
              <img alt="café" class="img-responsive" src="{{asset('front/img/cafe.jpg')}}"/>
+             
+             {% elseif meet_up.image ==  null and meet_up.theme == "Une balade" %}
+
+              <img alt="balade" class="img-responsive" src="{{asset('front/img/poussette.jpg')}}"/>
+
+
+              {% elseif meet_up.image ==  null and meet_up.theme == "Une exposition" %}
+
+              <img alt="balade" class="img-responsive" src="{{asset('front/img/exposition.jpg')}}"/>
+           
+
+              {% elseif meet_up.image ==  null and meet_up.theme == "Un atelier" %}
+
+              <img alt="balade" class="img-responsive" src="{{asset('front/img/atelier.jpg')}}"/>
+
+              {% else  %}
+
+              <img  class="img-circle img-responsive" src= "{{ asset(meet_up.image.webPath) }}" alt="{{ meet_up.image.alt }}">
+
+              {% endif %}
             </div>
             <!-- La rencontre-->
             <div class="col-md-8">
