@@ -1,69 +1,76 @@
 
-
-{%extends 'AppBundle::layout.html.twig'%}
-{%block body%}
-{% if listMaman != null %}
-  <div class="col-md-12 bandeau">
-      <h1 class="text-center">Résultat de la recherche</h1>
-  </div>
-
-  {% for user in listMaman %}
-      
-      <div class="container">
-        <div class="col-sm-4 mt20">
-          <div class="feature feature-2 bordered" style="padding-bottom:10px;">
-              <div class="text-center">
-                  {%if user.image!=null%}
-                  <a href="{{ path('show', {'username': user.username}) }}">
-                    <img src="{{asset(user.image.webPath)}}"  class="center-block img-circle img-responsive">
-                  </a>
-                  {%else%}
-                  <div class="col-sm-2">
+  {% extends '::layout.html.twig'%}
+  {% block body %}
+  {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+  {% if listMaman != null %}
+    <div class="col-md-12 bandeau">
+        <h1 class="text-center">Résultat de la recherche</h1>
+    </div>
+    {% for user in listMaman %}
+        
+        <div class="container">
+          <div class="col-sm-4 mt20">
+            <div class="feature feature-2 bordered" style="padding-bottom:10px;">
+                <div class="text-center">
+                    {% if user.image!=null %}
                     <a href="{{ path('show', {'username': user.username}) }}">
-                      <img  class="img-circle  " src= "http://i57.servimg.com/u/f57/16/18/15/10/1866.jpg" >
+                      <img src="{{asset(user.image.webPath)}}"  class="center-block img-circle img-responsive">
                     </a>
+                    {% else %}
+                    <div class="col-sm-2">
+                      <a href="{{ path('show', {'username': user.username}) }}">
+                        <img  class="img-circle  " src= "http://i57.servimg.com/u/f57/16/18/15/10/1866.jpg" >
+                      </a>
 
-                    </div>
-                  {%endif%}
-                  <h5 class="uppercase username-search mt20">{{user.username}}</h5>
-              </div>
-              <p class="mb0">
-                <strong>Département : </strong>{{user.departement}}
-              </p>
-              <p class="mb0">
-                <strong>Ville : </strong>{{user.ville}}
-              </p>
-              <p class="mb0">
-                <strong>A echangé avec : </strong>{{user.commentaires.count}} mamans
-              </p>
-              <p class="mb0">
-                <strong>{{user.enfants.count}} enfants</strong>
-              </p>
-              
-              
-              <div class="text-center mt20">
-                <a class="btn" href="{{ path('show', {'username': user.username}) }}">Voir le profil</a>
-              </div>
-          </div>
-          <!--end of feature-->
-      </div>
-      </div>
-   
-  {% endfor %}
+                      </div>
+                    {% endif %}
+                    <h5 class="uppercase username-search mt20">{{user.username}}</h5>
+                </div>
+                <p class="mb0">
+                  <strong>Département : </strong>{{user.departement}}
+                </p>
+                <p class="mb0">
+                  <strong>Ville : </strong>{{user.ville}}
+                </p>
+                <p class="mb0">
+                  <strong>A echangé avec : </strong>{{user.commentaires.count}} mamans
+                </p>
+                <p class="mb0">
+                  <strong>{{user.enfants.count}} enfants</strong>
+                </p>
+                
+                
+                <div class="text-center mt20">
+                  <a class="btn" href="{{ path('show', {'username': user.username}) }}">Voir le profil</a>
+                </div>
+            </div>
+            <!--end of feature-->
+        </div>
+        </div>
+     
+    {% endfor %}
+    {% endif %}
+    
+    
+    
+  {% if listMaman == null %}
+
+    <h4>Recherche non aboutie</h4>
+      dzdzez
+
   {% endif %}
-  
-  
-  
-{% if listMaman == null %}
-  <h4>Recherche non aboutie</h4>
+
+  {% else %}
+  <h1 class="text-center">Il y a {{listMaman.count()}} dans ce département </h1>
+     
 
   {% endif %}
-  
+    
 
-  {% block javascripts %}
-    {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    {% block javascripts %}
+      {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    {% endblock %}
+
   {% endblock %}
-
-{%endblock%}
