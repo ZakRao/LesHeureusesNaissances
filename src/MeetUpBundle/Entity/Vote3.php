@@ -28,11 +28,6 @@ class Vote3
      */
     private $vote3 =0;
 
-    /**
-     * @ORM\OneToOne(targetEntity="MeetUpBundle\Entity\MeetUp", cascade={"persist","remove"})
-     *
-     */
-    private $meetup3;
 
     /**
      * @ORM\ManyToMany(targetEntity="AppUserBundle\Entity\User", inversedBy="users3vote") 
@@ -83,29 +78,6 @@ class Vote3
         $this->vote3users = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    /**
-     * Set meetup3
-     *
-     * @param \MeetUpBundle\Entity\MeetUp $meetup3
-     *
-     * @return Vote3
-     */
-    public function setMeetup3(\MeetUpBundle\Entity\MeetUp $meetup3 = null)
-    {
-        $this->meetup3 = $meetup3;
-
-        return $this;
-    }
-
-    /**
-     * Get meetup3
-     *
-     * @return \MeetUpBundle\Entity\MeetUp
-     */
-    public function getMeetup3()
-    {
-        return $this->meetup3;
-    }
 
     /**
      * Add vote3user

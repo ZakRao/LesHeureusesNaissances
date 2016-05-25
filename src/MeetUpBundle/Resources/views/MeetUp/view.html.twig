@@ -6,6 +6,9 @@
 
 {% block body %}
 
+
+
+
 <div class="col-md-12 bandeau">
     <h1 class="text-center">{{ meet_up.titre }}</h1>
 </div>
@@ -35,7 +38,7 @@
             {% if meet_up.vote1.vote1users.contains(app.user) %}
               <p>
               {{meet_up.jour1 | date('d/m/Y')}} : {{ meet_up.vote1.vote1}} vote - Vote1
-              <a href="{{ path('suppression_vote_jour1', {'id' : meet_up.vote1.id}) }}"><strong>-</strong></a>
+              <a href="{{ path('suppression_vote_jour1', {'id' : meet_up.id}) }}"><strong>-</strong></a>
             </p> 
             <p>
               {{meet_up.jour2 | date('d/m/Y')}} : {{ meet_up.vote2.vote2}} vote - Vote2
@@ -54,7 +57,7 @@
 
             <p>
               {{meet_up.jour2 | date('d/m/Y')}} : {{ meet_up.vote2.vote2}} vote - Vote2
-              <a href="{{ path('suppression_vote_jour2', {'id' : meet_up.vote2.id}) }}"><strong>-</strong></a>
+              <a href="{{ path('suppression_vote_jour2', {'id' : meet_up.id}) }}"><strong>-</strong></a>
             </p> 
             <p>
               {{meet_up.jour3 | date('d/m/Y')}} : {{ meet_up.vote3.vote3}} vote - Vote3
@@ -73,7 +76,7 @@
 
             <p>
               {{meet_up.jour3 | date('d/m/Y')}} : {{ meet_up.vote3.vote3}} vote - Vote3
-              <a href="{{ path('suppression_vote_jour3', {'id' : meet_up.vote3.id}) }}"><strong>-</strong></a>
+              <a href="{{ path('suppression_vote_jour3', {'id' : meet_up.id}) }}"><strong>-</strong></a>
             </p> 
             
            
@@ -81,15 +84,15 @@
 
             <p>
               {{meet_up.jour1 | date('d/m/Y')}} : {{ meet_up.vote1.vote1}} vote - Vote1
-              <a href="{{ path('ajout_vote_jour1', {'id' : meet_up.vote1.id}) }}"><strong>+</strong></a>
+              <a href="{{ path('ajout_vote_jour1', {'id' : meet_up.id}) }}"><strong>+</strong></a>
             </p> 
             <p>
               {{meet_up.jour2 | date('d/m/Y')}} : {{ meet_up.vote2.vote2}} vote - Vote2
-              <a href="{{ path('ajout_vote_jour2', {'id' : meet_up.vote2.id}) }}"><strong>+</strong></a>
+              <a href="{{ path('ajout_vote_jour2', {'id' : meet_up.id}) }}"><strong>+</strong></a>
             </p> 
             <p>
               {{meet_up.jour3 | date('d/m/Y')}} : {{ meet_up.vote3.vote3}} vote - Vote3
-              <a href="{{ path('ajout_vote_jour3', {'id' : meet_up.vote3.id}) }}"><strong>+</strong></a>
+              <a href="{{ path('ajout_vote_jour3', {'id' : meet_up.id}) }}"><strong>+</strong></a>
             </p> 
          
 
@@ -123,7 +126,29 @@
         <div class="feature feature-2 bordered">
             <h3 class="text-center">La rencontre</h3>
             <div class="text-center col-md-4">
+              {% if meet_up.image ==  null and meet_up.theme == "Un cafe" %}
+
              <img alt="café" class="img-responsive" src="{{asset('front/img/cafe.jpg')}}"/>
+             
+             {% elseif meet_up.image ==  null and meet_up.theme == "Une balade" %}
+
+              <img alt="balade" class="img-responsive" src="{{asset('front/img/poussette.jpg')}}"/>
+
+
+              {% elseif meet_up.image ==  null and meet_up.theme == "Une exposition" %}
+
+              <img alt="balade" class="img-responsive" src="{{asset('front/img/exposition.jpg')}}"/>
+           
+
+              {% elseif meet_up.image ==  null and meet_up.theme == "Un atelier" %}
+
+              <img alt="balade" class="img-responsive" src="{{asset('front/img/atelier.jpg')}}"/>
+
+              {% else  %}
+
+              <img  class="img-circle img-responsive" src= "{{ asset(meet_up.image.webPath) }}" alt="{{ meet_up.image.alt }}">
+
+              {% endif %}
             </div>
             <!-- La rencontre-->
             <div class="col-md-8">
@@ -161,6 +186,9 @@
                <i class="glyphicon glyphicon-trash"></i>
                 Supprimer 
                 </a>
+                <a href="{{ path('edit_meet_up', {'id': meet_up.id}) }}" class="btn btn-danger">
+                  Modifier la rencontre
+                 </a> 
                 {% endif %} 
                 <form role="form" method="POST" enctype="multipart/form-data" action = "{{ path('add_commentaire_meet_up', {'id': meet_up.id}) }}" >
                   <div class="form-group col-xs-8">

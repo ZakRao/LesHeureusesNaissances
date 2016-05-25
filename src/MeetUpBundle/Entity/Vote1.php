@@ -36,14 +36,6 @@ class Vote1
      * @ORM\JoinTable(name="vote1_users")
      */
     private $vote1users;
-
-
-    /**
-     * @ORM\OneToOne(targetEntity="MeetUpBundle\Entity\MeetUp", cascade={"persist","remove"})
-     *
-     */
-    private $meetup1;
-
     
     /**
      * Constructor
@@ -101,30 +93,6 @@ class Vote1
         return $this;
     }
 
-
-    /**
-     * Set meetup1
-     *
-     * @param \MeetUpBundle\Entity\MeetUp $meetup1
-     *
-     * @return Vote1
-     */
-    public function setMeetup1(\MeetUpBundle\Entity\MeetUp $meetup1 = null)
-    {
-        $this->meetup1 = $meetup1;
-
-        return $this;
-    }
-
-    /**
-     * Get meetup1
-     *
-     * @return \MeetUpBundle\Entity\MeetUp
-     */
-    public function getMeetup1()
-    {
-        return $this->meetup1;
-    }
 
     /**
      * Remove vote1user

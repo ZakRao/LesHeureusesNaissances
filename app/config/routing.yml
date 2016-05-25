@@ -19,7 +19,9 @@ oc_platform:
 app_user_bis:
     resource: "@AppUserBundle/Resources/config/routing.yml"
 
-
+admin:
+    pattern: /admin
+    defaults:   { _controller: AppUserBundle:Admin:admin }
 
 show:
     pattern:  /profil/{username}

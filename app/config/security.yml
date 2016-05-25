@@ -53,6 +53,7 @@ security:
         - { path: ^/nouvelle_rencontre, roles: ROLE_USER }
         - { path: ^/lesrencontres, roles: ROLE_USER }
         - { path: ^/mesrencontres, roles: ROLE_USER }
+        - { path: ^/mes_disponibilites, roles: ROLE_USER }
         - { path: ^/boite_de_reception, roles: ROLE_USER }
         - { path: ^/suppression_enfant, roles: ROLE_USER }
         - { path: ^/suppression_enfant/, roles: ROLE_USER }
@@ -67,4 +68,5 @@ security:
         - { path: ^/nouveau_message/, roles: ROLE_USER }
         - { path: ^/recherche, roles: ROLE_USER }
         - { path: ^/rencontre, roles: ROLE_USER }
+        - { path: ^/modifier_rencontre, roles: ROLE_USER }
 
