@@ -98,7 +98,7 @@
         {% if app.user.id==user.id %} 
           <div class="clearfix"></div>
           <div class="text-center">
-            <a class="btn btn-filled" href="{{path('app_user_edit_dispos')}}">Modifier mon statut</a>
+            <a class="btn btn-filled" href="{{path('app_user_add_enfant')}}">Ajouter un enfant</a>
           </div>
         {% endif %}
       </div>
@@ -275,13 +275,70 @@
 
           
       <div id="user-dispo">
-        <h4 class="uppercase mt20">Je participe à ces rencontres</h4>
-
-        {% if app.user.id==user.id %} 
-          <div class="text-center"> <a class="btn btn-filled" href="{{path('app_user_edit_dispos')}}">Modifier mes disponibilités</a></div>
-         
-        {% endif %}
+        {% if app.user.meetups.count() == 0 %}
+          <h4 class="uppercase mt20">Je ne participe pas encore à des rencontres</h4>
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <strong>Vous ne participez pas encore à une rencontre, mais ne perdez pas de temps trouvez une rencontre près de chez vous ! </strong>
+                    </div>
+                </div>
+            {% else %}
+             <h4 class="uppercase mt20">Je participe à ces rencontres</h4>
+             <table class="table"> 
+              <thead> 
+                <tr> 
+                  <th>Nom de la rencontre</th> 
+                  <th>Ville</th> 
+                  <th>Date</th> 
+                  <th>Nombre de participants</th> 
+                  <th>Afficher</th> 
+                </tr> 
+              </thead> 
+              <tbody> 
+                {% for meetup in app.user.meetups %}
+                <tr> 
+                  <th scope="row">{{meetup.titre}}</th> 
+                  <td>{{meetup.localisation}}</td> 
+                  <td>{{meetup.jour1.format('j/m/Y')}}</td> 
+                  <td>{{meetup.listeparticipantes.count}}</td> 
+                  <td><a href="{{ path('meet_up_view', {'id': meetup.id}) }}">Voir</a></td> 
+                </tr> 
+                {% endfor %}
+              </tbody> 
+            </table>
+          {% endif %}
       </div>
+
+      <hr>
+
+      {% if listMeetUp != null   %}
+             <h4 class="uppercase mt20">J'ai crée ces rencontres</h4>
+             <table class="table"> 
+              <thead> 
+                <tr> 
+                  <th>Nom de la rencontre</th> 
+                  <th>Ville</th> 
+                  <th>Date</th> 
+                  <th>Nombre de participants</th> 
+                  <th>Afficher</th> 
+                </tr> 
+              </thead> 
+              <tbody> 
+                {% for meetup in listMeetUp %}
+                <tr> 
+                  <th scope="row">{{meetup.titre}}</th> 
+                  <td>{{meetup.localisation}}</td> 
+                  <td>{{meetup.jour1.format('j/m/Y')}}</td> 
+                  <td>{{meetup.listeparticipantes.count}}</td> 
+                  <td><a href="{{ path('meet_up_view', {'id': meetup.id}) }}">Voir</a></td> 
+                </tr> 
+                {% endfor %}
+              </tbody> 
+            </table>
+        {% endif %}
 
 
       <hr>

@@ -40,6 +40,11 @@ class ProfileController extends BaseController
 
     }
         
+        $listMeetUp = $this->getDoctrine()
+          ->getManager()
+          ->getRepository('MeetUpBundle:MeetUp')
+          ->findByUser($user)
+        ;
        
         if( $user === null ) {
             $user = $this->getUser();
@@ -49,7 +54,8 @@ class ProfileController extends BaseController
         }
 
         
-return $this->container->get('templating')->renderResponse('AppUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user));
+return $this->container->get('templating')->renderResponse('AppUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user,
+                                                                                                                                                                'listMeetUp'=> $listMeetUp               ));
     }
 
 
@@ -63,11 +69,18 @@ return $this->container->get('templating')->renderResponse('AppUserBundle:Profil
              return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_edit'));
 
     }
+
+         $listMeetUp = $this->getDoctrine()
+          ->getManager()
+          ->getRepository('MeetUpBundle:MeetUp')
+          ->findByUser($user)
+        ;
+
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
-        return $this->container->get('templating')->renderResponse('AppUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user));
+        return $this->container->get('templating')->renderResponse('AppUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user, 'listMeetUp'=> $listMeetUp ));
     }
 
     
@@ -88,8 +101,8 @@ return $this->container->get('templating')->renderResponse('AppUserBundle:Profil
         if ($process) {
             $this->setFlash('fos_user_success', 'profile.flash.updated');
 
-            return $this->container->get('templating')->renderResponse('AppUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user));
-                    }
+             return new RedirectResponse($this->getRedirectionUrl($user));    
+        }
 
         return $this->container->get('templating')->renderResponse(
             'FOSUserBundle:Profile:edit.html.'.$this->container->getParameter('fos_user.template.engine'),
@@ -106,7 +119,7 @@ return $this->container->get('templating')->renderResponse('AppUserBundle:Profil
      */
     protected function getRedirectionUrl(UserInterface $user)
     {
-        return $this->container->get('router')->generate('fos_user_profile_show');
+        return $this->container->get('router')->generate('profile');
     }
 
     /**
@@ -117,6 +130,15 @@ return $this->container->get('templating')->renderResponse('AppUserBundle:Profil
     {
         $this->container->get('session')->getFlashBag()->set($action, $value);
     }
+
+    protected function getDoctrine()
+{
+    if (!$this->container->has('doctrine')) {
+        throw new \LogicException('The DoctrineBundle is not registered in your application.');
+    }
+
+    return $this->container->get('doctrine');
+}
 
 
 }

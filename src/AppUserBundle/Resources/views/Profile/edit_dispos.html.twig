@@ -15,61 +15,57 @@
 <div class="container">
   <div class="row">
       <div class="col-md-10 col-md-offset-1">
-
       <form role="form" method="POST" action="{{path('app_user_edit_dispos')}}">
-            <div class="col-md-12">
-
+            <div class="col-md-4">
                 <h6 class="uppercase">
                 Lundi
                 </h6>
-                <div class="col-sm-3">
-                  <p class="mb16">
-                    Matin
-                  </p>
-                  {% if app.user.getLundiMatin() == true %}
-                  <INPUT type= "radio" name="1" value="1" checked > oui
-                  <INPUT type= "radio" name="1" value="0"> non
-                  {%else%}
-                  <INPUT type= "radio" name="1" value="1" > oui
-                  <INPUT type= "radio" name="1" value="0" checked> non
-                   {%endif %}
-                </div>
-                <div class="col-sm-3">
-                  <p class="mb16">
-                    Après-midi
-                  </p>
-                 
-                  {% if app.user.getLundiMidi() == true %}
-                  <INPUT type= "radio" name="2" value="1" checked > oui
-                  <INPUT type= "radio" name="2" value="0"> non
-                  {%else%}
-                  <INPUT type= "radio" name="2" value="1" > oui
-                  <INPUT type= "radio" name="2" value="0" checked> non
-                   {%endif %}
-            
-                </div>
-                <div class="col-sm-3">
-                  <p class="mb16">
-                    Soir
-                  </p>
-                  
-                  {% if app.user.getLundiSoir() == true %}
-                  <INPUT type= "radio" name="3" value="1" checked > oui
-                  <INPUT type= "radio" name="3" value="0"> non
-                  {%else%}
-                  <INPUT type= "radio" name="3" value="1" > oui
-                  <INPUT type= "radio" name="3" value="0" checked> non
-                   {%endif %}
-                </div>
-            </div>
+
+                <p class="mb16">
+                  Matin
+                </p>
+                {% if app.user.getLundiMatin() == true %}
+                <INPUT type= "radio" name="1" value="1" checked > oui
+                <INPUT type= "radio" name="1" value="0"> non
+                {% else %}
+                <INPUT type= "radio" name="1" value="1" > oui
+                <INPUT type= "radio" name="1" value="0" checked> non
+                 {% endif %}
+
+                <p class="mb16">
+                  Après-midi
+                </p>
+               
+                {% if app.user.getLundiMidi() == true %}
+                <INPUT type= "radio" name="2" value="1" checked > oui
+                <INPUT type= "radio" name="2" value="0"> non
+                {%else%}
+                <INPUT type= "radio" name="2" value="1" > oui
+                <INPUT type= "radio" name="2" value="0" checked> non
+
+                {% endif %}
+
+                <p class="mb16">
+                  Soir
+                </p>
+                
+                {% if app.user.getLundiSoir() == true %}
+                <INPUT type= "radio" name="3" value="1" checked > oui
+                <INPUT type= "radio" name="3" value="0"> non
+                {%else%}
+                <INPUT type= "radio" name="3" value="1" > oui
+                <INPUT type= "radio" name="3" value="0" checked> non
+                {% endif %}
+              </div>
+
             
             
-            <div class="col-md-12">
+            <div class="col-md-4">
 
                 <h6 class="uppercase">
                 Mardi
                 </h6>
-                <div class="col-sm-3">
+
                   <p class="mb16">
                     Matin
                   </p>
@@ -80,8 +76,8 @@
                   <INPUT type= "radio" name="4" value="1" > oui
                   <INPUT type= "radio" name="4" value="0" checked> non
                    {%endif %}
-                </div>
-                <div class="col-sm-3">
+
+
                   <p class="mb16">
                     Après-midi
                   </p>
@@ -92,8 +88,8 @@
                   <INPUT type= "radio" name="5" value="1" > oui
                   <INPUT type= "radio" name="5" value="0" checked> non
                    {%endif %}
-                </div>
-                <div class="col-sm-3">
+
+
                   <p class="mb16">
                     Soir
                   </p>
@@ -104,57 +100,54 @@
                   <INPUT type= "radio" name="6" value="1" > oui
                   <INPUT type= "radio" name="6" value="0" checked> non
                    {%endif %}
-                </div>
             </div>
-            <div class="col-md-12">
-
+            <div class="col-md-4">
                 <h6 class="uppercase">
                 Mercredi
                 </h6>
-                <div class="col-sm-3">
-                  <p class="mb16">
-                    Matin
-                  </p>
-                   {% if app.user.getMercrediMatin() == true %}
-                  <INPUT type= "radio" name="7" value="1" checked > oui
-                  <INPUT type= "radio" name="7" value="0"> non
-                  {%else%}
-                  <INPUT type= "radio" name="7" value="1" > oui
-                  <INPUT type= "radio" name="7" value="0" checked> non
-                   {%endif %}
-                </div>
-                <div class="col-sm-3">
-                  <p class="mb16">
-                    Après-midi
-                  </p>
-                   {% if app.user.getMercrediMidi() == true %}
-                  <INPUT type= "radio" name="8" value="1" checked > oui
-                  <INPUT type= "radio" name="8" value="0"> non
-                  {%else%}
-                  <INPUT type= "radio" name="8" value="1" > oui
-                  <INPUT type= "radio" name="8" value="0" checked> non
-                   {%endif %}
-                </div>
-                <div class="col-sm-3">
-                  <p class="mb16">
-                    Soir
-                  </p>
-                  {% if app.user.getMercrediSoir() == true %}
-                  <INPUT type= "radio" name="9" value="1" checked > oui
-                  <INPUT type= "radio" name="9" value="0"> non
-                  {%else%}
-                  <INPUT type= "radio" name="9" value="1" > oui
-                  <INPUT type= "radio" name="9" value="0" checked> non
-                   {%endif %}
-                </div>
+
+                <p class="mb16">
+                  Matin
+                </p>
+                 {% if app.user.getMercrediMatin() == true %}
+                <INPUT type= "radio" name="7" value="1" checked > oui
+                <INPUT type= "radio" name="7" value="0"> non
+                {%else%}
+                <INPUT type= "radio" name="7" value="1" > oui
+                <INPUT type= "radio" name="7" value="0" checked> non
+                 {% endif %}
+
+
+                <p class="mb16">
+                  Après-midi
+                </p>
+                 {% if app.user.getMercrediMidi() == true %}
+                <INPUT type= "radio" name="8" value="1" checked > oui
+                <INPUT type= "radio" name="8" value="0"> non
+                {%else%}
+                <INPUT type= "radio" name="8" value="1" > oui
+                <INPUT type= "radio" name="8" value="0" checked> non
+                 {% endif %}
+
+                <p class="mb16">
+                  Soir
+                </p>
+                {% if app.user.getMercrediSoir() == true %}
+                <INPUT type= "radio" name="9" value="1" checked > oui
+                <INPUT type= "radio" name="9" value="0"> non
+                {%else%}
+                <INPUT type= "radio" name="9" value="1" > oui
+                <INPUT type= "radio" name="9" value="0" checked> non
+                {% endif %}
+
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-4">
 
                 <h6 class="uppercase">
                 Jeudi
                 </h6>
-                <div class="col-sm-3">
+
                   <p class="mb16">
                     Matin
                   </p>
@@ -165,8 +158,8 @@
                   <INPUT type= "radio" name="10" value="1" > oui
                   <INPUT type= "radio" name="10" value="0" checked> non
                    {%endif %}
-                </div>
-                <div class="col-sm-3">
+
+
                   <p class="mb16">
                     Après-midi
                   </p>
@@ -177,8 +170,8 @@
                   <INPUT type= "radio" name="11" value="1" > oui
                   <INPUT type= "radio" name="11" value="0" checked> non
                    {%endif %}
-                </div>
-                <div class="col-sm-3">
+
+
                   <p class="mb16">
                     Soir
                   </p>
@@ -189,15 +182,15 @@
                   <INPUT type= "radio" name="12" value="1" > oui
                   <INPUT type= "radio" name="12" value="0" checked> non
                    {%endif %}
-                </div>
+
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-4">
 
                 <h6 class="uppercase">
                 Vendredi
                 </h6>
-                <div class="col-sm-3">
+
                   <p class="mb16">
                     Matin
                   </p>
@@ -208,8 +201,8 @@
                   <INPUT type= "radio" name="13" value="1" > oui
                   <INPUT type= "radio" name="13" value="0" checked> non
                    {%endif %}
-                </div>
-                <div class="col-sm-3">
+
+
                   <p class="mb16">
                     Après-midi
                   </p>
@@ -220,8 +213,8 @@
                   <INPUT type= "radio" name="14" value="1" > oui
                   <INPUT type= "radio" name="14" value="0" checked> non
                    {%endif %}
-                </div>
-                <div class="col-sm-3">
+
+
                   <p class="mb16">
                     Soir
                   </p>
@@ -232,15 +225,15 @@
                   <INPUT type= "radio" name="15" value="1" > oui
                   <INPUT type= "radio" name="15" value="0" checked> non
                    {%endif %}
-                </div>
+
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-4">
 
                 <h6 class="uppercase">
                 Samedi
                 </h6>
-                <div class="col-sm-3">
+
                   <p class="mb16">
                     Matin
                   </p>
@@ -251,8 +244,8 @@
                   <INPUT type= "radio" name="16" value="1" > oui
                   <INPUT type= "radio" name="16" value="0" checked> non
                    {%endif %}
-                </div>
-                <div class="col-sm-3">
+
+
                   <p class="mb16">
                     Après-midi
                   </p>
@@ -263,8 +256,8 @@
                   <INPUT type= "radio" name="17" value="1" > oui
                   <INPUT type= "radio" name="17" value="0" checked> non
                    {%endif %}
-                </div>
-                <div class="col-sm-3">
+
+
                   <p class="mb16">
                     Soir
                   </p>
@@ -275,15 +268,15 @@
                   <INPUT type= "radio" name="18" value="1" > oui
                   <INPUT type= "radio" name="18" value="0" checked> non
                    {%endif %}
-                </div>
+
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-4">
 
                 <h6 class="uppercase">
                 Dimanche
                 </h6>
-                <div class="col-sm-3">
+
                   <p class="mb16">
                     Matin
                   </p>
@@ -294,8 +287,8 @@
                   <INPUT type= "radio" name="19" value="1" > oui
                   <INPUT type= "radio" name="19" value="0" checked> non
                    {%endif %}
-                </div>
-                <div class="col-sm-3">
+
+
                   <p class="mb16">
                     Après-midi
                   </p>
@@ -306,8 +299,8 @@
                   <INPUT type= "radio" name="20" value="1" > oui
                   <INPUT type= "radio" name="20" value="0" checked> non
                    {%endif %}
-                </div>
-                <div class="col-sm-3">
+
+
                   <p class="mb16">
                     Soir
                   </p>
@@ -318,7 +311,7 @@
                   <INPUT type= "radio" name="21" value="1" > oui
                   <INPUT type= "radio" name="21" value="0" checked> non
                    {%endif %}
-                </div>
+
             </div>
 
             <div class="col-md-12">
