@@ -140,3 +140,16 @@ assetic:
     bundles:        [ MessagerieBundle ]
     filters:
         cssrewrite: ~
+
+# app/config/config.yml
+liip_imagine:
+    resolvers:
+       default:
+          web_path: ~
+
+    filter_sets:
+        cache: ~
+        produitThumb:
+            quality: 80
+            filters:
+                thumbnail: { size: [300, 150], mode: outbound }
