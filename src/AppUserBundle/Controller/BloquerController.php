@@ -23,7 +23,6 @@ class BloquerController extends Controller
       $user->setEnabled("0");
        $recipient = $user->getEmailCanonical();
 
-       $user->setRoles('ROLE_ADMIN');
 
       $messagemail = \Swift_Message::newInstance()
             ->setSubject('Vous avez demandé à bloquer votre compte ')
