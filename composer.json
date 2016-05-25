@@ -33,7 +33,6 @@
         "doctrine/doctrine-fixtures-bundle": "^2.3",
         "symfony/finder": "^3.0",
         "knplabs/knp-paginator-bundle": "~2.5",
-        "liip/imagine-bundle": "dev-master",
         "friendsofsymfony/message-bundle": "^1.2",
         "symfony/assetic-bundle": "^2.8"
     },

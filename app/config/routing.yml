@@ -68,6 +68,3 @@ message_to_user:
     defaults:   { _controller: MessagerieBundle:Message:newThreadFromProfile }
     requirements:
         _method: GET
-
-_liip_imagine:
-    resource: "@LiipImagineBundle/Resources/config/routing.xml"

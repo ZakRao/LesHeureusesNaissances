@@ -4,8 +4,6 @@ services:
 #        arguments: [@service_id, "plain_value", %parameter%]
 
 
-#
-
     oc_user.registration.form.type:
         class: AppUserBundle\Form\Type\RegistrationFormType
         arguments: [%fos_user.model.user.class%]
@@ -18,3 +16,10 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: oc_user_profile }
+
+
+    oc_user.changer_mdp.form.type:
+        class: AppUserBundle\Form\Type\ChangePasswordFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: oc_user_changer_mdp }
