@@ -51,72 +51,9 @@
    
   {% endfor %}
   {%endif%}
-
-  {%if listMeetUps!=null%}
-
-  {% for meetup in listMeetUps %}
     
-      <div class="container">
   
-    
-      <div class="well panel panel-default">
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-xs-12 col-sm-4 text-center">
-        {%if meetup.image!=null%}
-              <a href="{{ path('meet_up_view', {'id': meetup.id}) }}">
-                <img src="{{asset(meetup.image.webPath)}}"  class="center-block img-circle img-thumbnail img-responsive">
-              </a>
-        {%else%}
-        <div class="col-sm-2">
-          <a href="{{ path('meet_up_view', {'id': meetup.id}) }}">
-            <img  class="img-circle  " src= "http://i57.servimg.com/u/f57/16/18/15/10/1866.jpg" >
-          </a>
-
-          {# Rajouter dans cette partie une vérification avec des "if" si l'image est un café, balade ou expo #}
-          
-
-          </div>
-        {%endif%}
-              
-            </div>
-            <!--/col--> 
-            <div class="col-md-4 col-sm-6">
-                        {% if (meetup.image != null) %} 
-                                <img src="" alt=""> 
-                            {% endif %}
-                        <div class="pricing-table pt-2 boxed mb50">
-
-                             <h5 class="uppercase text-center">{{meetup.titre}}</h5> 
-                            <p class="pb10">{{meetup.description}}</p>
-                            <hr>
-                            <ul>
-                                <li>
-                                    <strong>Département : </strong> {{meetup.departement}}
-                                </li>
-                                <li>
-                                    <strong>Ville : </strong> {{meetup.localisation}}
-                                </li>
-                                <li>
-                                    <strong>Date : </strong> {{meetup.jour1.format('j/m/Y')}}
-                                </li>
-                            </ul>
-                            <div class="text-center">
-                                <a class="btn btn-filled btn-lg" href="{{ path('meet_up_view', {'id': meetup.id}) }}">Voir la rencontre</a> 
-                            </div>
-                        </div>
-                <!--end of pricing table-->
-            </div>
-        </div>
-      </div> 
-    </div> 
-  </div>     
-  
-  {% endfor %}
-{% endif %}
-  
-  
-{%if listUsers==null and listMeetUps==null %}
+{%if listUsers==null %}
   <em><h4>Recherche non aboutie<h4></em>
 
   {%endif%}
