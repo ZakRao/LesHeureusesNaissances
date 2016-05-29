@@ -18,51 +18,23 @@ class SearchController extends Controller
             return $this->redirectToRoute('fos_user_profile_edit');
 
     }
-       $request = Request::createFromGlobals();
-
-       $req = $request->request->get('username');
 
        
-       $listUsers = $this->getDoctrine()
-      ->getManager()
-      ->getRepository('AppUserBundle:User')
-      ->findByUsername($req);                      // À partir du premie 
 
-       $listMeetUps = $this->getDoctrine()
-      ->getManager()
-      ->getRepository('MeetUpBundle:MeetUp')
-      ->findByTitre($req);                      
+        $searchterm = $request->get('username');
+        $em = $this->getDoctrine()->getEntityManager();
 
-
-        $listMeetUpsByDpt = $this->getDoctrine()
-          ->getManager()
-          ->getRepository('MeetUpBundle:MeetUp')
-          ->findByDepartement($req); 
-
-
-        /*$listUsersByDpt = $this->getDoctrine()
-          ->getManager()
-          ->getRepository('AppUserBundle:User')
-          ->findByDepartement($req); 
-
-
-      if($listUsers) {*/
-        
+       $qb = $em->createQueryBuilder();
+       $listUsers = $qb->select('u')->from('AppUserBundle\Entity\User', 'u')
+      ->where( $qb->expr()->like('u.username', $qb->expr()->literal('%' . $searchterm . '%')) )
+      ->getQuery()
+      ->getResult();
+          
        return $this->render('AppUserBundle:Profile:result.html.twig', array(
-      'listUsers' => $listUsers,
-      'listMeetUps' => $listMeetUps,
-      'listUsersByDpt' => $listMeetUpsByDpt
+      'listUsers' => $listUsers
       ));
+  
 
-      /* }
-
-       else {
-         return $this->render('AppUserBundle:Profile:resultDpt.html.twig', array(
-      'listUsersByDpt' => $listUsersByDpt
-      ));
-        
-
-       }*/ 
 
   }
 }

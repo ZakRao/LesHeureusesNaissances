@@ -1,6 +1,6 @@
 home:
     path: /
-    defaults: { _controller: AppBundle:Advert:test }
+    defaults: { _controller: AppBundle:Home:test }
 
 app_user:
     resource: "@AppUserBundle/Controller/"
