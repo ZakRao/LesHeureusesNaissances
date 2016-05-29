@@ -145,3 +145,20 @@ assetic:
     bundles:        [ MessagerieBundle ]
     filters:
         cssrewrite: ~
+
+liip_imagine:
+    resolvers:
+       default:
+          web_path: ~
+
+    filter_sets:
+        test_medium_thumb:
+            data_loader: loader_aws_s3_images
+            quality: 75
+            filters:
+                thumbnail: { size: [400, 400], mode: outbound }
+        test_small_thumb:
+            data_loader: loader_aws_s3_images
+            quality: 75
+            filters:
+                thumbnail: { size: [100, 100], mode: outbound }

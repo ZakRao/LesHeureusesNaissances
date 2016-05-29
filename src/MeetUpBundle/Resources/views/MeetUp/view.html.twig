@@ -207,15 +207,59 @@
           <h2 class="text-center">Participantes</h2>
 
           {% if not meet_up.listeparticipantes.empty%} 
-            {% for participant in meet_up.listeparticipantes %}
-              <p>- {{participant.getUsername()}}</p>
-            {% endfor %}
-          {% else %}
-            <p>Pas encore de participantes</p>
-          {% endif %}
-        </div>
-    </div>
-
+              {% for participant in meet_up.listeparticipantes %}
+                  <div class="col-sm-3">
+                    <div class="image-cropper-small flex-container">
+                      {% if (participant.image)!=null %}
+                        <img  class="img-circle img-responsive" src= "{{ asset(participant.image.webPath)  }}" alt="{{ participant.image.alt }}">
+                      {% else %}
+                        <img  class="img-circle img-responsive" src= "http://i57.servimg.com/u/f57/16/18/15/10/1866.jpg" height="">
+                      {% endif %}
+                    </div>
+                    <p class="uppercase text-center">{{participant.getUsername()}}</p>
+                  </div>
+                {% endfor %}
+              {% else %}
+                  <p>Pas encore de participante</p>
+              {% endif %}
+              <div class="col-sm-3">
+                <div class="image-cropper-small flex-container">
+                    <img  class="img-circle img-responsive" src= "http://i57.servimg.com/u/f57/16/18/15/10/1866.jpg" height="">
+                </div>
+                  <p class="uppercase text-center">Name</p>
+              </div>
+              <div class="col-sm-3">
+                <div class="image-cropper-small flex-container">
+                    <img  class="img-circle img-responsive" src= "http://i57.servimg.com/u/f57/16/18/15/10/1866.jpg" height="">
+                </div>
+                  <p class="uppercase text-center">Name</p>
+              </div>
+              <div class="col-sm-3">
+                <div class="image-cropper-small flex-container">
+                    <img  class="img-circle img-responsive" src= "http://i57.servimg.com/u/f57/16/18/15/10/1866.jpg" height="">
+                </div>
+                  <p class="uppercase text-center">Name</p>
+              </div>
+              <div class="col-sm-3">
+                <div class="image-cropper-small flex-container">
+                    <img  class="img-circle img-responsive" src= "http://i57.servimg.com/u/f57/16/18/15/10/1866.jpg" height="">
+                </div>
+                  <p class="uppercase text-center">Name</p>
+              </div>
+              <div class="col-sm-3">
+                <div class="image-cropper-small flex-container">
+                    <img  class="img-circle img-responsive" src= "http://i57.servimg.com/u/f57/16/18/15/10/1866.jpg" height="">
+                </div>
+                  <p class="uppercase text-center">Name</p>
+              </div>
+              <div class="col-sm-3">
+                <div class="image-cropper-small flex-container">
+                    <img  class="img-circle img-responsive" src= "http://i57.servimg.com/u/f57/16/18/15/10/1866.jpg" height="">
+                </div>
+                  <p class="uppercase text-center">Name</p>
+              </div>
+                    <div class="clearfix"></div>
+              </div>
   </div>
 </div>
 

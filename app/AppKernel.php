@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new MessagerieBundle\MessagerieBundle(),
             new FOS\MessageBundle\FOSMessageBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

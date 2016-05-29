@@ -12,20 +12,13 @@
       <div class="container">
         <div class="col-sm-4 mt20">
           <div class="feature feature-2 bordered" style="padding-bottom:10px;">
-              <div class="text-center">
-                  {%if user.image!=null%}
-                  <a href="{{ path('show', {'username': user.username}) }}">
-                    <img src="{{asset(user.image.webPath)}}"  class="center-block img-circle img-responsive">
-                  </a>
-                  {%else%}
-                  <div class="col-sm-2">
-                    <a href="{{ path('show', {'username': user.username}) }}">
-                      <img  class="img-circle  " src= "http://i57.servimg.com/u/f57/16/18/15/10/1866.jpg" >
-                    </a>
+         <div class="image-cropper flex-container">
+                {% if (user.image)!=null %}
 
-                    </div>
-                  {%endif%}
-                  <h5 class="uppercase username-search mt20">{{user.username}}</h5>
+                  <img  class="img-circle img-responsive" src= "{{ asset(user.image.webPath)  }}" alt="{{ user.image.alt }}">
+                {% else %}
+                  <img  class="img-circle img-responsive" src= "http://i57.servimg.com/u/f57/16/18/15/10/1866.jpg" height="">
+                {% endif %}
               </div>
               <p class="mb0">
                 <strong>Département : </strong>{{user.departement}}

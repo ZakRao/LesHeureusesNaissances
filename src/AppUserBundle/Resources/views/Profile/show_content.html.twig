@@ -13,11 +13,14 @@
       <div class="feature feature-1 boxed">
           <div class="text-center">
             <div class="profile-image">
-              {% if (user.image)!=null %}
-                <img  class="img-circle img-responsive" src= "{{ asset(user.image.webPath) }}" alt="{{ user.image.alt }}">
-              {% else %}
-                <img  class="img-circle img-responsive" src= "http://i57.servimg.com/u/f57/16/18/15/10/1866.jpg" height="">
-              {% endif %}
+              <div class="image-cropper flex-container">
+                {% if (user.image)!=null %}
+
+                  <img  class="img-circle img-responsive" src= "{{ asset(user.image.webPath)  }}" alt="{{ user.image.alt }}">
+                {% else %}
+                  <img  class="img-circle img-responsive" src= "http://i57.servimg.com/u/f57/16/18/15/10/1866.jpg" height="">
+                {% endif %}
+              </div>
             </div>
             <div class="clearfix mt20"></div>
             <h5>Yannis Gil</h5>
